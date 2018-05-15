@@ -1,10 +1,8 @@
 # alpha.iku.network
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/brunobar79/alpha.iku.network.svg?token=f28840b511ac81f05347597ff80013b714b5fbc1806facc4d076c94f61d7798d&ts=1523510090430)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/ikunetwork/alpha.svg?token=f28840b511ac81f05347597ff80013b714b5fbc1806facc4d076c94f61d7798d&ts=1523510090430)](https://greenkeeper.io/)
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/e9e274b4be7ea5c12ccb3f5d193f8f5ba12e11f7334a878ae9b9189a5c43dc08.svg?columns=all)](https://waffle.io/brunobar79/alpha.iku.network)
-
-[![CircleCI](https://circleci.com/gh/brunobar79/alpha.iku.network.svg?style=svg&circle-token=aeac950a2a273454f2a601e41a408b27798c9f4f)](https://circleci.com/gh/brunobar79/alpha.iku.network)
+[![CircleCI](https://circleci.com/gh/ikunetwork/alpha.svg?style=svg&circle-token=0a839ed86374168a52bf662a9e9d254c981e16d4)](https://circleci.com/gh/ikunetwork/alpha)
 
 dApp for iku.network
 
