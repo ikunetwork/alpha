@@ -1,0 +1,7 @@
+{
+  "root": "build_webpack/",
+  "clean_urls": false,
+  "routes": {
+    "/**": "index.html"
+  }
+}

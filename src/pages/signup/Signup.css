@@ -1,0 +1,15 @@
+.form-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  padding: 20px;
+  border: 1px solid;
+  border-radius: 4px;
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.recaptcha-container {
+  margin: 30px 0px;
+}

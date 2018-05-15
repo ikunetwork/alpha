@@ -1,0 +1,95 @@
+.account ul li {
+  list-style-type: none;
+}
+.account h2 {
+  color: white;
+}
+
+.account .eth-balance h4 {
+  font-size: 40px;
+  margin-top: 0px;
+}
+
+.account .eth-balance h5 {
+  font-size: 30px;
+}
+
+.account .eth-balance {
+  margin-bottom: 30px;
+}
+
+.account .blocky {
+  width: 44px;
+  height: 44px;
+  display: inline-block;
+}
+
+.account .account-wallet li {
+  margin-bottom: 10px;
+}
+
+.account .account-wallet {
+  padding: 0px;
+  margin: 0px;
+}
+
+.account-wallet h5 {
+  display: inline-block;
+  margin-top: -25px;
+  vertical-align: middle;
+  margin-left: 10px;
+  font-size: 25px;
+}
+
+.account h5.subtitle {
+  border-bottom: 1px solid #666666;
+}
+
+.account h5 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.account img.eth-logo {
+  width: 100px;
+  border-radius: 100px;
+  background-color: #ffffff;
+  padding: 5px;
+}
+
+.account form p {
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+.account h4.title {
+  display: block;
+  margin-left: 20px;
+  color: #999999;
+  margin-bottom: 10px;
+}
+
+.account .address {
+  margin-bottom: 15px;
+  display: block;
+  font-size: 19px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.account h2 {
+  margin-bottom: 50px;
+  margin-top: 40px;
+}
+
+.account h5.subtitle {
+  border-bottom: 1px solid #cccccc;
+  color: #999999;
+  font-size: 30px;
+}
+
+.account h5 {
+  color: #999999;
+  font-size: 25px;
+}
