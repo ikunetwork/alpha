@@ -191,6 +191,6 @@
     "extends": "react-app"
   },
   "greenkeeper": {
-    "ignore": ["webpack-dev-server", "webpack"]
+    "ignore": ["webpack-dev-server", "webpack", "babel-loader"]
   }
 }
