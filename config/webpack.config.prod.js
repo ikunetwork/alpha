@@ -125,7 +125,9 @@ module.exports = {
         include: paths.appSrc,
       },
       {
-        enforce: "pre", test: /\.js$/, loader: require.resolve('source-map-loader') 
+        enforce: "pre", 
+        test: /\.js$/, 
+        loader: require.resolve('source-map-loader') 
       },
       {
         // "oneOf" will traverse all following loaders until one will
@@ -142,7 +144,7 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
-          // Process JS with Babel.
+          // Process JS with awesome TS loader.
           {
             test: /\.(ts|tsx|js|jsx|mjs)$/,
             include: paths.appSrc,

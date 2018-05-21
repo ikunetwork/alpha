@@ -119,6 +119,11 @@ module.exports = {
         include: paths.appSrc,
       },
       {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: require.resolve('source-map-loader')
+      },
+      {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
@@ -135,7 +140,7 @@ module.exports = {
             },
           },
          
-          // Process JS with Babel.
+          // Process JS with Awesome TS Loader.
           {
             test: /\.(ts|tsx|js|jsx|mjs)$/,
             include: paths.appSrc,
@@ -147,7 +152,6 @@ module.exports = {
               cacheDirectory: true,
             },
           },
-          
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
           // "style" loader turns CSS into JS modules that inject <style> tags.
