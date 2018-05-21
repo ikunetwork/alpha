@@ -86,7 +86,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     // `web` extension prefixes have been added for better support
     // for React Native Web.
-    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
+    extensions: ['.ts', '.tsx', '.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -125,6 +125,9 @@ module.exports = {
         include: paths.appSrc,
       },
       {
+        enforce: "pre", test: /\.js$/, loader: require.resolve('source-map-loader') 
+      },
+      {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
@@ -141,9 +144,9 @@ module.exports = {
           },
           // Process JS with Babel.
           {
-            test: /\.(js|jsx|mjs)$/,
+            test: /\.(ts|tsx|js|jsx|mjs)$/,
             include: paths.appSrc,
-            loader: require.resolve('babel-loader'),
+            loader: require.resolve('awesome-typescript-loader'),
             options: {
               compact: true,
             },
@@ -334,4 +337,5 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty',
   },
+  devtool: 'source-map'
 };

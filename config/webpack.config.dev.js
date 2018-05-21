@@ -80,7 +80,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     // `web` extension prefixes have been added for better support
     // for React Native Web.
-    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
+    extensions: ['.ts', '.tsx', '.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -134,11 +134,12 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+         
           // Process JS with Babel.
           {
-            test: /\.(js|jsx|mjs)$/,
+            test: /\.(ts|tsx|js|jsx|mjs)$/,
             include: paths.appSrc,
-            loader: require.resolve('babel-loader'),
+            loader: require.resolve('awesome-typescript-loader'),
             options: {
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -146,6 +147,7 @@ module.exports = {
               cacheDirectory: true,
             },
           },
+          
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
           // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -254,4 +256,5 @@ module.exports = {
   performance: {
     hints: false,
   },
+  devtool: 'source-map'
 };
