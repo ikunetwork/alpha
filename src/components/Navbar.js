@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Web3Helper from '../utils/Web3Helper';
-import Wallet from './Wallet';
+import Wallet from './Wallet.tsx';
 import Blocky from './Blocky';
 import DeviceHelper from '../utils/DeviceHelper';
 import { loginAction } from '../redux/modules/user';

@@ -1,16 +1,24 @@
-import React, { Component } from 'react';
-import Contract from 'truffle-contract';
-import IkuToken from '../../build/contracts/IkuToken.json';
+import * as React from "react";
+import * as Contract from "truffle-contract";
+import { IkuToken } from "../../contracts";
 
-export default class Wallet extends Component {
-  constructor(props) {
+interface WalletProps {
+  web3: any;
+  address: string;
+  sayHi: () => string;
+}
+
+interface WalletState {
+  tokenBalance: number,
+  tokenSymbol: string, 
+  tokenDecimals: number
+}
+
+export default class Wallet extends React.Component<WalletProps, WalletState, {}> {
+  constructor(props: WalletProps) {
     super(props);
 
-    this.state = {
-      tokenBalance: 0,
-      tokenSymbol: 'IKU',
-      tokenDecimals: 18,
-    };
+    this.state = { tokenBalance: 0, tokenSymbol: "IKU", tokenDecimals: 18 };
   }
 
   componentWillMount() {
@@ -40,7 +48,7 @@ export default class Wallet extends Component {
         return tokenInstance.symbol.call();
       })
       .catch(e => {
-        console.log('THERE WAS AN ERROR: ', e);
+        console.log("THERE WAS AN ERROR: ", e);
       });
   }
 
