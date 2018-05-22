@@ -1,5 +1,0 @@
-#!/bin/sh
-echo "Starting alpha.iku.network with $CURRENT_NETWORK network...";
-
-node scripts/start.js >> /dev/null 2>&1 &
-./node_modules/.bin/nodemon server.js
