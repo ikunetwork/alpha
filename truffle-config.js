@@ -1,5 +1,3 @@
-require('babel-register');
-
 module.exports = {
   migrations_directory: "./migrations",
   networks: {

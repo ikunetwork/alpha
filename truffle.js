@@ -1,5 +1,3 @@
-require('babel-register');
-
 const config = require('./api/Config');
 
 module.exports = {
