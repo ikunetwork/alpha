@@ -2381,7 +2381,7 @@ commander@2.11.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
 
-commander@2.15.x, commander@^2.11.0, commander@^2.9, commander@^2.9.0, commander@~2.15.0:
+commander@2.15.x, commander@^2.11.0, commander@^2.12.2, commander@^2.9, commander@^2.9.0, commander@~2.15.0:
   version "2.15.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
 
@@ -10529,6 +10529,13 @@ truffle-contract-schema@^2.0.0:
     crypto-js "^3.1.9-1"
     debug "^3.1.0"
 
+truffle-contract-typescript@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/truffle-contract-typescript/-/truffle-contract-typescript-1.0.13.tgz#964eb57dc62bbe22828c9b894063360b71d3d4a5"
+  dependencies:
+    commander "^2.12.2"
+    typescript "^2.5.3"
+
 truffle-contract@^3.0.2:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/truffle-contract/-/truffle-contract-3.0.5.tgz#c25d07042dcd519413bfee21034ed6ee7fc373bf"
@@ -10603,7 +10610,7 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.7.0:
+typescript@^2.5.3, typescript@^2.7.0:
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.8.3.tgz#5d817f9b6f31bb871835f4edf0089f21abe6c170"
 

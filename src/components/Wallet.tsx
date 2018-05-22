@@ -2,20 +2,20 @@ import * as React from "react";
 import * as Contract from "truffle-contract";
 import { IkuToken } from "../../contracts";
 
-interface WalletProps {
+interface Props {
   web3: any;
   address: string;
   sayHi: () => string;
 }
 
-interface WalletState {
+interface State {
   tokenBalance: number,
   tokenSymbol: string, 
   tokenDecimals: number
 }
 
-export default class Wallet extends React.Component<WalletProps, WalletState, {}> {
-  constructor(props: WalletProps) {
+export default class Wallet extends React.Component<Props, State, {}> {
+  constructor(props: Props) {
     super(props);
 
     this.state = { tokenBalance: 0, tokenSymbol: "IKU", tokenDecimals: 18 };
