@@ -1,11 +1,11 @@
 {
-  "parser": "babel-eslint",
+  "parser": "typescript-eslint-parser",
   "env": {
     "es6": true,
     "jasmine": true
   },
 
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "typescript"],
 
   // Map from global var to bool specifying if it can be redefined
   "globals": {
@@ -157,7 +157,7 @@
     "no-label-var": 1, // disallow labels that share a name with a variable
     "no-shadow": 1, // disallow declaration of variables already declared in the outer scope
     "no-shadow-restricted-names": 1, // disallow shadowing of names such as arguments
-    "no-undef": 2, // disallow use of undeclared variables unless mentioned in a /*global */ block
+    "no-undef": 1, // disallow use of undeclared variables unless mentioned in a /*global */ block
     "no-undefined": 0, // disallow use of undefined variable (off by default)
     "no-undef-init": 1, // disallow use of undefined when initializing variables
     "no-unused-vars": [
