@@ -101,7 +101,7 @@
     "truffle-contract": "^3.0.5",
     "truffle-contract-typescript": "^1.0.13",
     "truffle-hdwallet-provider": "^0.0.5",
-    "ts-node": "6.0.3",
+    "ts-node": "6.0.4",
     "typescript": "^2.7.0",
     "typescript-eslint-parser": "^15.0.0",
     "url-loader": "1.0.1",
