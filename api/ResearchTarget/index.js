@@ -127,8 +127,10 @@ class ResearchTarget {
 
             DB.insert(TABLE_NAME_VOTES, data)
               .then(_res => {
-                resolve({
-                  success: true,
+                ResearchTarget.getVoteCount({
+                  query: { id: req.body.id },
+                }).then(__res => {
+                  resolve(__res);
                 });
               })
               .catch(_e => {

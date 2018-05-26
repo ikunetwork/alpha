@@ -156,9 +156,11 @@ function voteRequest(body) {
   });
 }
 
-function voteSuccess() {
+function voteSuccess(response) {
+  const { votes } = response;
   return {
     type: ACTIONS.VOTE_SUCCESS,
+    votes,
   };
 }
 
@@ -287,6 +289,7 @@ export default function reducer(state = initialState, action) {
           },
         },
         fetchingVotes: false,
+        votingError: null,
       };
 
     case ACTIONS.GET_VOTES_FAILURE:
@@ -298,7 +301,7 @@ export default function reducer(state = initialState, action) {
 
     case ACTIONS.VOTE:
       return loop(
-        { ...state, voting: action.id },
+        { ...state, voting: action.body.id },
         Cmd.run(voteRequest, {
           successActionCreator: voteSuccess,
           failActionCreator: voteFailure,
@@ -313,6 +316,7 @@ export default function reducer(state = initialState, action) {
           ...state.votes,
           [state.voting]: {
             voted: true,
+            votes: action.votes,
           },
         },
         voting: false,
@@ -321,6 +325,10 @@ export default function reducer(state = initialState, action) {
     case ACTIONS.VOTE_FAILURE:
       return {
         ...state,
+        votes: {
+          ...state.votes,
+          [state.voting]: { voted: true },
+        },
         votingError:
           action.error || 'An error occurred while voting. Please try again.',
         voting: false,
