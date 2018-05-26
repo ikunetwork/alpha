@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Contract from "truffle-contract";
-import { IkuToken } from "../../contracts";
+import IkuTokenHelper from '../utils/IkuTokenHelper';
 
 interface Props {
   web3: any;
@@ -26,26 +26,12 @@ export default class Wallet extends React.Component<Props, State, {}> {
   }
 
   instantiateContract() {
-    const token = Contract(IkuToken);
-    token.setProvider(this.props.web3.currentProvider);
-
-    // Declaring this for later so we can chain functions.
-    let tokenInstance;
-
-    token
-      .deployed()
-      .then(instance => {
-        tokenInstance = instance;
-        return tokenInstance.balanceOf.call(this.props.address);
-      })
+    IkuTokenHelper.getBalance(this.props.web3.currentProvider, this.props.address)
       .then(result => {
         const balance = result
           .dividedBy(10 ** this.state.tokenDecimals)
           .toFormat(0);
-
-        // Update state with the result.
-        this.setState({ tokenBalance: balance });
-        return tokenInstance.symbol.call();
+          this.setState({ tokenBalance: balance });
       })
       .catch(e => {
         console.log("THERE WAS AN ERROR: ", e);
