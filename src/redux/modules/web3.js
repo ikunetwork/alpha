@@ -60,6 +60,39 @@ function showUnlockMetamaskModalAction(show) {
   };
 }
 
+function getAccounts(web3eth, currentAddress, onChangeAddress) {
+  web3eth.getAccounts((error, response) => {
+    if (!error) {
+      const address = response[0];
+      if (address !== currentAddress) {
+        onChangeAddress(address);
+      }
+
+      setTimeout(_ => {
+        getAccounts(web3eth, currentAddress, onChangeAddress);
+      }, 2000);
+    } else {
+      console.log('Error fetching web3 address: ', error);
+    }
+  });
+}
+
+function getVersion(web3version, currentNetworkId, onChangeNetwork) {
+  web3version.getNetwork((error, networkId) => {
+    if (!error) {
+      if (networkId !== currentNetworkId) {
+        onChangeNetwork(networkId);
+      }
+
+      setTimeout(_ => {
+        getVersion(web3version, currentNetworkId, onChangeNetwork);
+      }, 2000);
+    } else {
+      console.log('Error fetching web3 network: ', error);
+    }
+  });
+}
+
 function startListening(
   web3eth,
   web3version,
@@ -68,28 +101,8 @@ function startListening(
   onChangeAddress,
   onChangeNetwork
 ) {
-  setInterval(() => {
-    web3eth.getAccounts((error, response) => {
-      if (!error) {
-        const address = response[0];
-        if (address !== currentAddress) {
-          onChangeAddress(address);
-        }
-      } else {
-        console.log('Error fetching web3 address: ', error);
-      }
-    });
-
-    web3version.getNetwork((error, networkId) => {
-      if (!error) {
-        if (networkId !== currentNetworkId) {
-          onChangeNetwork(networkId);
-        }
-      } else {
-        console.log('Error fetching web3 network: ', error);
-      }
-    });
-  }, 2000);
+  getAccounts(web3eth, currentAddress, onChangeAddress);
+  getVersion(web3version, currentNetworkId, onChangeNetwork);
 }
 
 function setWeb3Action(data) {
