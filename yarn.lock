@@ -3147,9 +3147,9 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-flowtype@2.46.3:
-  version "2.46.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.46.3.tgz#7e84131d87ef18b496b1810448593374860b4e8e"
+eslint-plugin-flowtype@2.47.0:
+  version "2.47.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.47.0.tgz#75bba03f76264f3b9be5df2a17203541e183ae90"
   dependencies:
     lodash "^4.15.0"
 
@@ -10142,9 +10142,9 @@ truffle@^4.1.10:
     original-require "^1.0.1"
     solc "0.4.24"
 
-ts-node@6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-6.0.3.tgz#28bf74bcad134fad17f7469dad04638ece03f0f4"
+ts-node@6.0.4:
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-6.0.4.tgz#245af3a8cdf3baa1121893fe12b9a54ee297c4c5"
   dependencies:
     arrify "^1.0.0"
     chalk "^2.3.0"
