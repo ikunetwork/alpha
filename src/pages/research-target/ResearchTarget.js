@@ -16,10 +16,17 @@ class ResearchTarget extends Component {
   constructor(props) {
     super(props);
     this.currentUrl = this.getCurrentUrl();
+    this.voteCount = 0;
   }
 
   componentDidMount() {
     this.fetchVotes();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.votingError) {
+      alert(nextProps.votingError);
+    }
   }
 
   getCurrentUrl() {
@@ -43,7 +50,11 @@ class ResearchTarget extends Component {
   getVoteCount() {
     if (this.props.votes) {
       const currentTarget = this.props.votes[this.getTargetId()];
-      return (currentTarget || {}).votes || 0;
+      const newCount = (currentTarget || {}).votes || 0;
+      if (newCount > this.voteCount) {
+        this.voteCount = newCount;
+      }
+      return this.voteCount;
     } else {
       return 0;
     }
@@ -350,6 +361,7 @@ export default connect(
   state => ({
     researchTargets: state.researchTargets.targets,
     votes: state.researchTargets.votes,
+    votingError: state.researchTargets.votingError,
     user: state.user,
   }),
   dispatch => ({

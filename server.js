@@ -151,7 +151,7 @@ router
         })
         .catch(error => {
           console.log('ROUTE :: POST :: /research-target/vote :: ', error);
-          res.send(error);
+          res.status(400).send(error);
         });
     } else {
       res.send({ error: 'missing parameters' });
