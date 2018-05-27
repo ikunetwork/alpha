@@ -143,6 +143,15 @@ class ResearchTarget extends Component {
     );
   }
 
+  renderResearch = info => [
+    <p key="est_required">
+      <b>Est. $ Required:</b> {info.est_required || 'Unknown'}
+    </p>,
+    <p key="est_required">
+      <b>Status:</b> {info.current_status || 'Unknown'}
+    </p>,
+  ];
+
   renderBiomarket = info => {
     const items = [];
     if (info.disease_type && info.disease_type !== '') {
@@ -321,7 +330,12 @@ class ResearchTarget extends Component {
                       readOnly={true}
                     />
                   </div>
-
+                  <div key="biomarker-title" className="form-section-header">
+                    <h4>Research</h4>
+                  </div>
+                  <div className="article-content">
+                    {this.renderResearch(info)}
+                  </div>
                   <div className="article-content">
                     {this.renderBiomarket(info)}
                   </div>
