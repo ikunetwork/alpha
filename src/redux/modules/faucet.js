@@ -2,6 +2,8 @@ import { Cmd, loop } from 'redux-loop';
 
 import apiRequest from '../../utils/Fetch';
 
+import { ACTIONS as ALERT_ACTIONS } from './alerts';
+
 const ACTIONS = {
   GET_TOKENS: 'FAUCET/GET_TOKENS',
   GET_TOKENS_SUCCESS: 'FAQ/GET_TOKENS_SUCCESS',
@@ -55,14 +57,15 @@ export default function reducer(state = initialState, action) {
 
     case ACTIONS.GET_TOKENS_SUCCESS:
       return { ...state, loading: false, success: true };
-
+    
     case ACTIONS.GET_TOKENS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error:
-          action.error || 'Ooops! Something went wrong... Please try again.',
-      };
+      return loop(
+        {...state, loading: false },
+        Cmd.run({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error || 'Oops! Something went wrong... Please try again.'
+        })
+      );
 
     default:
       return state;
