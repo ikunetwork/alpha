@@ -387,7 +387,9 @@ class Proposal extends Component {
           });
 
           if (response.activated) {
-            this.props.setAlert('Thanks to your vote the proposal has been approved by the network!');
+            this.props.setAlert(
+              'Thanks to your vote the proposal has been approved by the network!'
+            );
             this.getData();
           }
         } else {

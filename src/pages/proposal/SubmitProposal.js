@@ -99,7 +99,9 @@ class SubmitProposal extends Component {
 
   submitProposal = () => {
     if (!this.state.certify) {
-      this.props.setAlert('You need to certify that the information given is complete and correct');
+      this.props.setAlert(
+        'You need to certify that the information given is complete and correct'
+      );
       return false;
     }
     const {

@@ -1,7 +1,5 @@
 import { Cmd, loop } from 'redux-loop';
 
-import apiRequest from '../../utils/Fetch';
-
 const ACTIONS = {
   SET_GLOBAL_ALERT: 'ALERTS/SET_GLOBAL_ALERT',
   CLEAR_GLOBAL_ALERT: 'ALERTS/CLEAR_GLOBAL_ALERT',

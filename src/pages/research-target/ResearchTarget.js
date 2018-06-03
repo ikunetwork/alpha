@@ -28,14 +28,14 @@ class ResearchTarget extends Component {
     this.fetchVotes();
   }
 
-  componentWillUnmount() {
-    this.props.clearAlert();
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.votingError) {
       alert(nextProps.votingError);
     }
+  }
+  
+  componentWillUnmount() {
+    this.props.clearAlert();
   }
 
   getCurrentUrl() {

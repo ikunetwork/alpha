@@ -12,16 +12,18 @@ import {
 import {
   setGlobalAlertAction,
   clearGlobalAlertAction,
-} from '../../redux/modules/alerts'
+} from '../../redux/modules/alerts';
 
 class Faucet extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.success && nextProps.success) {
-      this.props.setAlert('Hold tight... Your tokens are on the way! \n(It may take a couple of minutes to reflect your new balance)');
+      this.props.setAlert(
+        'Hold tight... Your tokens are on the way! \n(It may take a couple of minutes to reflect your new balance)'
+      );
       window.location.reload();
     }
   }
-  
+
   componentWillUnmount() {
     this.props.clearAlert();
   }
