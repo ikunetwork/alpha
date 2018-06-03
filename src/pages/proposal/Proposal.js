@@ -18,10 +18,16 @@ import TimeCountdown from '../../components/TimeCountdown';
 import ProposalComments from '../../components/ProposalComments';
 import ProposalUpdates from '../../components/ProposalUpdates';
 import ProposalData from '../../components/ProposalData';
+
 import {
   showNoWeb3BrowserModalAction,
   showUnlockMetamaskModalAction,
 } from '../../redux/modules/web3';
+
+import {
+  setGlobalAlertAction,
+  clearGlobalAlertAction,
+} from '../../redux/modules/alerts';
 
 import './Proposal.css';
 
@@ -53,6 +59,10 @@ class Proposal extends Component {
 
   componentDidMount() {
     this.init();
+  }
+
+  componentWillUnmount() {
+    this.props.clearAlert();
   }
 
   onDataUploadSuccess(ipfs_hash, encryption_key) {
@@ -359,7 +369,7 @@ class Proposal extends Component {
 
   vote() {
     if (this.state.done) {
-      alert('You already voted!');
+      this.props.setAlert('You already voted!');
       return false;
     }
 
@@ -377,14 +387,11 @@ class Proposal extends Component {
           });
 
           if (response.activated) {
-            alert(
-              'Thanks to your vote the proposal has been approved by the network!'
-            );
+            this.props.setAlert('Thanks to your vote the proposal has been approved by the network!');
             this.getData();
           }
         } else {
-          alert('You already voted!');
-
+          this.props.setAlert('You already voted');
           this.setState({
             done: true,
           });
@@ -439,13 +446,13 @@ class Proposal extends Component {
           if (response.message) {
             msg = response.message;
           }
-          alert(msg);
+          this.props.setAlert(msg);
         }
         this.setState({ accessingData: false });
       })
       .catch(error => {
         if (error.message) {
-          alert(error.message);
+          this.props.setAlert(error.message);
         }
         console.log(
           'There was an error while requesting access to data',
@@ -476,13 +483,13 @@ class Proposal extends Component {
           if (response.message) {
             msg = response.message;
           }
-          alert(msg);
+          this.props.setAlert(msg);
         }
         this.setState({ accessingLicense: false });
       })
       .catch(error => {
         if (error.message) {
-          alert(error.message);
+          this.props.setAlert(error.message);
         }
         console.log(
           'There was an error while requesting access to license',
@@ -1044,5 +1051,7 @@ export default connect(
       dispatch(showNoWeb3BrowserModalAction(show)),
     showUnlockMetamaskModal: show =>
       dispatch(showUnlockMetamaskModalAction(show)),
+    setAlert: message => dispatch(setGlobalAlertAction(message)),
+    clearAlert: () => dispatch(clearGlobalAlertAction()),
   })
 )(Proposal);

@@ -16,6 +16,11 @@ import {
   clearSubmissionDataAction,
 } from '../../redux/modules/researchTargets';
 
+import {
+  setGlobalAlertAction,
+  clearGlobalAlertAction,
+} from '../../redux/modules/alerts';
+
 import './SubmitResearchTarget.css';
 
 class SubmitResearchTarget extends Component {
@@ -60,6 +65,10 @@ class SubmitResearchTarget extends Component {
     this.props.clearSubmissionData();
   }
 
+  componentWillUnmount() {
+    this.props.clearAlert();
+  }
+
   onTagAdded = t => {
     const tags = [...this.state.tags, ...t].filter(
       (elem, pos, arr) => arr.indexOf(elem) === pos
@@ -79,6 +88,11 @@ class SubmitResearchTarget extends Component {
     this.setState({
       [name]: value,
     });
+  }
+
+  setAlert(msg) {
+    this.props.setAlert(msg);
+    window.scrollTo(0, 0);
   }
 
   verifyCaptcha(r) {
@@ -105,12 +119,12 @@ class SubmitResearchTarget extends Component {
     } = this.state;
 
     if (name.trim() === '') {
-      alert('You need to enter the name of the Research Target');
+      this.props.setAlert('You need to enter the name of the Research Target');
       return false;
     }
 
     if (description.trim() === '') {
-      alert('The Science / Hypothesis section is required');
+      this.props.setAlert('The Science / Hypothesis section is required');
       return false;
     }
 
@@ -119,7 +133,7 @@ class SubmitResearchTarget extends Component {
       video.search('youtube.com') === -1 &&
       video.search('youtu.be') === -1
     ) {
-      alert('Only youtube urls are supported at this moment');
+      this.props.setAlert('Only youtube urls are supported at this moment');
       return false;
     }
 
@@ -486,5 +500,7 @@ export default connect(
     submitResearchTarget: fields =>
       dispatch(submitResearchTargetAction(fields)),
     clearSubmissionData: () => dispatch(clearSubmissionDataAction()),
+    setAlert: message => dispatch(setGlobalAlertAction(message)),
+    clearAlert: () => dispatch(clearGlobalAlertAction()),
   })
 )(SubmitResearchTarget);

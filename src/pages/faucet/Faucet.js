@@ -3,19 +3,27 @@ import { connect } from 'react-redux';
 import { getTokensAction } from '../../redux/modules/faucet';
 import Loader from '../../components/Loader';
 import Title from '../../components/Title';
+
 import {
   showNoWeb3BrowserModalAction,
   showUnlockMetamaskModalAction,
 } from '../../redux/modules/web3';
 
+import {
+  setGlobalAlertAction,
+  clearGlobalAlertAction,
+} from '../../redux/modules/alerts'
+
 class Faucet extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.success && nextProps.success) {
-      alert(
-        'Hold tight... Your tokens are on the way! \n(It may take a couple of minutes to reflect your new balance)'
-      );
+      this.props.setAlert('Hold tight... Your tokens are on the way! \n(It may take a couple of minutes to reflect your new balance)');
       window.location.reload();
     }
+  }
+  
+  componentWillUnmount() {
+    this.props.clearAlert();
   }
 
   getIKU() {
@@ -103,5 +111,7 @@ export default connect(
       dispatch(showNoWeb3BrowserModalAction(show)),
     showUnlockMetamaskModal: show =>
       dispatch(showUnlockMetamaskModalAction(show)),
+    setAlert: message => dispatch(setGlobalAlertAction(message)),
+    clearAlert: () => dispatch(clearGlobalAlertAction()),
   })
 )(Faucet);

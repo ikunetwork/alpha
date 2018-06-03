@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import Alert from './components/Alert';
 import Footer from './components/Footer';
 import Web3BrowserRequiredModal from './components/Web3BrowserRequiredModal';
 import UnlockMetamaskModal from './components/UnlockMetamaskModal';
@@ -72,6 +73,7 @@ class App extends Component {
     return (
       <Router onUpdate={() => window.scrollTo(0, 0)}>
         <ScrollToTop>
+          <Alert alert={this.props.alert} />
           <div className={(this.props.user.loggedIn && 'loggedIn') || ''}>
             <Sidebar user={this.props.user} logout={this.props.logout} />
             <Navbar
@@ -165,6 +167,7 @@ class App extends Component {
 
 export default connect(
   state => ({
+    alert: state.alerts.globalAlert,
     user: state.user,
     address: state.user.address,
     web3: state.web3,

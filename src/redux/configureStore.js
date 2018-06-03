@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import { install as installReduxLoop, combineReducers } from 'redux-loop';
 
-import addresses from './modules/addresses';
+import alerts from './modules/alerts';
 import faq from './modules/faq';
 import faucet from './modules/faucet';
 import network from './modules/network';
@@ -12,7 +12,7 @@ import user from './modules/user';
 import web3 from './modules/web3';
 
 const reducer = combineReducers({
-  addresses,
+  alerts,
   faq,
   faucet,
   network,
