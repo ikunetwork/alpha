@@ -155,7 +155,6 @@ export default function reducer(state = initialState, action) {
       );
 
     case ACTIONS.SIGNUP_FAILURE:
-      return { ...state, loading: false, error: action.error };
       return loop(
         { ...state, loading: false },
         Cmd.action({
@@ -193,7 +192,8 @@ export default function reducer(state = initialState, action) {
         state,
         Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
-          alert: 'The verification email has been re-sent. Please check your inbox.',
+          alert:
+            'The verification email has been re-sent. Please check your inbox.',
         })
       );
 
