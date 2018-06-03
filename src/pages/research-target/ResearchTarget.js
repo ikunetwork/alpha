@@ -33,7 +33,7 @@ class ResearchTarget extends Component {
       alert(nextProps.votingError);
     }
   }
-  
+
   componentWillUnmount() {
     this.props.clearAlert();
   }
