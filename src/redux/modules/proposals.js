@@ -1,5 +1,7 @@
 import { Cmd, loop } from 'redux-loop';
 
+import { ACTIONS as ALERT_ACTIONS } from './alerts';
+
 import apiRequest from '../../utils/Fetch';
 import Token from '../../utils/Token';
 
@@ -202,7 +204,13 @@ export default function reducer(state = initialState, action) {
       );
 
     case ACTIONS.GET_PROPOSALS_FAILURE:
-      return { ...state, loading: false, error: action.error };
+      return loop(
+        { ...state, loading: false },
+        Cmd.action({
+          type: ALERT_ACTIONS,
+          alert: action.error || 'An error occurred while fetching proposals.',
+        })
+      );
 
     case ACTIONS.SET_PROPOSALS:
       return { ...state, proposals: action.proposals };
@@ -247,12 +255,15 @@ export default function reducer(state = initialState, action) {
       };
 
     case ACTIONS.SUBMIT_PROPOSAL_FAILURE:
-      return {
-        ...state,
-        submissionError:
-          'An error occurred submitting your proposal. Please try again.',
-        submittingProposal: false,
-      };
+      return loop(
+        { ...state, submittingProposal: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert:
+            action.error ||
+            'An error occurred submitting your proposal. Please try again.',
+        })
+      );
 
     case ACTIONS.CLEAR_SUBMISSION_DATA:
       return { ...state, submission: null, submissionError: null };
@@ -275,12 +286,13 @@ export default function reducer(state = initialState, action) {
       };
 
     case ACTIONS.GET_COMMENTS_FAILURE:
-      return {
-        ...state,
-        fetchCommentsError:
-          action.error || 'An error occurred getting comments.',
-        fetchingComments: false,
-      };
+      return loop(
+        { ...state, fetchingComments: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error || 'An error occurred getting comments.',
+        })
+      );
 
     case ACTIONS.COMMENT:
       return loop(
@@ -301,14 +313,15 @@ export default function reducer(state = initialState, action) {
       };
 
     case ACTIONS.COMMENT_FAILURE:
-      return {
-        ...state,
-        commentingError:
-          action.error ||
-          'An error occurred while adding a comment. Please try again.',
-        commenting: false,
-        commented: false,
-      };
+      return loop(
+        { ...state, commenting: false, commented: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert:
+            action.error ||
+            'An error occurred while adding a comment. Please try again.',
+        })
+      );
 
     default:
       return state;

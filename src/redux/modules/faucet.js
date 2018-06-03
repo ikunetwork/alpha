@@ -57,13 +57,14 @@ export default function reducer(state = initialState, action) {
 
     case ACTIONS.GET_TOKENS_SUCCESS:
       return { ...state, loading: false, success: true };
-    
+
     case ACTIONS.GET_TOKENS_FAILURE:
       return loop(
-        {...state, loading: false },
-        Cmd.run({
+        { ...state, loading: false },
+        Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
-          alert: action.error || 'Oops! Something went wrong... Please try again.'
+          alert:
+            action.error || 'Oops! Something went wrong... Please try again.',
         })
       );
 
