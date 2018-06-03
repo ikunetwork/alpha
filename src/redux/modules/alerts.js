@@ -35,4 +35,4 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export { setGlobalAlertAction, clearGlobalAlertAction };
+export { setGlobalAlertAction, clearGlobalAlertAction, ACTIONS };
