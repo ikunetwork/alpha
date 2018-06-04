@@ -6,7 +6,13 @@ export default class ProposalInfo extends Component {
     if (!this.props.info || !this.props.info.attachments) {
       return null;
     }
-    const attachments = JSON.parse(this.props.info.attachments);
+    let attachments = [];
+    try {
+      attachments = JSON.parse(this.props.info.attachments);
+    } catch (e) {
+      console.log(e);
+      attachments = [];
+    }
     if (attachments.length) {
       return (
         <div>
@@ -14,8 +20,13 @@ export default class ProposalInfo extends Component {
           <ul className="proposal-attachments">
             {attachments.map((item, i) => (
               <li key={`item-${i.toString()}`}>
-                <a href={item.url} target="_blank" className="attachment">
-                  <i className="fa fa-file" /> {item.original_filename}
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="attachment"
+                >
+                  <i className="fa fa-file-o" /> {item.original_filename}
                 </a>
               </li>
             ))}
