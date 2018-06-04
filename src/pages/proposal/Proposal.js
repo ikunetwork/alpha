@@ -561,6 +561,7 @@ class Proposal extends Component {
                   this.props.networkId
                 )}`}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-iku  ml-auto mr-auto"
               >
                 View transaction on ETHERSCAN.IO
@@ -664,6 +665,7 @@ class Proposal extends Component {
               this.props.networkId
             )}`}
             target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-iku"
           >
             See transaction details
@@ -812,6 +814,7 @@ class Proposal extends Component {
               this.props.networkId
             )}`}
             target="_blank"
+            rel="noopener noreferrer"
             className="token-name"
             title="View on etherscan.io"
           >

@@ -21,7 +21,12 @@ export default class ProposalInfo extends Component {
           <ul className="proposal-attachments">
             {attachments.map((item, i) => (
               <li key={`item-${i.toString()}`}>
-                <a href={item.url} target="_blank" className="attachment">
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="attachment"
+                >
                   <i className="fa fa-file-o" /> {item.original_filename}
                 </a>
               </li>

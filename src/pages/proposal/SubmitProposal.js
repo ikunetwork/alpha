@@ -218,7 +218,12 @@ class SubmitProposal extends Component {
         <ul>
           {this.state.attachments.map((item, i) => (
             <li key={`attachment-${i.toString()}`}>
-              <a href={item.url} target="_blank" className="attachment">
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="attachment"
+              >
                 <i className="fa fa-file-o" /> {item.original_filename}
               </a>
               <button
