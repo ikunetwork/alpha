@@ -7,7 +7,6 @@ export default class ProposalInfo extends Component {
       return null;
     }
     let attachments = [];
-    console.log(this.props.info.attachments);
     try {
       attachments = JSON.parse(this.props.info.attachments);
     } catch (e) {
