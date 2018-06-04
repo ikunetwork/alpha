@@ -64,6 +64,7 @@ export default class IPFSUploader extends Component {
         <a
           href={`https://ipfs.io/ipfs/${this.state.added_file_hash}`}
           target="_blank"
+          rel="noopener noreferrer"
         >
           {this.state.added_file_hash}
         </a>

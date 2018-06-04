@@ -59,6 +59,7 @@ export default class ProposalData extends Component {
                 className="btn btn-iku"
                 href={`https://ipfs.io/ipfs/${this.props.proposal.ipfs_hash}`}
                 target="_blank"
+                rel="noopener noreferrer"
                 onClick={_ => this.props.requestAccessToLicense()}
               >
                 {this.props.accessingLicense ? (

@@ -119,6 +119,15 @@ class App extends Component {
                   />
                 )}
               />
+              <Route
+                path="/edit-proposal"
+                render={() => (
+                  <SubmitProposal
+                    address={this.props.address}
+                    loggedIn={this.props.user.loggedIn}
+                  />
+                )}
+              />
               {/* <Route path={`/network-tools`} component={NetworkTools} /> */}
               <Route path="/research-target/:id" component={ResearchTarget} />
               <Route path="/proposal/:id" component={Proposal} />

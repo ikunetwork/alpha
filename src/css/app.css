@@ -161,6 +161,25 @@ h2.title {
 }
 
 /* CTAs */
+.btn-edit {
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex: 1;
+  background-color: #495ac5 !important;
+  border-color: #495ac5;
+  color: #ffffff !important;
+  margin-bottom: 30px;
+  max-width: 210px;
+}
+
+.btn-edit i {
+  font-size: 15px;
+  margin-top: 3px;
+  margin-left: 18px;
+  margin-right: 10px;
+}
+
 .btn-iku {
   background-color: #495ac5 !important;
   border-color: #495ac5;
@@ -606,12 +625,12 @@ a {
 }
 
 .attachment i {
-  color: #ffffff;
+  color: #333333;
   margin-right: 10px;
 }
 
 .delete-attachment i {
-  color: #ffffff;
+  color: #f4282d;
 }
 
 .delete-attachment {
@@ -624,9 +643,6 @@ a {
 .attachments ul {
   margin-left: 0px;
   padding-left: 0px;
-}
-.attachments li {
-  display: flex;
 }
 
 a.attachment {

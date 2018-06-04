@@ -168,6 +168,7 @@ export default class ContributeModal extends PureComponent {
                   this.props.networkId
                 )}`}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="etherscan-link"
               >
                 View your transaction details on EtherScan.io
