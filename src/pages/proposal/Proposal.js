@@ -4,6 +4,7 @@ import Datetime from 'react-datetime';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { downloadText } from 'download.js';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import apiRequest from '../../utils/Fetch';
 import Currency from '../../utils/Currency';
@@ -893,6 +894,25 @@ class Proposal extends Component {
     }
   }
 
+  renderEdit() {
+    if (this.isProposalOwner() && !this.state.info.approved) {
+      return (
+        <div className="row">
+          <div className="col-md-3 ml-auto mr-auto">
+            <Link
+              to={{
+                pathname: `/edit-proposal/${this.state.info.id}`,
+              }}
+              className="btn btn-round btn-edit btn-center"
+            >
+              <i className="fa fa-edit" /> Edit Proposal
+            </Link>
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
     if (!this.state.info) {
       return (
@@ -915,6 +935,7 @@ class Proposal extends Component {
         <div className="section section-white">
           <div className="container tim-container">
             <Title align="center">{info.name}</Title>
+            {this.renderEdit()}
             {this.renderMainRow()}
             <div className="row">
               <div className="col-md-9 horizontal-section">

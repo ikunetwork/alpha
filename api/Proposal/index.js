@@ -105,11 +105,63 @@ class Proposal {
       const proposal_id = req.body.id;
       delete data.id;
 
-      DB.update(TABLE_NAME, data, proposal_id)
-        .then(res => resolve(Proposal.normalize(res.rows[0])))
-        .catch(e => {
-          reject(e);
-        });
+      // Once the proposal has been approved
+      // Only some of the fields are allowed to be updated
+
+      DB.get('proposal', proposal_id).then(res => {
+        const proposal = Proposal.normalize(res.rows[0]);
+        let allowed = true;
+
+        if (proposal.approved) {
+          const restricted_fields = [
+            'created_by',
+            'name',
+            'investigator_name',
+            'investigator_location',
+            'rare_disease',
+            'thesis',
+            'current_stage',
+            'empirical_data',
+            'anecdotal_data',
+            'scientific_justification',
+            'observations',
+            'funds_required',
+            'funding_process_duration',
+            'socioeconomic_implication',
+            'attachments',
+            'roadmap',
+            'image',
+          ];
+          // check that we're gonna update allowed fields
+          for (let i = 0; i < Object.keys(data).length; i++) {
+            const key = Object.keys(data)[i];
+            if (restricted_fields.indexOf(key) !== -1) {
+              reject({
+                error: `The field ${key} can't be updated at this time`,
+              });
+              allowed = false;
+              break;
+            }
+          }
+        }
+
+        if (allowed) {
+          if (data.attachments.length) {
+            data.attachments = JSON.stringify(data.attachments);
+          } else {
+            delete data.attachments;
+          }
+          if (!data.rare_disease) {
+            delete data.rare_disease;
+          }
+
+          DB.update(TABLE_NAME, data, proposal_id)
+            .then(r => resolve(Proposal.normalize(r.rows[0])))
+            .catch(e => {
+              reject(e);
+            });
+        }
+      });
     });
   }
 
