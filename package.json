@@ -102,7 +102,7 @@
     "truffle-contract-typescript": "^1.0.13",
     "truffle-hdwallet-provider": "^0.0.5",
     "ts-node": "6.1.0",
-    "typescript": "^2.7.0",
+    "typescript": "^2.9.1",
     "typescript-eslint-parser": "^16.0.0",
     "url-loader": "1.0.1",
     "web3": "^0.20.6",
@@ -117,14 +117,22 @@
     "test": "NODE_ENV='development' scripts/test.sh",
     "test-coverage": "NODE_ENV='development' scripts/coverage.sh",
     "truffle": "NODE_ENV='development' node ./node_modules/.bin/truffle",
-    "truffle-develop": "NODE_ENV='development' node ./node_modules/.bin/truffle develop",
-    "truffle-log": "NODE_ENV='development' node ./node_modules/.bin/truffle develop --log",
-    "truffle-test": "NODE_ENV='development' node ./node_modules/.bin/truffle test",
-    "truffle-compile": "NODE_ENV='development' node ./node_modules/.bin/truffle compile",
-    "truffle-compile-ts": "NODE_ENV='development' node ./node_modules/.bin/truffle compile && ./node_modules/.bin/truffle-contract-typescript build ./build/contracts contracts.ts",
-    "truffle-migrate": "NODE_ENV='development' node ./node_modules/.bin/truffle migrate --reset",
-    "truffle-migrate-ropsten": "NODE_ENV='development' node ./node_modules/.bin/truffle migrate --network ropsten",
-    "truffle-deploy": "NODE_ENV='development' node ./node_modules/.bin/truffle migrate",
+    "truffle-develop":
+      "NODE_ENV='development' node ./node_modules/.bin/truffle develop",
+    "truffle-log":
+      "NODE_ENV='development' node ./node_modules/.bin/truffle develop --log",
+    "truffle-test":
+      "NODE_ENV='development' node ./node_modules/.bin/truffle test",
+    "truffle-compile":
+      "NODE_ENV='development' node ./node_modules/.bin/truffle compile",
+    "truffle-compile-ts":
+      "NODE_ENV='development' node ./node_modules/.bin/truffle compile && ./node_modules/.bin/truffle-contract-typescript build ./build/contracts contracts.ts",
+    "truffle-migrate":
+      "NODE_ENV='development' node ./node_modules/.bin/truffle migrate --reset",
+    "truffle-migrate-ropsten":
+      "NODE_ENV='development' node ./node_modules/.bin/truffle migrate --network ropsten",
+    "truffle-deploy":
+      "NODE_ENV='development' node ./node_modules/.bin/truffle migrate",
     "lint::server": "./node_modules/.bin/eslint server.js",
     "lint::server::fix": "./node_modules/.bin/eslint --fix server.js",
     "lint::frontend": "./node_modules/.bin/eslint src/",
@@ -134,21 +142,23 @@
     "lint::jobs": "./node_modules/.bin/eslint jobs/",
     "lint::jobs::fix": "./node_modules/.bin/eslint --fix jobs/",
     "lint::test": "./node_modules/.bin/eslint test/",
-    "lint::css::fix": "./node_modules/.bin/prettier --write '{src,public__{test,coverage}__}/**/*.css'",
+    "lint::css::fix":
+      "./node_modules/.bin/prettier --write '{src,public__{test,coverage}__}/**/*.css'",
     "lint::test::fix": "./node_modules/.bin/eslint --fix test/",
-    "lint::all": "./node_modules/.bin/eslint src/ && ./node_modules/.bin/eslint api/ && ./node_modules/.bin/eslint jobs/ && ./node_modules/.bin/eslint test/ && ./node_modules/.bin/eslint server.js",
-    "lint::all::fix": "./node_modules/.bin/eslint --fix src/ && ./node_modules/.bin/eslint --fix api/ && ./node_modules/.bin/eslint --fix jobs/ && ./node_modules/.bin/eslint --fix test/ && ./node_modules/.bin/eslint --fix server.js && ./node_modules/.bin/prettier --write '{src,public__{test,coverage}__}/**/*.css'",
-    "db::setup": "node ./db_migrations/setup-db.js && sleep 5 && node ./db_migrations/setup-fks.js",
-    "db::populate": "node ./db_migrations/populate-users.js && node ./db_migrations/populate-proposals.js && node ./db_migrations/populate-rts.js",
+    "lint::all":
+      "./node_modules/.bin/eslint src/ && ./node_modules/.bin/eslint api/ && ./node_modules/.bin/eslint jobs/ && ./node_modules/.bin/eslint test/ && ./node_modules/.bin/eslint server.js",
+    "lint::all::fix":
+      "./node_modules/.bin/eslint --fix src/ && ./node_modules/.bin/eslint --fix api/ && ./node_modules/.bin/eslint --fix jobs/ && ./node_modules/.bin/eslint --fix test/ && ./node_modules/.bin/eslint --fix server.js && ./node_modules/.bin/prettier --write '{src,public__{test,coverage}__}/**/*.css'",
+    "db::setup":
+      "node ./db_migrations/setup-db.js && sleep 5 && node ./db_migrations/setup-fks.js",
+    "db::populate":
+      "node ./db_migrations/populate-users.js && node ./db_migrations/populate-proposals.js && node ./db_migrations/populate-rts.js",
     "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "greenkeeper": {
-    "ignore": [
-      "webpack-dev-server",
-      "webpack"
-    ]
+    "ignore": ["webpack-dev-server", "webpack"]
   }
 }
