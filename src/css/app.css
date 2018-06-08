@@ -792,7 +792,6 @@ a.attachment {
   text-align: center;
   opacity: 0;
   transition: opacity 0.5s;
-  -webkit-transition: opacity 0.5s;
   margin: 0 auto;
 }
 
@@ -1317,6 +1316,10 @@ a.attachment {
     margin: auto;
   }
   .main {
+    padding-left: 15px;
+  }
+  .global-alert-container {
+    padding: 10px;
     padding-left: 15px;
   }
   .container.tim-container {
