@@ -92,7 +92,6 @@ class SubmitResearchTarget extends Component {
 
   setAlert(msg) {
     this.props.setAlert(msg);
-    window.scrollTo(0, 0);
   }
 
   verifyCaptcha(r) {

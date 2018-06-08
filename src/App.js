@@ -58,6 +58,9 @@ class App extends Component {
       // Address has changed, we need to fetch new user info
       this.fetchUserInfo(nextProps.address);
     }
+    if (this.props.alert !== nextProps.alert && nextProps.alert) {
+      window.scrollTo(0, 0);
+    }
   }
 
   fetchUserInfo = address => {
