@@ -53,10 +53,6 @@ class SubmitProposal extends Component {
     this.init();
   }
 
-  componentWillUnmount() {
-    this.props.clearAlert();
-  }
-  
   componentWillReceiveProps(nextProps) {
     if (
       this.isEditing() &&
@@ -66,6 +62,10 @@ class SubmitProposal extends Component {
     ) {
       this.loadProposalInfo(nextProps);
     }
+  }
+  
+  componentWillUnmount() {
+    this.props.clearAlert();
   }
 
   onImageUploaded(image) {
