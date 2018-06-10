@@ -25,6 +25,7 @@ class SubmitProposal extends Component {
     super(props);
 
     this.state = {
+      id: null,
       name: '',
       rare_disease: false,
       thesis: '',
@@ -55,6 +56,17 @@ class SubmitProposal extends Component {
   componentWillUnmount() {
     this.props.clearAlert();
   }
+  
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.isEditing() &&
+      !this.state.id &&
+      nextProps.proposals &&
+      nextProps.proposals.length > 0
+    ) {
+      this.loadProposalInfo(nextProps);
+    }
+  }
 
   onImageUploaded(image) {
     this.setState({ image: image.url });
@@ -74,6 +86,18 @@ class SubmitProposal extends Component {
     console.log('Upload failed:', msg);
   };
 
+  getProposalId = () => window.location.pathname.replace('/edit-proposal/', '');
+
+  getProposalInfo(props) {
+    const id = this.getProposalId();
+    if (id !== '') {
+      return (
+        props.proposals && props.proposals.find(p => p.id === parseInt(id, 10))
+      );
+    }
+    return null;
+  }
+
   setValue(event) {
     const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -92,9 +116,37 @@ class SubmitProposal extends Component {
     );
   }
 
+  loadProposalInfo(props) {
+    const info = this.getProposalInfo(props);
+    if (info) {
+      let { attachments } = info;
+      if (typeof attachments === 'string') {
+        try {
+          attachments = JSON.parse(attachments);
+        } catch (e) {
+          console.log('Error trying to parse attachments', e);
+          attachments = [];
+        }
+      } else if (typeof attachments !== 'object') {
+        attachments = [];
+      }
+      info.attachments = attachments;
+      this.setState({ ...info });
+    }
+  }
+
+  isEditing() {
+    const id = this.getProposalId();
+    if (id !== '') {
+      return true;
+    }
+    return false;
+  }
+
   async init() {
     this.props.clearSubmissionData();
     this.setState({ eth_price_usd: await Currency.getEtherPriceInUSD() });
+    this.loadProposalInfo(this.props);
   }
 
   submitProposal = () => {
@@ -125,29 +177,31 @@ class SubmitProposal extends Component {
       attachments,
     } = this.state;
 
-    this.props.submitProposal(
-      {
-        name,
-        rare_disease,
-        thesis,
-        current_stage,
-        observations,
-        socioeconomic_implication,
-        investigator_name,
-        investigator_location,
-        funds_required,
-        funding_process_duration,
-        token_name,
-        token_symbol,
-        roadmap,
-        empirical_data,
-        anecdotal_data,
-        scientific_justification,
-        image,
-        attachments,
-      },
-      this.props.address
-    );
+    const data = {
+      name,
+      rare_disease,
+      thesis,
+      current_stage,
+      observations,
+      socioeconomic_implication,
+      investigator_name,
+      investigator_location,
+      funds_required,
+      funding_process_duration,
+      token_name,
+      token_symbol,
+      roadmap,
+      empirical_data,
+      anecdotal_data,
+      scientific_justification,
+      image,
+      attachments,
+    };
+
+    if (this.state.id) {
+      data.id = this.state.id;
+    }
+    this.props.submitProposal(data, this.props.address);
   };
 
   deleteAttachment(i) {
@@ -168,13 +222,18 @@ class SubmitProposal extends Component {
   );
 
   renderAttachments() {
-    if (this.state.attachments.length) {
+    if (this.state.attachments && this.state.attachments.length) {
       return (
         <ul>
           {this.state.attachments.map((item, i) => (
             <li key={`attachment-${i.toString()}`}>
-              <a href={item.url} target="_blank" className="attachment">
-                <i className="fa fa-file" /> {item.original_filename}
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="attachment"
+              >
+                <i className="fa fa-file-o" /> {item.original_filename}
               </a>
               <button
                 className="delete-attachment"
@@ -193,7 +252,9 @@ class SubmitProposal extends Component {
   renderForm() {
     return (
       <div className="container col-ld-8 col-md-12 proposal-form col-sm-12">
-        <Title align="center">Submit Proposal</Title>
+        <Title align="center">
+          {this.isEditing() ? 'Edit' : 'Submit'} Proposal
+        </Title>
         <div className="form-wrapper">
           <div className="row">
             <p>
@@ -552,11 +613,14 @@ class SubmitProposal extends Component {
   renderNewProposal() {
     return (
       <div className="container col-md-8">
-        <Title align="center">Proposal Submitted</Title>
+        <Title align="center">
+          {this.isEditing() ? 'Edit' : 'Submit'} Proposal
+        </Title>
         <div className="form-wrapper">
           <div className="row ml-auto mr-auto text-center title">
             <p className="form-help">
-              Your Proposal has been submitted succesfully.
+              Your Proposal has been{' '}
+              {this.isEditing() ? 'updated' : 'submitted'} succesfully.
               <br />
             </p>
             <div className="title">
@@ -597,6 +661,7 @@ export default connect(
     loading: state.proposals.submittingProposal,
     error: state.proposals.submissionError,
     newProposal: state.proposals.submission,
+    proposals: state.proposals.proposals,
   }),
   dispatch => ({
     submitProposal: (fields, address) =>

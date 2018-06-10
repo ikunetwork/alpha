@@ -60,6 +60,10 @@ class Database {
       field_values
     );
   }
+
+  static get(table, id) {
+    return Database.query(`SELECT * FROM "${table}" WHERE id='${id}'`);
+  }
 }
 
 module.exports = Database;

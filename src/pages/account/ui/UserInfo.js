@@ -41,6 +41,7 @@ export default function UserInfo({
       <a
         href={`${EtherscanUrlHelper.getAddressUrl(address, networkId)}`}
         target="_blank"
+        rel="noopener noreferrer"
         className="address token-name"
         title="View on etherscan.io"
       >

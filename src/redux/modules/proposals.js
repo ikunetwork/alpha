@@ -75,8 +75,9 @@ function submitProposalAction(fields, address) {
 }
 
 function submitProposalRequest(fields, address) {
+  const method = fields.id ? 'put' : 'post';
   return apiRequest('/api/proposal', {
-    method: 'post',
+    method,
     body: { ...fields },
     jwt_auth: Token.get(address),
   });

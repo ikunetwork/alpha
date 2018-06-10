@@ -156,7 +156,7 @@ class ResearchTarget extends Component {
     <p key="est_required">
       <b>Est. $ Required:</b> {info.est_required || 'Unknown'}
     </p>,
-    <p key="est_required">
+    <p key="status">
       <b>Status:</b> {info.current_status || 'Unknown'}
     </p>,
   ];
@@ -339,7 +339,7 @@ class ResearchTarget extends Component {
                       readOnly={true}
                     />
                   </div>
-                  <div key="biomarker-title" className="form-section-header">
+                  <div key="research-title" className="form-section-header">
                     <h4>Research</h4>
                   </div>
                   <div className="article-content">
