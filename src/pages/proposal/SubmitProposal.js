@@ -63,7 +63,7 @@ class SubmitProposal extends Component {
       this.loadProposalInfo(nextProps);
     }
   }
-  
+
   componentWillUnmount() {
     this.props.clearAlert();
   }
