@@ -1,5 +1,7 @@
 import { Cmd, loop } from 'redux-loop';
 
+import { ACTIONS as ALERT_ACTIONS } from './alerts';
+
 import apiRequest from '../../utils/Fetch';
 import Token from '../../utils/Token';
 import { ACTIONS as USER_ACTIONS } from './user';
@@ -153,7 +155,13 @@ export default function reducer(state = initialState, action) {
       );
 
     case ACTIONS.SIGNUP_FAILURE:
-      return { ...state, loading: false, error: action.error };
+      return loop(
+        { ...state, loading: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error,
+        })
+      );
 
     case ACTIONS.SET_NEW_USER_FIELDS:
       return loop(
@@ -174,19 +182,20 @@ export default function reducer(state = initialState, action) {
         state,
         Cmd.run(resendSignupEmailRequest, {
           successActionCreator: resendSignupEmailSuccess,
-          // beware: using a generic error handler
           failActionCreator: signupFailure,
           args: [action.address],
         })
       );
 
     case ACTIONS.RESEND_SIGNUP_EMAIL_SUCCESS:
-      // this was in an alert, we need to add UI to display the message
-      return {
-        ...state,
-        message:
-          'The verification email has been re-sent. Please check you inbox.',
-      };
+      return loop(
+        state,
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert:
+            'The verification email has been re-sent. Please check your inbox.',
+        })
+      );
 
     case ACTIONS.VERIFY_EMAIL:
       return loop(
@@ -208,11 +217,13 @@ export default function reducer(state = initialState, action) {
       );
 
     case ACTIONS.VERIFY_EMAIL_FAILURE:
-      return {
-        ...state,
-        error: action.error,
-        verifyingEmail: false,
-      };
+      return loop(
+        { ...state, verifyingEmail: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error,
+        })
+      );
 
     default:
       return state;

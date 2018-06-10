@@ -796,6 +796,25 @@ a.attachment {
   margin-bottom: 50px;
 }
 
+.global-alert-container {
+  background-color: #495ac5;
+  padding: 25px;
+  padding-left: 90px;
+}
+
+.global-alert-text {
+  max-width: 50%;
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s;
+  margin: 0 auto;
+}
+
+.active-alert .global-alert-text {
+  opacity: 1;
+}
+
 .contribute .input-group {
   height: 40px;
 }
@@ -1313,6 +1332,10 @@ a.attachment {
     margin: auto;
   }
   .main {
+    padding-left: 15px;
+  }
+  .global-alert-container {
+    padding: 10px;
     padding-left: 15px;
   }
   .container.tim-container {

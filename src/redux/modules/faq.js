@@ -1,5 +1,7 @@
 import { Cmd, loop } from 'redux-loop';
 
+import { ACTIONS as ALERT_ACTIONS } from './alerts';
+
 import apiRequest from '../../utils/Fetch';
 
 const ACTIONS = {
@@ -59,7 +61,13 @@ export default function reducer(state = initialState, action) {
       );
 
     case ACTIONS.GET_FAQ_FAILURE:
-      return { ...state, loading: false, error: action.error };
+      return loop(
+        { ...state, loading: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error,
+        })
+      );
 
     case ACTIONS.SET_FAQ:
       return { ...state, faq: action.faq };

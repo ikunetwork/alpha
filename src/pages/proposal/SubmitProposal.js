@@ -13,6 +13,11 @@ import {
   clearSubmissionDataAction,
 } from '../../redux/modules/proposals';
 
+import {
+  setGlobalAlertAction,
+  clearGlobalAlertAction,
+} from '../../redux/modules/alerts';
+
 import './SubmitProposal.css';
 
 class SubmitProposal extends Component {
@@ -57,6 +62,10 @@ class SubmitProposal extends Component {
     ) {
       this.loadProposalInfo(nextProps);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearAlert();
   }
 
   onImageUploaded(image) {
@@ -142,7 +151,7 @@ class SubmitProposal extends Component {
 
   submitProposal = () => {
     if (!this.state.certify) {
-      alert(
+      this.props.setAlert(
         'You need to certify that the information given is complete and correct'
       );
       return false;
@@ -658,5 +667,7 @@ export default connect(
     submitProposal: (fields, address) =>
       dispatch(submitProposalAction(fields, address)),
     clearSubmissionData: () => dispatch(clearSubmissionDataAction()),
+    setAlert: message => dispatch(setGlobalAlertAction(message)),
+    clearAlert: () => dispatch(clearGlobalAlertAction()),
   })
 )(SubmitProposal);

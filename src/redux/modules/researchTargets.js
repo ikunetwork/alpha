@@ -1,5 +1,7 @@
 import { Cmd, loop } from 'redux-loop';
 
+import { ACTIONS as ALERT_ACTIONS } from './alerts';
+
 import apiRequest from '../../utils/Fetch';
 
 const ACTIONS = {
@@ -211,7 +213,13 @@ export default function reducer(state = initialState, action) {
       );
 
     case ACTIONS.GET_RESEARCH_TARGETS_FAILURE:
-      return { ...state, loading: false, error: action.error };
+      return loop(
+        { ...state, loading: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error,
+        })
+      );
 
     case ACTIONS.SET_RESEARCH_TARGETS:
       return { ...state, researchTargets: action.researchTargets };
@@ -256,13 +264,15 @@ export default function reducer(state = initialState, action) {
       };
 
     case ACTIONS.SUBMIT_RESEARCH_TARGET_FAILURE:
-      return {
-        ...state,
-        submissionError:
-          action.error ||
-          'An error occurred submitting the research target. Please try again.',
-        submittingResearchTarget: false,
-      };
+      return loop(
+        { ...state, submittingResearchTarget: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert:
+            action.error ||
+            'An error occurred submitting the research target. Please try again.',
+        })
+      );
 
     case ACTIONS.CLEAR_SUBMISSION_DATA:
       return { ...state, submission: null, submissionError: null };
@@ -293,11 +303,13 @@ export default function reducer(state = initialState, action) {
       };
 
     case ACTIONS.GET_VOTES_FAILURE:
-      return {
-        ...state,
-        fetchVotesError: action.error || 'An error occurred getting votes.',
-        voting: false,
-      };
+      return loop(
+        { ...state, voting: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error || 'An error occurred getting votes.',
+        })
+      );
 
     case ACTIONS.VOTE:
       return loop(
@@ -323,16 +335,21 @@ export default function reducer(state = initialState, action) {
       };
 
     case ACTIONS.VOTE_FAILURE:
-      return {
-        ...state,
-        votes: {
-          ...state.votes,
-          [state.voting]: { voted: true },
+      return loop(
+        {
+          ...state,
+          votes: {
+            ...state.votes,
+            [state.voting]: { voted: true },
+          },
+          voting: false,
         },
-        votingError:
-          action.error || 'An error occurred while voting. Please try again.',
-        voting: false,
-      };
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert:
+            action.error || 'An error occurred while voting. Please try again.',
+        })
+      );
 
     default:
       return state;

@@ -12,6 +12,11 @@ import {
   voteAction,
 } from '../../redux/modules/researchTargets';
 
+import {
+  setGlobalAlertAction,
+  clearGlobalAlertAction,
+} from '../../redux/modules/alerts';
+
 class ResearchTarget extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +32,10 @@ class ResearchTarget extends Component {
     if (nextProps.votingError) {
       alert(nextProps.votingError);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearAlert();
   }
 
   getCurrentUrl() {
@@ -71,7 +80,7 @@ class ResearchTarget extends Component {
 
   vote() {
     if (this.getVoted()) {
-      alert('You already voted!');
+      this.props.setAlert('You already voted!');
       return false;
     }
     this.props.vote(this.getTargetInfo(), this.getTargetId());
@@ -381,5 +390,7 @@ export default connect(
   dispatch => ({
     getVotes: id => dispatch(getVotesAction(id)),
     vote: body => dispatch(voteAction(body)),
+    setAlert: message => dispatch(setGlobalAlertAction(message)),
+    clearAlert: () => dispatch(clearGlobalAlertAction()),
   })
 )(ResearchTarget);

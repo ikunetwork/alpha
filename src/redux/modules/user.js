@@ -1,5 +1,7 @@
 import { Cmd, loop } from 'redux-loop';
 
+import { ACTIONS as ALERT_ACTIONS } from './alerts';
+
 import apiRequest from '../../utils/Fetch';
 import Token from '../../utils/Token';
 
@@ -176,11 +178,13 @@ export default function reducer(state = initialState, action) {
       );
 
     case ACTIONS.LOGIN_FAILURE:
-      return {
-        ...state,
-        loggingIn: false,
-        loginError: action.error,
-      };
+      return loop(
+        { ...state, loggingIn: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error,
+        })
+      );
 
     case ACTIONS.GET_USER_INFO:
       return loop(
@@ -202,7 +206,13 @@ export default function reducer(state = initialState, action) {
       );
 
     case ACTIONS.GET_USER_INFO_FAILURE:
-      return { ...state, loading: false, error: action.error };
+      return loop(
+        { ...state, loading: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error,
+        })
+      );
 
     case ACTIONS.EDIT_USER_INFO:
       return loop(
@@ -224,7 +234,13 @@ export default function reducer(state = initialState, action) {
       );
 
     case ACTIONS.EDIT_USER_INFO_FAILURE:
-      return { ...state, editingInfo: false, editError: action.error };
+      return loop(
+        { ...state, editingInfo: false },
+        Cmd.action({
+          type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
+          alert: action.error,
+        })
+      );
 
     case ACTIONS.SET_USER_INFO:
       return {
