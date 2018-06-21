@@ -33,19 +33,20 @@ const strategy = new Strategy(jwtOptions, (req, jwt_payload, done) => {
   User.findById(jwt_payload.id)
     .then(user => {
       if (
-        user.verified ||
+        (user && user.verified) ||
         req.url === '/user/verify-email' ||
         req.url === '/user/resend-email' ||
         (req.url === '/user/me' && req.method === 'PATCH')
       ) {
         done(null, user);
       } else {
-        done(null, false, { error: 'unauthorized' });
+        console.log(user, req.url, req.method);
+        done(null, false, { message: 'unauthorized' });
       }
     })
     .catch(e => {
       console.log('JTW :: exception on the strategy', e);
-      done(e, false);
+      done(null, false, { message: 'unauthorized' });
     });
 });
 

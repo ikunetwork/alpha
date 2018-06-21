@@ -39,7 +39,7 @@ class VerifyEmail extends Component {
   }
 
   renderSuccess() {
-    if (!this.props.loading) {
+    if (this.props.loading) {
       return (
         <div className="container col-md-6">
           <div className="row">

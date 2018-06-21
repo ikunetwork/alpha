@@ -20,7 +20,9 @@ class Faucet extends Component {
       this.props.setAlert(
         'Hold tight... Your tokens are on the way! \n(It may take a couple of minutes to reflect your new balance)'
       );
-      window.location.reload();
+      setTimeout(_ => {
+        window.location.reload();
+      }, 4000);
     }
   }
 
