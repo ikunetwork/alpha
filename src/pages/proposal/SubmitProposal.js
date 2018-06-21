@@ -137,7 +137,7 @@ class SubmitProposal extends Component {
 
   isEditing() {
     const id = this.getProposalId();
-    if (id !== '') {
+    if (id !== '' && Number.isInteger(id)) {
       return true;
     }
     return false;
