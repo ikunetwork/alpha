@@ -16,7 +16,7 @@ class User {
           resolve(res.rows[0]);
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }
@@ -57,7 +57,7 @@ class User {
             });
           });
       } else {
-        reject({ error: 'invalid signed message' });
+        reject({ message: 'invalid signed message' });
       }
     });
   }
@@ -91,7 +91,7 @@ class User {
           })
           .catch(e => {
             console.log('USER :: Error during signup ', e);
-            reject(e);
+            reject({ message: e.message });
           });
       }
     });
@@ -112,7 +112,7 @@ class User {
           resolve(res.rows[0]);
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }
@@ -125,7 +125,7 @@ class User {
           resolve(res.rows[0]);
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }

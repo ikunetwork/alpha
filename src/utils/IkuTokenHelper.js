@@ -17,7 +17,7 @@ export default class IkuTokenHelper {
           resolve(tokenInstance.balanceOf.call(address));
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }

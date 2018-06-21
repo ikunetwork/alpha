@@ -204,12 +204,16 @@ class Navbar extends Component {
   };
 
   logoutAndClose = () => {
-    this.closeNavbar();
+    if (this.state.isMobile) {
+      this.closeNavbar();
+    }
     this.props.logout();
   };
 
   attemptLogin = () => {
-    // this.props.web3.handleAction(this.login());
+    if (this.state.isMobile) {
+      this.closeNavbar();
+    }
     if (this.props.web3) {
       if (!this.props.address) {
         this.props.showUnlockMetamaskModal(true);
