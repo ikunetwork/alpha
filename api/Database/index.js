@@ -19,20 +19,20 @@ class Database {
               .end()
               .then(__ => {
                 if (err) {
-                  reject(err);
+                  reject({ message: err.message });
                 } else {
                   resolve(res);
                 }
               })
               .catch(e => {
                 console.log('DB-ERROR :: error while closing db connection');
-                reject(e);
+                reject({ message: e.message });
               });
           });
         })
         .catch(e => {
           console.log('DB-ERROR :: error while connecting to DB');
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }
