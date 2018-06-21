@@ -6,3 +6,4 @@ build_webpack/
 .env
 .vscode/
 coverage/
+.gitconfig

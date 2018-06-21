@@ -21,7 +21,7 @@ class S3Uploader {
       s3.getSignedUrl('putObject', s3Params, (err, data) => {
         if (err) {
           console.log(err);
-          reject(err);
+          reject({ message: err.message });
         }
         const returnData = {
           signedRequest: data,

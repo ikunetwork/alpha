@@ -809,6 +809,7 @@ a.attachment {
   opacity: 0;
   transition: opacity 0.5s;
   margin: 0 auto;
+  font-weight: 500;
 }
 
 .active-alert .global-alert-text {
@@ -1430,6 +1431,10 @@ a.attachment {
     padding-left: 20px;
     padding-right: 20px;
   }
+
+  .global-alert-text {
+    max-width: 90%;
+  }
 }
 
 /*                       */
@@ -1481,5 +1486,9 @@ a.attachment {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .global-alert-text {
+    max-width: 80%;
   }
 }

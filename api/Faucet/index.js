@@ -51,11 +51,11 @@ class Faucet {
               })
               .catch(e => {
                 console.log('REJECT', reject);
-                reject(e);
+                reject({ message: e.message });
               });
           })
           .catch(e => {
-            reject(e);
+            reject({ message: e.message });
           });
       });
     });

@@ -217,7 +217,9 @@ export default function reducer(state = initialState, action) {
         { ...state, loading: false },
         Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
-          alert: action.error,
+          alert:
+            (action.error && action.error.message) ||
+            'Ooops! something went wrong...',
         })
       );
 
@@ -269,7 +271,7 @@ export default function reducer(state = initialState, action) {
         Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
           alert:
-            action.error ||
+            (action.error && action.error.message) ||
             'An error occurred submitting the research target. Please try again.',
         })
       );
@@ -307,7 +309,9 @@ export default function reducer(state = initialState, action) {
         { ...state, voting: false },
         Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
-          alert: action.error || 'An error occurred getting votes.',
+          alert:
+            (action.error && action.error.message) ||
+            'An error occurred getting votes.',
         })
       );
 
@@ -347,7 +351,8 @@ export default function reducer(state = initialState, action) {
         Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
           alert:
-            action.error || 'An error occurred while voting. Please try again.',
+            (action.error && action.error.message) ||
+            'An error occurred while voting. Please try again.',
         })
       );
 

@@ -23,7 +23,7 @@ export default class Currency {
           if (e.code && e.code === 'EUNAVAILABLE') {
             resolve(1000);
           } else {
-            reject(e);
+            reject({ message: e.message });
           }
         });
     });
