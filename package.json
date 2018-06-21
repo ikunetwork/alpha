@@ -8,7 +8,7 @@
     "airtable": "^0.5.0",
     "animated-scroll-to": "^1.1.7",
     "autoprefixer": "8.6.3",
-    "awesome-typescript-loader": "^4.0.0",
+    "awesome-typescript-loader": "^5.1.1",
     "aws-sdk": "^2.222.1",
     "bignumber.js": "^7.0.1",
     "body-parser": "~1.18.2",
