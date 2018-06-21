@@ -92,7 +92,7 @@ export default class Web3Helper {
         (err, result) => {
           if (err) {
             console.error(err);
-            reject(err);
+            reject({ message: err.message });
           }
 
           if (result.error) {

@@ -12,13 +12,13 @@ class ResearchTarget {
         DB.query(`SELECT * FROM "${TABLE_NAME}" WHERE id='${req.query.id}'`)
           .then(res => resolve(res.rows[0]))
           .catch(e => {
-            reject(e);
+            reject({ message: e.message });
           });
       } else {
         DB.query(`SELECT * FROM "${TABLE_NAME}" ORDER BY id DESC`)
           .then(res => resolve(res.rows))
           .catch(e => {
-            reject(e);
+            reject({ message: e.message });
           });
       }
     });
@@ -46,7 +46,7 @@ class ResearchTarget {
 
             DB.insert(TABLE_NAME, data)
               .then(res => resolve(res.rows[0]))
-              .catch(e => reject(e));
+              .catch(e => reject({ message: e.message }));
           } else {
             reject(body);
           }
@@ -79,7 +79,7 @@ class ResearchTarget {
             DB.update(TABLE_NAME, data, rt_id)
               .then(res => resolve(res.rows[0]))
               .catch(e => {
-                reject(e);
+                reject({ message: e.message });
               });
           } else {
             reject(body);
@@ -102,7 +102,7 @@ class ResearchTarget {
           });
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }
@@ -139,7 +139,7 @@ class ResearchTarget {
           }
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }

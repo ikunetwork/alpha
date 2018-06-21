@@ -57,13 +57,13 @@ class Proposal {
             }
           })
           .catch(e => {
-            reject(e);
+            reject({ message: e.message });
           });
       } else {
         DB.query(`SELECT * FROM "${TABLE_NAME}" ORDER BY id DESC`)
           .then(res => resolve(res.rows.map(i => Proposal.normalize(i))))
           .catch(e => {
-            reject(e);
+            reject({ message: e.message });
           });
       }
     });
@@ -94,7 +94,7 @@ class Proposal {
       DB.insert(TABLE_NAME, data)
         .then(res => resolve(Proposal.normalize(res.rows[0])))
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }
@@ -158,7 +158,7 @@ class Proposal {
           DB.update(TABLE_NAME, data, proposal_id)
             .then(r => resolve(Proposal.normalize(r.rows[0])))
             .catch(e => {
-              reject(e);
+              reject({ message: e.message });
             });
         }
       });
@@ -176,7 +176,7 @@ class Proposal {
           });
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }
@@ -217,7 +217,7 @@ class Proposal {
           }
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }
@@ -313,14 +313,14 @@ class Proposal {
                 resolve({ activated: true });
               })
               .catch(e => {
-                reject(e);
+                reject({ message: e.message });
               });
           } else {
             resolve({ activated: false });
           }
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }
@@ -380,7 +380,7 @@ class Proposal {
             });
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }
@@ -427,7 +427,7 @@ class Proposal {
             });
         })
         .catch(e => {
-          reject(e);
+          reject({ message: e.message });
         });
     });
   }

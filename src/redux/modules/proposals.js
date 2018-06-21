@@ -209,7 +209,9 @@ export default function reducer(state = initialState, action) {
         { ...state, loading: false },
         Cmd.action({
           type: ALERT_ACTIONS,
-          alert: action.error || 'An error occurred while fetching proposals.',
+          alert:
+            (action.error && action.error.message) ||
+            'An error occurred while fetching proposals.',
         })
       );
 
@@ -261,7 +263,7 @@ export default function reducer(state = initialState, action) {
         Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
           alert:
-            action.error ||
+            (action.error && action.error.message) ||
             'An error occurred submitting your proposal. Please try again.',
         })
       );
@@ -291,7 +293,9 @@ export default function reducer(state = initialState, action) {
         { ...state, fetchingComments: false },
         Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
-          alert: action.error || 'An error occurred getting comments.',
+          alert:
+            (action.error && action.error.message) ||
+            'An error occurred getting comments.',
         })
       );
 
@@ -319,7 +323,7 @@ export default function reducer(state = initialState, action) {
         Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
           alert:
-            action.error ||
+            (action.error && action.error.message) ||
             'An error occurred while adding a comment. Please try again.',
         })
       );

@@ -65,7 +65,9 @@ export default function reducer(state = initialState, action) {
         { ...state, loading: false },
         Cmd.action({
           type: ALERT_ACTIONS.SET_GLOBAL_ALERT,
-          alert: action.error,
+          alert:
+            (action.error && action.error.message) ||
+            'Oops! Something went wrong...',
         })
       );
 

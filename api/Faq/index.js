@@ -29,7 +29,7 @@ class Faq {
           },
           err => {
             if (err) {
-              reject(err);
+              reject({ message: err.message });
             } else {
               resolve(items);
             }
@@ -42,7 +42,7 @@ class Faq {
     return new Promise((resolve, reject) => {
       api(TABLE_NAME).create(data, (err, record) => {
         if (err) {
-          reject(err);
+          reject({ message: err.message });
         } else {
           resolve(record);
         }
