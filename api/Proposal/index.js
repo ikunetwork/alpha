@@ -9,13 +9,12 @@ const Contract = require('truffle-contract');
 const ResearchSpecificToken = require('../../build/contracts/ResearchSpecificToken.json');
 const RSTCrowdsale = require('../../build/contracts/RSTCrowdsale.json');
 const IPFS = require('ipfs-api');
-const CryptoJS = require('crypto-js');
 const Web3 = require('web3');
 
 class Proposal {
   static normalize(obj) {
     // Fields that we don't want to expose through the API
-    const private_fields = ['encryption_key', 'ipfs_hash'];
+    const private_fields = ['ipfs_hash'];
     const new_obj = { ...obj };
     private_fields.forEach(key => {
       delete new_obj[key];
@@ -364,13 +363,8 @@ class Proposal {
                     );
                   }
 
-                  const encrypted_file_content = file.toString('utf8');
-                  const bytes = CryptoJS.AES.decrypt(
-                    encrypted_file_content,
-                    record.encryption_key
-                  );
-                  const plaintext = bytes.toString(CryptoJS.enc.Utf8);
-                  resolve({ content: plaintext });
+                  const ipfs_file_content = file.toString('utf8');
+                  resolve({ content: ipfs_file_content });
                 });
               } else {
                 reject({

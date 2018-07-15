@@ -9,8 +9,8 @@ export default class ProposalData extends Component {
     this.state = {};
   }
 
-  onUploadSuccess(ipfs_hash, encryption_key) {
-    this.props.onUploadSuccess(ipfs_hash, encryption_key);
+  onUploadSuccess(ipfs_hash) {
+    this.props.onUploadSuccess(ipfs_hash);
   }
 
   renderUploader() {
@@ -21,9 +21,7 @@ export default class ProposalData extends Component {
             <h4>Upload research data</h4>
           </div>
           <IPFSUploader
-            onUploadSuccess={(ipfs_hash, encryption_key) =>
-              this.onUploadSuccess(ipfs_hash, encryption_key)
-            }
+            onUploadSuccess={ipfs_hash => this.onUploadSuccess(ipfs_hash)}
           />
           <div className="row">
             <hr />

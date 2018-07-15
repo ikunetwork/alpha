@@ -66,12 +66,11 @@ class Proposal extends Component {
     this.props.clearAlert();
   }
 
-  onDataUploadSuccess(ipfs_hash, encryption_key) {
+  onDataUploadSuccess(ipfs_hash) {
     apiRequest('/api/proposal', {
       method: 'put',
       body: {
         ipfs_hash,
-        encryption_key,
         id: this.state.info.id,
       },
     }).then(response => {
@@ -1032,8 +1031,8 @@ class Proposal extends Component {
                         requestAccessToLicense={_ =>
                           this.requestAccessToLicense()
                         }
-                        onUploadSuccess={(ipfs_hash, encryption_key) =>
-                          this.onDataUploadSuccess(ipfs_hash, encryption_key)
+                        onUploadSuccess={(ipfs_hash) =>
+                          this.onDataUploadSuccess(ipfs_hash)
                         }
                       />
                     </TabPanel>
