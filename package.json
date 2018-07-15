@@ -148,7 +148,10 @@
   "greenkeeper": {
     "ignore": [
       "webpack-dev-server",
-      "webpack"
+      "webpack",
+      "eslint-config-airbnb",
+      "eth-sig-util",
+      "awesome-typescript-loader"
     ]
   }
 }
