@@ -5,9 +5,9 @@
   "dependencies": {
     "@types/react": "^16.3.14",
     "@types/react-dom": "^16.0.5",
-    "airtable": "^0.5.0",
+    "airtable": "^0.5.6",
     "animated-scroll-to": "^1.1.7",
-    "autoprefixer": "8.6.3",
+    "autoprefixer": "8.6.4",
     "awesome-typescript-loader": "^4.0.0",
     "aws-sdk": "^2.222.1",
     "bignumber.js": "^7.0.1",
@@ -22,24 +22,24 @@
     "cron": "^1.3.0",
     "cross-fetch": "^2.1.0",
     "crypto-js": "^3.1.9-1",
-    "css-loader": "0.28.11",
+    "css-loader": "1.0.0",
     "disqus-react": "^1.0.5",
     "dotenv": "^6.0.0",
     "dotenv-expand": "4.2.0",
     "download.js": "^1.0.0",
-    "eslint": "4.19.1",
+    "eslint": "5.0.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.3.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-loader": "2.0.0",
-    "eslint-plugin-flowtype": "2.48.0",
-    "eslint-plugin-import": "2.12.0",
+    "eslint-plugin-flowtype": "2.49.4",
+    "eslint-plugin-import": "2.13.0",
     "eslint-plugin-jsx-a11y": "6.1.1",
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-prettier": "^2.0.1",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "7.9.1",
+    "eslint-plugin-react": "7.10.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-typescript": "^0.12.0",
     "eth-sig-util": "^1.4.2",
@@ -52,7 +52,7 @@
     "fs-extra": "6.0.1",
     "ganache-cli": "6.1.3",
     "greenkeeper-lockfile": "^1.12.0",
-    "gzip-size": "4.1.0",
+    "gzip-size": "5.0.0",
     "html-webpack-plugin": "3.2.0",
     "http-proxy-middleware": "0.18.0",
     "indent-string": "^3.2.0",
@@ -71,7 +71,7 @@
     "path-exists": "3.0.0",
     "pg": "^7.4.1",
     "postcss-flexbugs-fixes": "3.3.1",
-    "postcss-loader": "2.1.5",
+    "postcss-loader": "2.1.6",
     "prettier": "^1.2.2",
     "promise": "8.0.1",
     "raf": "3.4.0",
@@ -101,7 +101,7 @@
     "truffle-contract": "^3.0.5",
     "truffle-contract-typescript": "^1.0.13",
     "truffle-hdwallet-provider": "^0.0.5",
-    "ts-node": "6.1.2",
+    "ts-node": "6.2.0",
     "typescript": "^2.9.1",
     "typescript-eslint-parser": "^16.0.0",
     "url-loader": "1.0.1",
@@ -117,22 +117,14 @@
     "test": "NODE_ENV='development' scripts/test.sh",
     "test-coverage": "NODE_ENV='development' scripts/coverage.sh",
     "truffle": "NODE_ENV='development' node ./node_modules/.bin/truffle",
-    "truffle-develop":
-      "NODE_ENV='development' node ./node_modules/.bin/truffle develop",
-    "truffle-log":
-      "NODE_ENV='development' node ./node_modules/.bin/truffle develop --log",
-    "truffle-test":
-      "NODE_ENV='development' node ./node_modules/.bin/truffle test",
-    "truffle-compile":
-      "NODE_ENV='development' node ./node_modules/.bin/truffle compile",
-    "truffle-compile-ts":
-      "NODE_ENV='development' node ./node_modules/.bin/truffle compile && ./node_modules/.bin/truffle-contract-typescript build ./build/contracts contracts.ts",
-    "truffle-migrate":
-      "NODE_ENV='development' node ./node_modules/.bin/truffle migrate --reset",
-    "truffle-migrate-ropsten":
-      "NODE_ENV='development' node ./node_modules/.bin/truffle migrate --network ropsten",
-    "truffle-deploy":
-      "NODE_ENV='development' node ./node_modules/.bin/truffle migrate",
+    "truffle-develop": "NODE_ENV='development' node ./node_modules/.bin/truffle develop",
+    "truffle-log": "NODE_ENV='development' node ./node_modules/.bin/truffle develop --log",
+    "truffle-test": "NODE_ENV='development' node ./node_modules/.bin/truffle test",
+    "truffle-compile": "NODE_ENV='development' node ./node_modules/.bin/truffle compile",
+    "truffle-compile-ts": "NODE_ENV='development' node ./node_modules/.bin/truffle compile && ./node_modules/.bin/truffle-contract-typescript build ./build/contracts contracts.ts",
+    "truffle-migrate": "NODE_ENV='development' node ./node_modules/.bin/truffle migrate --reset",
+    "truffle-migrate-ropsten": "NODE_ENV='development' node ./node_modules/.bin/truffle migrate --network ropsten",
+    "truffle-deploy": "NODE_ENV='development' node ./node_modules/.bin/truffle migrate",
     "lint::server": "./node_modules/.bin/eslint server.js",
     "lint::server::fix": "./node_modules/.bin/eslint --fix server.js",
     "lint::frontend": "./node_modules/.bin/eslint src/",
@@ -142,23 +134,21 @@
     "lint::jobs": "./node_modules/.bin/eslint jobs/",
     "lint::jobs::fix": "./node_modules/.bin/eslint --fix jobs/",
     "lint::test": "./node_modules/.bin/eslint test/",
-    "lint::css::fix":
-      "./node_modules/.bin/prettier --write '{src,public__{test,coverage}__}/**/*.css'",
+    "lint::css::fix": "./node_modules/.bin/prettier --write '{src,public__{test,coverage}__}/**/*.css'",
     "lint::test::fix": "./node_modules/.bin/eslint --fix test/",
-    "lint::all":
-      "./node_modules/.bin/eslint src/ && ./node_modules/.bin/eslint api/ && ./node_modules/.bin/eslint jobs/ && ./node_modules/.bin/eslint test/ && ./node_modules/.bin/eslint server.js",
-    "lint::all::fix":
-      "./node_modules/.bin/eslint --fix src/ && ./node_modules/.bin/eslint --fix api/ && ./node_modules/.bin/eslint --fix jobs/ && ./node_modules/.bin/eslint --fix test/ && ./node_modules/.bin/eslint --fix server.js && ./node_modules/.bin/prettier --write '{src,public__{test,coverage}__}/**/*.css'",
-    "db::setup":
-      "node ./db_migrations/setup-db.js && sleep 5 && node ./db_migrations/setup-fks.js",
-    "db::populate":
-      "node ./db_migrations/populate-users.js && node ./db_migrations/populate-proposals.js && node ./db_migrations/populate-rts.js",
+    "lint::all": "./node_modules/.bin/eslint src/ && ./node_modules/.bin/eslint api/ && ./node_modules/.bin/eslint jobs/ && ./node_modules/.bin/eslint test/ && ./node_modules/.bin/eslint server.js",
+    "lint::all::fix": "./node_modules/.bin/eslint --fix src/ && ./node_modules/.bin/eslint --fix api/ && ./node_modules/.bin/eslint --fix jobs/ && ./node_modules/.bin/eslint --fix test/ && ./node_modules/.bin/eslint --fix server.js && ./node_modules/.bin/prettier --write '{src,public__{test,coverage}__}/**/*.css'",
+    "db::setup": "node ./db_migrations/setup-db.js && sleep 5 && node ./db_migrations/setup-fks.js",
+    "db::populate": "node ./db_migrations/populate-users.js && node ./db_migrations/populate-proposals.js && node ./db_migrations/populate-rts.js",
     "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "greenkeeper": {
-    "ignore": ["webpack-dev-server", "webpack"]
+    "ignore": [
+      "webpack-dev-server",
+      "webpack"
+    ]
   }
 }
