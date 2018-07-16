@@ -60,7 +60,7 @@ export default class IPFSUploader extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div>
         <div className="upload">
           <input
             type="file"

@@ -16,15 +16,12 @@ export default class ProposalData extends Component {
   renderUploader() {
     if (this.props.isProposalOwner) {
       return (
-        <div>
-          <div className="row">
+        <div className="row">
+          <div className="col-md-12">
             <h4>Upload research data</h4>
-          </div>
-          <IPFSUploader
-            onUploadSuccess={ipfs_hash => this.onUploadSuccess(ipfs_hash)}
-          />
-          <div className="row">
-            <hr />
+            <IPFSUploader
+              onUploadSuccess={ipfs_hash => this.onUploadSuccess(ipfs_hash)}
+            />
           </div>
         </div>
       );
@@ -32,40 +29,55 @@ export default class ProposalData extends Component {
   }
 
   render() {
+    let data = [];
+    const { ipfs_hash } = this.props.proposal;
+
+    try {
+      if (!Array.isArray(ipfs_hash)) {
+        data = JSON.parse(ipfs_hash);
+      } else {
+        data = ipfs_hash;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
     return (
       <div className="proposal-data-upload">
         {this.renderUploader()}
-
         <div className="row">
-          {this.props.proposal.ipfs_hash ? (
-            <div>
+          {data && data.length ? (
+            <div className="col-md-12">
+              {this.props.isProposalOwner ? <hr /> : null}
               <h4>Research data is available</h4>
-              <br />
-              <br />
-              <button
-                className="btn btn-iku"
-                onClick={_ => this.props.requestAccessToData()}
-              >
-                {this.props.accessingData ? (
-                  <Loader size="small" />
-                ) : (
-                  'Request access to data'
-                )}
-              </button>
-
-              <button
-                className="btn btn-iku"
-                href={`https://ipfs.io/ipfs/${this.props.proposal.ipfs_hash}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={_ => this.props.requestAccessToLicense()}
-              >
-                {this.props.accessingLicense ? (
-                  <Loader size="small" />
-                ) : (
-                  'Request access to License'
-                )}
-              </button>
+              <ul className="datasets">
+                {data.map((item, i) => (
+                  <li key={item}>
+                    <a
+                      href={`https://ipfs.io/ipfs/${item}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Dataset #{i + 1} ({item})
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className="request-license-wrapper">
+                <button
+                  className="btn btn-iku"
+                  href={`https://ipfs.io/ipfs/${this.props.proposal.ipfs_hash}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={_ => this.props.requestAccessToLicense()}
+                >
+                  {this.props.accessingLicense ? (
+                    <Loader size="small" />
+                  ) : (
+                    'Request access to License'
+                  )}
+                </button>
+              </div>
             </div>
           ) : !this.props.isProposalOwner ? (
             <p>The proposal creator didn't upload any data yet...</p>

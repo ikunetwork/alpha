@@ -75,10 +75,8 @@ export default class Web3Helper {
     });
   }
 
-  static signMessage(address, web3) {
+  static signMessage(address, web3, text) {
     return new Promise((resolve, reject) => {
-      const text =
-        'By clicking on "Sign" you agree to the terms of iku.network';
       const msg = ethUtil.bufferToHex(Buffer.from(text, 'utf8'));
       const from = address;
       const params = [msg, from];

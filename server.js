@@ -372,43 +372,20 @@ router.post(
   }
 );
 
-router.get(
-  '/proposal/data',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    if (req.query.id) {
-      Proposal.accessToData(req)
-        .then(response => {
-          res.json(response);
-        })
-        .catch(error => {
-          console.log('ROUTE :: GET :: /proposal/data :: 500', error);
-          res.status(500).send(error);
-        });
-    } else {
-      res.send({ error: 'missing parameters' });
-    }
+router.route('/proposal/license').post((req, res) => {
+  if (req.body.id && req.body.address && req.body.sign) {
+    Proposal.accessToLicense(req)
+      .then(response => {
+        res.json(response);
+      })
+      .catch(error => {
+        console.log('ROUTE :: GET :: /proposal/license :: 500', error);
+        res.status(500).send(error);
+      });
+  } else {
+    res.send({ error: 'missing parameters' });
   }
-);
-
-router.get(
-  '/proposal/license',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    if (req.query.id) {
-      Proposal.accessToLicense(req)
-        .then(response => {
-          res.json(response);
-        })
-        .catch(error => {
-          console.log('ROUTE :: GET :: /proposal/license :: 500', error);
-          res.status(500).send(error);
-        });
-    } else {
-      res.send({ error: 'missing parameters' });
-    }
-  }
-);
+});
 
 router
   .route('/faq')
