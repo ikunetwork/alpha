@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from '../../components/Loader';
 import Web3Helper from '../../utils/Web3Helper';
+import Config from '../../utils/Config';
 import {
   showNoWeb3BrowserModalAction,
   showUnlockMetamaskModalAction,
@@ -50,7 +51,11 @@ class Signup extends Component {
   signup = () => {
     if (this.validateWeb3()) {
       // Sign
-      Web3Helper.signMessage(this.props.address, this.props.web3)
+      Web3Helper.signMessage(
+        this.props.address,
+        this.props.web3,
+        Config.SIGN_IN_MESSAGE
+      )
         .then(sign => {
           const {
             first_name,

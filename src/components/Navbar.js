@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Web3Helper from '../utils/Web3Helper';
+import Config from '../utils/Config';
 import Wallet from './Wallet.tsx';
 import Blocky from './Blocky';
 import DeviceHelper from '../utils/DeviceHelper';
@@ -195,9 +196,11 @@ class Navbar extends Component {
   login = () => {
     const { address, web3 } = this.props;
     if (address) {
-      Web3Helper.signMessage(address, web3).then(sign => {
-        this.props.login({ address, sign });
-      });
+      Web3Helper.signMessage(address, web3, Config.SIGN_IN_MESSAGE).then(
+        sign => {
+          this.props.login({ address, sign });
+        }
+      );
     } else {
       console.log('Address unknown; cannot perform login request.');
     }

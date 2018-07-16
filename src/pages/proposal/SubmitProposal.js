@@ -127,11 +127,11 @@ class SubmitProposal extends Component {
           console.log('Error trying to parse attachments', e);
           attachments = [];
         }
-      } else if (typeof attachments !== 'object') {
+      } else if (typeof attachments !== 'object' || attachments === null) {
         attachments = [];
       }
       info.attachments = attachments;
-      this.setState({ ...info });
+      this.setState(info);
     }
   }
 

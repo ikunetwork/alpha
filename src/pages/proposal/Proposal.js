@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 
 import apiRequest from '../../utils/Fetch';
 import Currency from '../../utils/Currency';
+import Web3Helper from '../../utils/Web3Helper';
 import RSTCrowdsale from '../../../build/contracts/RSTCrowdsale.json';
-import Token from '../../utils/Token';
 import EtherscanUrlHelper from '../../utils/EtherscanUrlHelper';
 import Loader from '../../components/Loader';
 import ContributeModal from '../../components/ContributeModal';
@@ -66,12 +66,25 @@ class Proposal extends Component {
     this.props.clearAlert();
   }
 
-  onDataUploadSuccess(ipfs_hash, encryption_key) {
+  onDataUploadSuccess(ipfs_hash) {
+    const newInfoState = this.state.info;
+    if (newInfoState.ipfs_hash) {
+      // Cast to array from DB
+      if (!Array.isArray(newInfoState.ipfs_hash)) {
+        newInfoState.ipfs_hash = JSON.parse(newInfoState.ipfs_hash);
+      }
+      newInfoState.ipfs_hash = [...newInfoState.ipfs_hash, ipfs_hash];
+    } else {
+      newInfoState.ipfs_hash = [ipfs_hash];
+    }
+    this.setState({
+      info: newInfoState,
+    });
+
     apiRequest('/api/proposal', {
       method: 'put',
       body: {
-        ipfs_hash,
-        encryption_key,
+        ipfs_hash: newInfoState.ipfs_hash,
         id: this.state.info.id,
       },
     }).then(response => {
@@ -424,80 +437,45 @@ class Proposal extends Component {
       });
   }
 
-  requestAccessToData() {
-    // TO DO => User needs to sign some shit
-    // TO make sure they are the owners of the eth address
-    // that we are gonna validate token amount
-    // In the meantime, all users requesting a license, need to be registered
-    this.setState({ accessingData: true });
-
-    apiRequest(
-      '/api/proposal/data',
-      {
-        method: 'get',
-        jwt_auth: Token.get(this.state.props.address),
-      },
-      {
-        id: this.state.info.id,
-      }
-    )
-      .then(response => {
-        if (response.content) {
-          downloadText('data.txt', response.content);
-        } else {
-          let msg = 'Ooops! something went wrong...';
-          if (response.message) {
-            msg = response.message;
-          }
-          this.props.setAlert(msg);
-        }
-        this.setState({ accessingData: false });
-      })
-      .catch(error => {
-        if (error.message) {
-          this.props.setAlert(error.message);
-        }
-        console.log(
-          'There was an error while requesting access to data',
-          error
-        );
-        this.setState({ accessingData: false });
-      });
-  }
-
-  requestAccessToLicense(e) {
+  requestAccessToLicense() {
     this.setState({ accessingLicense: true });
 
-    apiRequest(
-      '/api/proposal/license',
-      {
-        method: 'get',
-        jwt_auth: Token.get(this.props.user.address),
-      },
-      {
-        id: this.state.info.id,
-      }
-    )
-      .then(response => {
-        if (response.content) {
-          downloadText('license.txt', response.content);
-        } else {
-          let msg = 'Ooops! something went wrong...';
-          if (response.message) {
-            msg = response.message;
-          }
-          this.props.setAlert(msg);
-        }
-        this.setState({ accessingLicense: false });
+    // Sign message
+    const textToSign = 'Requesting access to license';
+    Web3Helper.signMessage(this.props.address, this.props.web3, textToSign)
+      .then(sign => {
+        apiRequest('/api/proposal/license', {
+          method: 'post',
+          body: {
+            id: this.state.info.id,
+            address: this.props.address,
+            sign,
+          },
+        })
+          .then(response => {
+            if (response.content) {
+              downloadText('license.txt', response.content);
+            } else {
+              let msg = 'Ooops! something went wrong...';
+              if (response.message) {
+                msg = response.message;
+              }
+              this.props.setAlert(msg);
+            }
+            this.setState({ accessingLicense: false });
+          })
+          .catch(error => {
+            if (error.message) {
+              this.props.setAlert(error.message);
+            }
+            console.log(
+              'There was an error while requesting access to license',
+              error
+            );
+            this.setState({ accessingLicense: false });
+          });
       })
-      .catch(error => {
-        if (error.message) {
-          this.props.setAlert(error.message);
-        }
-        console.log(
-          'There was an error while requesting access to license',
-          error
-        );
+      .catch(e => {
         this.setState({ accessingLicense: false });
       });
   }
@@ -1028,12 +1006,11 @@ class Proposal extends Component {
                         web3={this.props.web3}
                         accessingData={this.state.accessingData}
                         accessingLicense={this.state.accessingLicense}
-                        requestAccessToData={_ => this.requestAccessToData()}
                         requestAccessToLicense={_ =>
                           this.requestAccessToLicense()
                         }
-                        onUploadSuccess={(ipfs_hash, encryption_key) =>
-                          this.onDataUploadSuccess(ipfs_hash, encryption_key)
+                        onUploadSuccess={ipfs_hash =>
+                          this.onDataUploadSuccess(ipfs_hash)
                         }
                       />
                     </TabPanel>
