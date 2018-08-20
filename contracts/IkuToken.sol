@@ -2,8 +2,9 @@ pragma solidity ^0.4.21;
 
 import 'openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol';
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
+import "./upgradability/Upgradeable.sol";
 
-contract IkuToken is StandardToken, Ownable {
+contract IkuToken is Upgradeable, StandardToken, Ownable {
     string public constant name = 'IkuToken';
     string public constant symbol = 'IKU';
     uint8 public constant decimals = 18;

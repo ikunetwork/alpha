@@ -1,0 +1,406 @@
+{
+  "contractName": "UpgradeabilityStorage",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "implementation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060ee8061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680635c60da1b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050905600a165627a7a7230582016fa928ae45eaed7597fd019d055ed746daf4c7a9a59c4899fef9e694629b4c10029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680635c60da1b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050905600a165627a7a7230582016fa928ae45eaed7597fd019d055ed746daf4c7a9a59c4899fef9e694629b4c10029",
+  "sourceMap": "192:379:11:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;192:379:11;;;;;;;",
+  "deployedSourceMap": "192:379:11:-;;;;;;;;;;;;;;;;;;;;;;;;480:89;;8:9:-1;5:2;;;30:1;27;20:12;5:2;480:89:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;527:7;549:15;;;;;;;;;;;542:22;;480:89;:::o",
+  "source": "pragma solidity ^0.4.24;\n\nimport './IRegistry.sol';\n\n/**\n * @title UpgradeabilityStorage\n * @dev This contract holds all the necessary state variables to support the upgrade functionality\n */\ncontract UpgradeabilityStorage {\n  // Versions registry\n  IRegistry internal registry;\n\n  // Address of the current implementation\n  address internal _implementation;\n\n  /**\n  * @dev Tells the address of the current implementation\n  * @return address of the current implementation\n  */\n  function implementation() public view returns (address) {\n    return _implementation;\n  }\n}",
+  "sourcePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/UpgradeabilityStorage.sol",
+  "ast": {
+    "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/UpgradeabilityStorage.sol",
+    "exportedSymbols": {
+      "UpgradeabilityStorage": [
+        500
+      ]
+    },
+    "id": 501,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 486,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:11"
+      },
+      {
+        "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/IRegistry.sol",
+        "file": "./IRegistry.sol",
+        "id": 487,
+        "nodeType": "ImportDirective",
+        "scope": 501,
+        "sourceUnit": 312,
+        "src": "26:25:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title UpgradeabilityStorage\n@dev This contract holds all the necessary state variables to support the upgrade functionality",
+        "fullyImplemented": true,
+        "id": 500,
+        "linearizedBaseContracts": [
+          500
+        ],
+        "name": "UpgradeabilityStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 489,
+            "name": "registry",
+            "nodeType": "VariableDeclaration",
+            "scope": 500,
+            "src": "250:27:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IRegistry_$311",
+              "typeString": "contract IRegistry"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 488,
+              "name": "IRegistry",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 311,
+              "src": "250:9:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IRegistry_$311",
+                "typeString": "contract IRegistry"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 491,
+            "name": "_implementation",
+            "nodeType": "VariableDeclaration",
+            "scope": 500,
+            "src": "325:32:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 490,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "325:7:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 498,
+              "nodeType": "Block",
+              "src": "536:33:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 496,
+                    "name": "_implementation",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 491,
+                    "src": "549:15:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 495,
+                  "id": 497,
+                  "nodeType": "Return",
+                  "src": "542:22:11"
+                }
+              ]
+            },
+            "documentation": "@dev Tells the address of the current implementation\n@return address of the current implementation",
+            "id": 499,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "implementation",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 492,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "503:2:11"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 495,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 494,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 499,
+                  "src": "527:7:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 493,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "527:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "526:9:11"
+            },
+            "scope": 500,
+            "src": "480:89:11",
+            "stateMutability": "view",
+            "superFunction": 318,
+            "visibility": "public"
+          }
+        ],
+        "scope": 501,
+        "src": "192:379:11"
+      }
+    ],
+    "src": "0:571:11"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/UpgradeabilityStorage.sol",
+    "exportedSymbols": {
+      "UpgradeabilityStorage": [
+        500
+      ]
+    },
+    "id": 501,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 486,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:11"
+      },
+      {
+        "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/IRegistry.sol",
+        "file": "./IRegistry.sol",
+        "id": 487,
+        "nodeType": "ImportDirective",
+        "scope": 501,
+        "sourceUnit": 312,
+        "src": "26:25:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title UpgradeabilityStorage\n@dev This contract holds all the necessary state variables to support the upgrade functionality",
+        "fullyImplemented": true,
+        "id": 500,
+        "linearizedBaseContracts": [
+          500
+        ],
+        "name": "UpgradeabilityStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 489,
+            "name": "registry",
+            "nodeType": "VariableDeclaration",
+            "scope": 500,
+            "src": "250:27:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IRegistry_$311",
+              "typeString": "contract IRegistry"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 488,
+              "name": "IRegistry",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 311,
+              "src": "250:9:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IRegistry_$311",
+                "typeString": "contract IRegistry"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 491,
+            "name": "_implementation",
+            "nodeType": "VariableDeclaration",
+            "scope": 500,
+            "src": "325:32:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 490,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "325:7:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 498,
+              "nodeType": "Block",
+              "src": "536:33:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 496,
+                    "name": "_implementation",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 491,
+                    "src": "549:15:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 495,
+                  "id": 497,
+                  "nodeType": "Return",
+                  "src": "542:22:11"
+                }
+              ]
+            },
+            "documentation": "@dev Tells the address of the current implementation\n@return address of the current implementation",
+            "id": 499,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "implementation",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 492,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "503:2:11"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 495,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 494,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 499,
+                  "src": "527:7:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 493,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "527:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "526:9:11"
+            },
+            "scope": 500,
+            "src": "480:89:11",
+            "stateMutability": "view",
+            "superFunction": 318,
+            "visibility": "public"
+          }
+        ],
+        "scope": 501,
+        "src": "192:379:11"
+      }
+    ],
+    "src": "0:571:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-08-20T18:49:34.858Z"
+}
