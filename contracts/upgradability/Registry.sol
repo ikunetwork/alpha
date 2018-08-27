@@ -43,7 +43,7 @@ contract Registry is IRegistry {
   function createProxy(string contractName, string version) public payable returns (UpgradeabilityProxy) {
     UpgradeabilityProxy proxy = new UpgradeabilityProxy(contractName, version);
     Upgradeable(proxy).initialize.value(msg.value)(msg.sender);
-    emit ProxyCreated(proxy);
+    emit ProxyCreated(contractName, version, proxy);
     return proxy;
   }
 }

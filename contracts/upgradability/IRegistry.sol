@@ -7,9 +7,11 @@ pragma solidity ^0.4.24;
 interface IRegistry {
   /**
   * @dev This event will be emitted every time a new proxy is created
+  * @param contractName representing the name of one of the three contracts
+  * @param version representing the version name of the registered implementation
   * @param proxy representing the address of the proxy created
   */
-  event ProxyCreated(address indexed proxy);
+  event ProxyCreated(string contractName, string version, address indexed proxy);
 
   /**
   * @dev This event will be emitted every time a new implementation is registered

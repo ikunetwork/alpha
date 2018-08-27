@@ -6,15 +6,16 @@ contract IkuToken_v2 is IkuToken{
 	string public constant name = 'IkuToken_v2';
 	bool public isInitialized = false;
 
-	constructor() public{}
-
+	/**
+     * @dev contract's version getter
+    */
 	function getContractVersion() public pure returns(uint){
 		return 2;
 	}
 
 	/**
      * @dev initializes the contract by re-setting variables not set by constructor
-     * funtion owing to the proxy pattern architecture
+     * function owing to the proxy pattern architecture
      * @param sender representing the original
     **/
 	function initialize(address sender) public payable{

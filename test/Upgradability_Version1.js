@@ -1,7 +1,6 @@
 import ether from './helpers/ether';
-import decodeLogs from './helpers/decodeLogs';
-import { advanceBlock } from './helpers/advanceToBlock';
 import { increaseTimeTo, duration } from './helpers/increaseTime';
+import getLogs from './helpers/getLogs';
 import latestTime from './helpers/latestTime';
 import EVMRevert from './helpers/EVMRevert';
 
@@ -22,7 +21,7 @@ const ResearchSpecificToken_v2 = artifacts.require('ResearchSpecificToken_v2');
 const Registry = artifacts.require('Registry');
 const Proxy = artifacts.require('UpgradeabilityProxy');
 
-contract('Upgradability-contracts version-1', accounts => {
+contract('Upgradability for version-1 contracts', accounts => {
   const creator = accounts[0];
 
   const RATE = new BigNumber(1000);
@@ -33,14 +32,11 @@ contract('Upgradability-contracts version-1', accounts => {
   let ikuToken_v2;
   let researchSpecificToken_v1;
   let researchSpecificToken_v2;
-  let rstCrowdsale_v1;
-  let rstCrowdsale_v2;
 
   let registry;
 
   let ikuTokenProxy;
   let researchSpecificTokenProxy;
-  let rstCrowdsaleProxy;
 
   let tx;
 
@@ -53,16 +49,6 @@ contract('Upgradability-contracts version-1', accounts => {
       'RST'
     );
 
-    // rstCrowdsale_v1 = await RSTCrowdsale.new(
-    //   web3.eth.getBlock('latest').timestamp + 100,
-    //   web3.eth.getBlock('latest').timestamp + 1000,
-    //   RATE,
-    //   creator,
-    //   CAP,
-    //   researchSpecificToken_v1.address,
-    //   GOAL
-    // );
-
     registry = await Registry.new();
 
     await registry.addVersion('IkuToken', '1.0', ikuToken_v1.address);
@@ -73,8 +59,6 @@ contract('Upgradability-contracts version-1', accounts => {
       researchSpecificToken_v1.address
     );
 
-    // await registry.addVersion('RSTCrowdsale', '1.0', rstCrowdsale_v1.address);
-
     // creating proxies & upgrading to initial version
     tx = await registry.createProxy('IkuToken', '1.0');
     ikuTokenProxy = tx.logs[0].args.proxy;
@@ -82,11 +66,14 @@ contract('Upgradability-contracts version-1', accounts => {
     tx = await registry.createProxy('ResearchSpecificToken', '1.0');
     researchSpecificTokenProxy = tx.logs[0].args.proxy;
 
-    // tx = await registry.createProxy('RSTCrowdsale', '1.0');
-    // rstCrowdsaleProxy = tx.logs[0].args.proxy;
-
-    // console.log(ikuTokenProxy, researchSpecificTokenProxy, rstCrowdsaleProxy);
     assert.equal(await IkuToken.at(ikuTokenProxy).name(), 'IkuToken');
+  });
+
+  it('should emit ProxyCreated events for each of the two contracts', async()=>{
+    const proxyFilter = await registry.ProxyCreated({}, { fromBlock: 0, toBlock: 'latest' });
+    const events = await getLogs(proxyFilter);
+    assert.equal(ikuTokenProxy, events[0].args.proxy);
+    assert.equal(researchSpecificTokenProxy, events[1].args.proxy);
   });
 
   describe("deployed proxy contracts should pass all individual tests(version-1)", ()=>{
@@ -260,7 +247,6 @@ contract('Upgradability-contracts version-1', accounts => {
 
       it('should allow finalization and transfer funds to wallet if the goal is reached', async function() {
         const beforeFinalization = web3.eth.getBalance(wallet);
-        // await increaseTimeTo(afterClosingTime);
         await crowdsale.finalize({ from: owner });
         const afterFinalization = web3.eth.getBalance(wallet);
 

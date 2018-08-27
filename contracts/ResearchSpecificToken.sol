@@ -22,7 +22,7 @@ contract ResearchSpecificToken is Upgradeable, MintableToken {
 
     /**
      * @dev initializes the contract by re-setting variables not set by constructor
-     * funtion owing to the proxy pattern architecture
+     * function owing to the proxy pattern architecture
      * @param _decimalUnits representing decimals for the ERC20 token
      * @param _tokenName representing name of the ERC20 token
      * @param _tokenSymbol representing the symbol for the ERC20 token 
