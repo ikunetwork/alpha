@@ -176,7 +176,8 @@ class SubmitResearchTarget extends Component {
   renderError = () => (
     <div className="form-error">
       <p>
-        There was an error while trying to submit your research target.<br />
+        There was an error while trying to submit your research target.
+        <br />
         Please try again...
         <br />
       </p>

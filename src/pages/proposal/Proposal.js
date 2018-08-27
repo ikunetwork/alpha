@@ -506,7 +506,7 @@ class Proposal extends Component {
 
   renderFundedPercentage() {
     const percentage = Math.ceil(
-      this.state.amount_raised * 100 / this.state.funds_required
+      (this.state.amount_raised * 100) / this.state.funds_required
     );
 
     return (
@@ -702,14 +702,12 @@ class Proposal extends Component {
             <div className="row amount-raised">
               <h6>Funding</h6>
               <h3>
-                {amount_raised} ETH (${Currency.formatUSD(
-                  this.state.amount_raised_usd.toString()
-                )})
+                {amount_raised} ETH ($
+                {Currency.formatUSD(this.state.amount_raised_usd.toString())})
               </h3>
               <p>
-                pledged of {funds_required} ETH goal (${Currency.formatUSD(
-                  this.state.funds_required_usd.toString()
-                )})
+                pledged of {funds_required} ETH goal ($
+                {Currency.formatUSD(this.state.funds_required_usd.toString())})
               </p>
             </div>
 
@@ -739,10 +737,8 @@ class Proposal extends Component {
               <h4>
                 Goal:{' '}
                 <b>
-                  ${Currency.formatUSD(this.state.funds_required_usd)} ({Currency.formatETH(
-                    this.state.funds_required
-                  )}{' '}
-                  ETH)
+                  ${Currency.formatUSD(this.state.funds_required_usd)} (
+                  {Currency.formatETH(this.state.funds_required)} ETH)
                 </b>
               </h4>
             </div>
@@ -770,10 +766,8 @@ class Proposal extends Component {
               <h4>
                 Goal:{' '}
                 <b>
-                  ${Currency.formatUSD(this.state.funds_required_usd)} ({Currency.formatETH(
-                    this.state.funds_required
-                  )}{' '}
-                  ETH)
+                  ${Currency.formatUSD(this.state.funds_required_usd)} (
+                  {Currency.formatETH(this.state.funds_required)} ETH)
                 </b>
               </h4>
             </div>
@@ -823,7 +817,8 @@ class Proposal extends Component {
   renderApprovedMessage = () => (
     <div className="row row-alert">
       <div className="alert alert-success sidebar-alert">
-        This proposal has been <br />approved by the IKU network
+        This proposal has been <br />
+        approved by the IKU network
       </div>
       <div className="row row-separator" />
     </div>

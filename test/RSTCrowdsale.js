@@ -104,7 +104,7 @@ contract('RSTCrowdsale', ([owner, wallet, investor]) => {
   });
 
   it('should reject payments after end', async function() {
-    await increaseTimeTo(this.afterEnd);
+    await increaseTimeTo(this.afterClosingTime);
     await this.crowdsale.send(ether(1)).should.be.rejectedWith(EVMRevert);
     await this.crowdsale
       .buyTokens(investor, { value: ether(1), from: investor })

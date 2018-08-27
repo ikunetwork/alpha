@@ -18,12 +18,11 @@ const RSTCrowdsale = artifacts.require('RSTCrowdsale');
 
 const IkuToken_v2 = artifacts.require('IkuToken_v2');
 const ResearchSpecificToken_v2 = artifacts.require('ResearchSpecificToken_v2');
-const RSTCrowdsale_v2 = artifacts.require('RSTCrowdsale_v2');
 
 const Registry = artifacts.require('Registry');
 const Proxy = artifacts.require('UpgradeabilityProxy');
 
-contract('Upgradability', accounts => {
+contract('Upgradability-contracts version-1', accounts => {
   const creator = accounts[0];
 
   const RATE = new BigNumber(1000);
@@ -51,7 +50,7 @@ contract('Upgradability', accounts => {
     researchSpecificToken_v1 = await ResearchSpecificToken.new(
       18,
       'ResearchSpecificToken',
-      'RST1'
+      'RST'
     );
 
     // rstCrowdsale_v1 = await RSTCrowdsale.new(
@@ -90,76 +89,23 @@ contract('Upgradability', accounts => {
     assert.equal(await IkuToken.at(ikuTokenProxy).name(), 'IkuToken');
   });
 
-  it('should be able to update contracts using created proxies', async () => {
-    ikuToken_v2 = await IkuToken_v2.new({from: accounts[2]});
-
-    researchSpecificToken_v2 = await ResearchSpecificToken_v2.new(
-      18,
-      'ResearchSpecificToken_v2',
-      'RST2'
-    );
-
-    // rstCrowdsale_v2 = await RSTCrowdsale.new(
-    //   web3.eth.getBlock('latest').timestamp + 105,
-    //   web3.eth.getBlock('latest').timestamp + 1005,
-    //   RATE,
-    //   creator,
-    //   CAP,
-    //   researchSpecificToken_v2.address,
-    //   GOAL
-    // );
-
-    await registry.addVersion('IkuToken', '2.0', ikuToken_v2.address);
-    await registry.addVersion(
-      'ResearchSpecificToken',
-      '2.0',
-      researchSpecificToken_v2.address
-    );
-    // await registry.addVersion('RSTCrowdsale', '2.0', rstCrowdsale_v2.address);
-
-    await Proxy.at(ikuTokenProxy).upgradeTo('IkuToken', '2.0');
-    await Proxy.at(researchSpecificTokenProxy).upgradeTo(
-      'ResearchSpecificToken',
-      '2.0'
-    );
-    // await Proxy.at(rstCrowdsaleProxy).upgradeTo('RSTCrowdsale', '2.0');
-
-    assert.equal(await IkuToken_v2.at(ikuTokenProxy).name(), 'IkuToken_v2');
-    assert.equal(await IkuToken_v2.at(ikuTokenProxy).getContractVersion(), 2);
-    assert.equal(
-      await ResearchSpecificToken_v2.at(
-        researchSpecificTokenProxy
-      ).getContractVersion(),
-      2
-    );
-    // the following getter call should fail because of "_preValidatePurchase"
-    // await RSTCrowdsale_v2.at(rstCrowdsaleProxy)
-    //   .getContractVersion()
-    //   .should.be.rejectedWith(EVMRevert);
-  });
-
-  describe("deployed proxy contracts should pass all individual tests", ()=>{
-    describe("IkuToken_v2 proxy", ()=>{
+  describe("deployed proxy contracts should pass all individual tests(version-1)", ()=>{
+    describe("IkuToken_v1 proxy", ()=>{
       let token;
 
       before(async ()=>{
-        token = IkuToken_v2.at(ikuTokenProxy);
-        const isInitialized = await token.isInitialized();
-        //make sure that contract has not been initialized yet
-        assert.equal(isInitialized, false);
-        //initialize the upgraded contract
-        await token.initialize(accounts[2], {from: accounts[2]});
+        token = IkuToken.at(ikuTokenProxy);
       });
 
       it('should be initialized with owner set correctly', async()=>{
         const isInitialized = await token.isInitialized();
         assert.equal(isInitialized, true);
-        assert.equal(accounts[2], await token.owner());
+        assert.equal(creator, await token.owner());
       });
 
-      it('has a name (IkuToken_v2)', async () => {
+      it('has a name (IkuToken_v1)', async () => {
         const name = await token.name();
-        assert.equal(name, 'IkuToken_v2');
+        assert.equal(name, 'IkuToken');
       });
 
       it('has a symbol (IKU)', async () => {
@@ -180,23 +126,22 @@ contract('Upgradability', accounts => {
       it('assigns the initial total supply to the creator', async () => {
         const totalSupply = await token.totalSupply();
         const creatorBalance = await token.balanceOf(creator);
-
         assert(creatorBalance.eq(totalSupply));
       });
     });
 
-    describe("ResearchSpecificToken_v2 proxy", ()=>{
+    describe("ResearchSpecificToken_v1 proxy", ()=>{
       let token;
 
       before(async ()=>{
-        token = ResearchSpecificToken_v2.at(researchSpecificTokenProxy);
+        token = ResearchSpecificToken.at(researchSpecificTokenProxy);
         const isInitialized = await token.isInitialized();
         //make sure that contract has not been initialized yet
         assert.equal(isInitialized, false);
         await token.initializeRSToken(
           18,
           'ResearchSpecificToken',
-          'RST1'
+          'RST'
         )
       });
 
@@ -213,7 +158,7 @@ contract('Upgradability', accounts => {
 
       it('has a symbol', async () => {
         const symbol = await token.symbol();
-        assert.equal(symbol, 'RST1');
+        assert.equal(symbol, 'RST');
       });
 
       it('has 18 decimals', async () => {
@@ -222,7 +167,7 @@ contract('Upgradability', accounts => {
       });
     });
 
-    describe("RSTCrowdsale contract with deployed ResearchSpecificToken proxy", ()=>{
+    describe("RSTCrowdsale contract with deployed ResearchSpecificToken proxy(version-1)", ()=>{
       let token;
       let crowdsale;
 
@@ -234,7 +179,7 @@ contract('Upgradability', accounts => {
       let afterClosingTime = closingTime + duration.seconds(1);
 
       before(async ()=>{
-        token = ResearchSpecificToken_v2.at(researchSpecificTokenProxy);
+        token = ResearchSpecificToken.at(researchSpecificTokenProxy);
         const isInitialized = await token.isInitialized();
         assert.equal(isInitialized, true);
         assert.equal(creator, await token.owner());
@@ -273,7 +218,7 @@ contract('Upgradability', accounts => {
         goal.should.be.bignumber.equal(GOAL);
         cap.should.be.bignumber.equal(CAP);
         tokenName.should.be.equal('ResearchSpecificToken');
-        tokenSymbol.should.be.equal('RST1');
+        tokenSymbol.should.be.equal('RST');
         decimalUnits.should.be.bignumber.equal(18);
       });
 

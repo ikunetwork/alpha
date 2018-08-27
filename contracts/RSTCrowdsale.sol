@@ -4,9 +4,8 @@ import 'openzeppelin-solidity/contracts/crowdsale/validation/CappedCrowdsale.sol
 import 'openzeppelin-solidity/contracts/crowdsale/distribution/RefundableCrowdsale.sol';
 import 'openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol';
 import 'openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol';
-import "./upgradability/Upgradeable.sol";
 
-contract RSTCrowdsale is Upgradeable, CappedCrowdsale, RefundableCrowdsale, MintedCrowdsale {
+contract RSTCrowdsale is CappedCrowdsale, RefundableCrowdsale, MintedCrowdsale {
 
   constructor(
     uint256 _openingTime, 

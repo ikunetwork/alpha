@@ -3,10 +3,12 @@ const { Client } = require('pg');
 class Database {
   static query(query, values) {
     return new Promise((resolve, reject) => {
-      const client = new Client({
-        connectionString: process.env.DATABASE_URL,
-        ssl: true,
-      });
+      // console.log(process.env.DATABASE_URL);
+      // const client = new Client({
+      //   connectionString: process.env.DATABASE_URL,
+      //   ssl: true,
+      // });
+      const client = new Client();
       client
         .connect()
         .then(_ => {
