@@ -11,9 +11,25 @@ contract IkuToken is Upgradeable, StandardToken, Ownable {
 
     uint256 public constant INITIAL_SUPPLY = 100000 * (10 ** uint256(decimals));
 
+    bool public isInitialized = false;
+    
     constructor() public{
         totalSupply_ = INITIAL_SUPPLY;
         balances[msg.sender] = INITIAL_SUPPLY;
         emit Transfer(0x0, msg.sender, INITIAL_SUPPLY);
+    }
+
+    /**
+     * @dev initializes the contract by re-setting variables not set by constructor
+     * funtion owing to the proxy pattern architecture
+     * @param sender representing the original
+    **/
+    function initialize(address sender) public payable{
+        require(!isInitialized, "already initialized"); 
+        isInitialized = true;
+        owner = sender;
+        totalSupply_ = INITIAL_SUPPLY;
+        balances[sender] = INITIAL_SUPPLY;
+        emit Transfer(0x0, sender, INITIAL_SUPPLY);
     }
 }

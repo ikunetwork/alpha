@@ -22,7 +22,7 @@ contract RSTCrowdsale_v2 is RSTCrowdsale{
         _goal
     ) public {}
 
-    function getContractVersion() public pure returns(string){
-        return '2.0';
+    function getContractVersion() public pure returns(uint){
+        return 2;
     }
 }
