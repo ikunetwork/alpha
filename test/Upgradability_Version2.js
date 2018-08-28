@@ -67,12 +67,8 @@ contract('Upgradability for version-2 contracts', accounts => {
     tx = await registry.createProxy('ResearchSpecificToken', '1.0');
     researchSpecificTokenProxy = tx.logs[0].args.proxy;
 
-
-    assert.equal(
-      await IkuToken.at(ikuTokenProxy).name(), 
-      'IkuToken'
-    );
-    //the following resolves to true beacuse contract hasn't been initialized yet
+    assert.equal(await IkuToken.at(ikuTokenProxy).name(), 'IkuToken');
+    // the following resolves to true beacuse contract hasn't been initialized yet
     assert.equal(
       await ResearchSpecificToken.at(researchSpecificTokenProxy).name(),
       ''
@@ -80,7 +76,7 @@ contract('Upgradability for version-2 contracts', accounts => {
   });
 
   it('should be able to update contracts using created proxies', async () => {
-    ikuToken_v2 = await IkuToken_v2.new({from: accounts[2]});
+    ikuToken_v2 = await IkuToken_v2.new({ from: accounts[2] });
 
     researchSpecificToken_v2 = await ResearchSpecificToken_v2.new(
       18,
@@ -111,27 +107,30 @@ contract('Upgradability for version-2 contracts', accounts => {
     );
   });
 
-  it('should emit ProxyCreated events for each of the two contracts', async()=>{
-    const proxyFilter = await registry.ProxyCreated({}, { fromBlock: 0, toBlock: 'latest' });
+  it('should emit ProxyCreated events for each of the two contracts', async () => {
+    const proxyFilter = await registry.ProxyCreated(
+      {},
+      { fromBlock: 0, toBlock: 'latest' }
+    );
     const events = await getLogs(proxyFilter);
     assert.equal(ikuTokenProxy, events[0].args.proxy);
     assert.equal(researchSpecificTokenProxy, events[1].args.proxy);
   });
 
-  describe("deployed proxy contracts should pass all individual tests(version-2)", ()=>{
-    describe("IkuToken_v2 proxy", ()=>{
+  describe('deployed proxy contracts should pass all individual tests(version-2)', () => {
+    describe('IkuToken_v2 proxy', () => {
       let token;
 
-      before(async ()=>{
+      before(async () => {
         token = IkuToken_v2.at(ikuTokenProxy);
         const isInitialized = await token.isInitialized();
-        //make sure that contract has not been initialized yet
+        // make sure that contract has not been initialized yet
         assert.equal(isInitialized, false);
-        //initialize the upgraded contract
-        await token.initialize(accounts[2], {from: accounts[2]});
+        // initialize the upgraded contract
+        await token.initialize(accounts[2], { from: accounts[2] });
       });
 
-      it('should be initialized with owner set correctly', async()=>{
+      it('should be initialized with owner set correctly', async () => {
         const isInitialized = await token.isInitialized();
         assert.equal(isInitialized, true);
         assert.equal(accounts[2], await token.owner());
@@ -165,22 +164,18 @@ contract('Upgradability for version-2 contracts', accounts => {
       });
     });
 
-    describe("ResearchSpecificToken_v2 proxy", ()=>{
+    describe('ResearchSpecificToken_v2 proxy', () => {
       let token;
 
-      before(async ()=>{
+      before(async () => {
         token = ResearchSpecificToken_v2.at(researchSpecificTokenProxy);
         const isInitialized = await token.isInitialized();
-        //make sure that contract has not been initialized yet
+        // make sure that contract has not been initialized yet
         assert.equal(isInitialized, false);
-        await token.initializeRSToken(
-          18,
-          'ResearchSpecificToken',
-          'RST1'
-        )
+        await token.initializeRSToken(18, 'ResearchSpecificToken', 'RST1');
       });
 
-      it('should be initialized with owner set correctly', async()=>{
+      it('should be initialized with owner set correctly', async () => {
         const isInitialized = await token.isInitialized();
         assert.equal(isInitialized, true);
         assert.equal(creator, await token.owner());
@@ -202,18 +197,18 @@ contract('Upgradability for version-2 contracts', accounts => {
       });
     });
 
-    describe("RSTCrowdsale contract with deployed ResearchSpecificToken proxy", ()=>{
+    describe('RSTCrowdsale contract with deployed ResearchSpecificToken proxy', () => {
       let token;
       let crowdsale;
 
       const owner = accounts[0];
       const wallet = accounts[8];
       const investor = accounts[7];
-      let openingTime = latestTime() + duration.minutes(1); 
-      let closingTime = openingTime + duration.weeks(1);
-      let afterClosingTime = closingTime + duration.seconds(1);
+      const openingTime = latestTime() + duration.minutes(1);
+      const closingTime = openingTime + duration.weeks(1);
+      const afterClosingTime = closingTime + duration.seconds(1);
 
-      before(async ()=>{
+      before(async () => {
         token = ResearchSpecificToken_v2.at(researchSpecificTokenProxy);
         const isInitialized = await token.isInitialized();
         assert.equal(isInitialized, true);
@@ -232,7 +227,7 @@ contract('Upgradability for version-2 contracts', accounts => {
         await token.transferOwnership(crowdsale.address);
       });
 
-      it('should create crowdsale with correct parameters', async function() {
+      it('should create crowdsale with correct parameters', async () => {
         crowdsale.should.exist;
         token.should.exist;
 
@@ -257,14 +252,14 @@ contract('Upgradability for version-2 contracts', accounts => {
         decimalUnits.should.be.bignumber.equal(18);
       });
 
-      it('should not accept payments before start', async function() {
+      it('should not accept payments before start', async () => {
         await crowdsale.send(ether(1)).should.be.rejectedWith(EVMRevert);
         await crowdsale
           .buyTokens(investor, { from: investor, value: ether(1) })
           .should.be.rejectedWith(EVMRevert);
       });
 
-      it('should accept payments during the sale', async function() {
+      it('should accept payments during the sale', async () => {
         const investmentAmount = CAP;
         const expectedTokenAmount = RATE.mul(investmentAmount);
 
@@ -281,11 +276,11 @@ contract('Upgradability for version-2 contracts', accounts => {
           expectedTokenAmount
         );
 
-        //should reject any payment above cap
+        // should reject any payment above cap
         await crowdsale.send(1).should.be.rejectedWith(EVMRevert);
       });
 
-      it('should reject payments after end', async function() {
+      it('should reject payments after end', async () => {
         await increaseTimeTo(afterClosingTime);
         await crowdsale.send(ether(1)).should.be.rejectedWith(EVMRevert);
         await crowdsale
@@ -293,12 +288,14 @@ contract('Upgradability for version-2 contracts', accounts => {
           .should.be.rejectedWith(EVMRevert);
       });
 
-      it('should allow finalization and transfer funds to wallet if the goal is reached', async function() {
+      it('should allow finalization and transfer funds to wallet if the goal is reached', async () => {
         const beforeFinalization = web3.eth.getBalance(wallet);
         await crowdsale.finalize({ from: owner });
         const afterFinalization = web3.eth.getBalance(wallet);
 
-        afterFinalization.minus(beforeFinalization).should.be.bignumber.equal(GOAL);
+        afterFinalization
+          .minus(beforeFinalization)
+          .should.be.bignumber.equal(GOAL);
       });
     });
   });

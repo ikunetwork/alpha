@@ -1,7 +1,7 @@
 import decodeLogs from './helpers/decodeLogs';
 
 const IkuToken = artifacts.require('IkuToken');
-const IkuToken_v2 = artifacts.require("IkuToken_v2");
+const IkuToken_v2 = artifacts.require('IkuToken_v2');
 
 contract('IkuToken', accounts => {
   let token;
