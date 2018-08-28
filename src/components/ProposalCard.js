@@ -36,7 +36,10 @@ class ProposalCard extends Component {
         </div>
         <div className="card-body text-center">
           <h4 className="card-title">{item.name}</h4>
-          <div className="card-description">{desc}...</div>
+          <div className="card-description">
+            {desc}
+            ...
+          </div>
           <div className="card-footer" />
         </div>
       </div>

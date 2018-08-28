@@ -6,7 +6,6 @@ import 'openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol';
 import 'openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol';
 
 contract RSTCrowdsale is CappedCrowdsale, RefundableCrowdsale, MintedCrowdsale {
-    
 
   constructor(
     uint256 _openingTime, 
