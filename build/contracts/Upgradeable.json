@@ -40,14 +40,14 @@
     "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/Upgradeable.sol",
     "exportedSymbols": {
       "Upgradeable": [
-        670
+        652
       ]
     },
-    "id": 671,
+    "id": 653,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 650,
+        "id": 632,
         "literals": [
           "solidity",
           "^",
@@ -60,10 +60,10 @@
       {
         "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/UpgradeabilityStorage.sol",
         "file": "./UpgradeabilityStorage.sol",
-        "id": 651,
+        "id": 633,
         "nodeType": "ImportDirective",
-        "scope": 671,
-        "sourceUnit": 649,
+        "scope": 653,
+        "sourceUnit": 631,
         "src": "26:37:11",
         "symbolAliases": [],
         "unitAlias": ""
@@ -74,38 +74,38 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 652,
+              "id": 634,
               "name": "UpgradeabilityStorage",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 648,
+              "referencedDeclaration": 630,
               "src": "331:21:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UpgradeabilityStorage_$648",
+                "typeIdentifier": "t_contract$_UpgradeabilityStorage_$630",
                 "typeString": "contract UpgradeabilityStorage"
               }
             },
-            "id": 653,
+            "id": 635,
             "nodeType": "InheritanceSpecifier",
             "src": "331:21:11"
           }
         ],
         "contractDependencies": [
-          648
+          630
         ],
         "contractKind": "contract",
         "documentation": "@title Upgradeable\n@dev This contract holds all the minimum required functionality for a behavior to be upgradeable.\nThis means, required state variables for owned upgradeability purpose and simple initialization validation.",
         "fullyImplemented": true,
-        "id": 670,
+        "id": 652,
         "linearizedBaseContracts": [
-          670,
-          648
+          652,
+          630
         ],
         "name": "Upgradeable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 668,
+              "id": 650,
               "nodeType": "Block",
               "src": "618:77:11",
               "statements": [
@@ -119,7 +119,7 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 664,
+                        "id": 646,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -128,18 +128,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 659,
+                            "id": 641,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2293,
+                            "referencedDeclaration": 2275,
                             "src": "632:3:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
                               "typeString": "msg"
                             }
                           },
-                          "id": 660,
+                          "id": 642,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -160,14 +160,14 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 662,
+                              "id": 644,
                               "name": "registry",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 637,
+                              "referencedDeclaration": 619,
                               "src": "654:8:11",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IRegistry_$457",
+                                "typeIdentifier": "t_contract$_IRegistry_$439",
                                 "typeString": "contract IRegistry"
                               }
                             }
@@ -175,11 +175,11 @@
                           "expression": {
                             "argumentTypes": [
                               {
-                                "typeIdentifier": "t_contract$_IRegistry_$457",
+                                "typeIdentifier": "t_contract$_IRegistry_$439",
                                 "typeString": "contract IRegistry"
                               }
                             ],
-                            "id": 661,
+                            "id": 643,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -192,7 +192,7 @@
                             },
                             "typeName": "address"
                           },
-                          "id": 663,
+                          "id": 645,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -215,7 +215,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "6d73672e73656e64657220213d207265676973747279",
-                        "id": 665,
+                        "id": 647,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -242,21 +242,21 @@
                           "typeString": "literal_string \"msg.sender != registry\""
                         }
                       ],
-                      "id": 658,
+                      "id": 640,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2296,
-                        2297
+                        2278,
+                        2279
                       ],
-                      "referencedDeclaration": 2297,
+                      "referencedDeclaration": 2279,
                       "src": "624:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 666,
+                    "id": 648,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -270,14 +270,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 667,
+                  "id": 649,
                   "nodeType": "ExpressionStatement",
                   "src": "624:66:11"
                 }
               ]
             },
             "documentation": "@dev Validates the caller is the versions registry.\nTHIS FUNCTION SHOULD BE OVERRIDDEN CALLING SUPER\n@param sender representing the address deploying the initial behavior of the contract",
-            "id": 669,
+            "id": 651,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -285,15 +285,15 @@
             "name": "initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 656,
+              "id": 638,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 655,
+                  "id": 637,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 669,
+                  "scope": 651,
                   "src": "587:14:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -302,7 +302,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 654,
+                    "id": 636,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "587:7:11",
@@ -319,19 +319,19 @@
             },
             "payable": true,
             "returnParameters": {
-              "id": 657,
+              "id": 639,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "618:0:11"
             },
-            "scope": 670,
+            "scope": 652,
             "src": "567:128:11",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 671,
+        "scope": 653,
         "src": "307:390:11"
       }
     ],
@@ -341,14 +341,14 @@
     "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/Upgradeable.sol",
     "exportedSymbols": {
       "Upgradeable": [
-        670
+        652
       ]
     },
-    "id": 671,
+    "id": 653,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 650,
+        "id": 632,
         "literals": [
           "solidity",
           "^",
@@ -361,10 +361,10 @@
       {
         "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/UpgradeabilityStorage.sol",
         "file": "./UpgradeabilityStorage.sol",
-        "id": 651,
+        "id": 633,
         "nodeType": "ImportDirective",
-        "scope": 671,
-        "sourceUnit": 649,
+        "scope": 653,
+        "sourceUnit": 631,
         "src": "26:37:11",
         "symbolAliases": [],
         "unitAlias": ""
@@ -375,38 +375,38 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 652,
+              "id": 634,
               "name": "UpgradeabilityStorage",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 648,
+              "referencedDeclaration": 630,
               "src": "331:21:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UpgradeabilityStorage_$648",
+                "typeIdentifier": "t_contract$_UpgradeabilityStorage_$630",
                 "typeString": "contract UpgradeabilityStorage"
               }
             },
-            "id": 653,
+            "id": 635,
             "nodeType": "InheritanceSpecifier",
             "src": "331:21:11"
           }
         ],
         "contractDependencies": [
-          648
+          630
         ],
         "contractKind": "contract",
         "documentation": "@title Upgradeable\n@dev This contract holds all the minimum required functionality for a behavior to be upgradeable.\nThis means, required state variables for owned upgradeability purpose and simple initialization validation.",
         "fullyImplemented": true,
-        "id": 670,
+        "id": 652,
         "linearizedBaseContracts": [
-          670,
-          648
+          652,
+          630
         ],
         "name": "Upgradeable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 668,
+              "id": 650,
               "nodeType": "Block",
               "src": "618:77:11",
               "statements": [
@@ -420,7 +420,7 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 664,
+                        "id": 646,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -429,18 +429,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 659,
+                            "id": 641,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2293,
+                            "referencedDeclaration": 2275,
                             "src": "632:3:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
                               "typeString": "msg"
                             }
                           },
-                          "id": 660,
+                          "id": 642,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -461,14 +461,14 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 662,
+                              "id": 644,
                               "name": "registry",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 637,
+                              "referencedDeclaration": 619,
                               "src": "654:8:11",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IRegistry_$457",
+                                "typeIdentifier": "t_contract$_IRegistry_$439",
                                 "typeString": "contract IRegistry"
                               }
                             }
@@ -476,11 +476,11 @@
                           "expression": {
                             "argumentTypes": [
                               {
-                                "typeIdentifier": "t_contract$_IRegistry_$457",
+                                "typeIdentifier": "t_contract$_IRegistry_$439",
                                 "typeString": "contract IRegistry"
                               }
                             ],
-                            "id": 661,
+                            "id": 643,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -493,7 +493,7 @@
                             },
                             "typeName": "address"
                           },
-                          "id": 663,
+                          "id": 645,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -516,7 +516,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "6d73672e73656e64657220213d207265676973747279",
-                        "id": 665,
+                        "id": 647,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -543,21 +543,21 @@
                           "typeString": "literal_string \"msg.sender != registry\""
                         }
                       ],
-                      "id": 658,
+                      "id": 640,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2296,
-                        2297
+                        2278,
+                        2279
                       ],
-                      "referencedDeclaration": 2297,
+                      "referencedDeclaration": 2279,
                       "src": "624:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 666,
+                    "id": 648,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -571,14 +571,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 667,
+                  "id": 649,
                   "nodeType": "ExpressionStatement",
                   "src": "624:66:11"
                 }
               ]
             },
             "documentation": "@dev Validates the caller is the versions registry.\nTHIS FUNCTION SHOULD BE OVERRIDDEN CALLING SUPER\n@param sender representing the address deploying the initial behavior of the contract",
-            "id": 669,
+            "id": 651,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -586,15 +586,15 @@
             "name": "initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 656,
+              "id": 638,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 655,
+                  "id": 637,
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
-                  "scope": 669,
+                  "scope": 651,
                   "src": "587:14:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -603,7 +603,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 654,
+                    "id": 636,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "587:7:11",
@@ -620,19 +620,19 @@
             },
             "payable": true,
             "returnParameters": {
-              "id": 657,
+              "id": 639,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "618:0:11"
             },
-            "scope": 670,
+            "scope": 652,
             "src": "567:128:11",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 671,
+        "scope": 653,
         "src": "307:390:11"
       }
     ],
@@ -644,5 +644,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-28T08:57:59.652Z"
+  "updatedAt": "2018-08-28T10:49:07.371Z"
 }

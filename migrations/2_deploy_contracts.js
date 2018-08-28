@@ -48,5 +48,16 @@ module.exports = (deployer) => {
 	}).then(tx => {
 		researchSpecificTokenProxy = tx.logs[0].args.proxy;
 		console.log('ResearchSpecificToken proxy: ', researchSpecificTokenProxy);
+	});
+
+	// step 4 : call any uncalled initializers
+	// Note : there's no need to call initialize on Ikutoken because it's 
+	//        automatically called by registry on proxy creation.
+	deployer.then(()=>{
+		return ResearchSpecificToken.at(researchSpecificTokenProxy);
+	}).then((instance)=>{
+		researchSpecificToken = instance;
+		console.log('initializing ResearchSpecificToken ...');
+		return researchSpecificToken.initializeRSToken(18, 'ResearchSpecificToken', 'RST')
 	})
 }

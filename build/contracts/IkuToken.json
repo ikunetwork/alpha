@@ -424,7 +424,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 92,
-        "sourceUnit": 2279,
+        "sourceUnit": 2261,
         "src": "26:71:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -435,7 +435,7 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 92,
-        "sourceUnit": 1417,
+        "sourceUnit": 1399,
         "src": "98:63:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -446,7 +446,7 @@
         "id": 4,
         "nodeType": "ImportDirective",
         "scope": 92,
-        "sourceUnit": 671,
+        "sourceUnit": 653,
         "src": "162:41:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -460,10 +460,10 @@
               "id": 5,
               "name": "Upgradeable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 670,
+              "referencedDeclaration": 652,
               "src": "226:11:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Upgradeable_$670",
+                "typeIdentifier": "t_contract$_Upgradeable_$652",
                 "typeString": "contract Upgradeable"
               }
             },
@@ -478,10 +478,10 @@
               "id": 7,
               "name": "StandardToken",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2278,
+              "referencedDeclaration": 2260,
               "src": "239:13:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_StandardToken_$2278",
+                "typeIdentifier": "t_contract$_StandardToken_$2260",
                 "typeString": "contract StandardToken"
               }
             },
@@ -496,10 +496,10 @@
               "id": 9,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1416,
+              "referencedDeclaration": 1398,
               "src": "254:7:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$1416",
+                "typeIdentifier": "t_contract$_Ownable_$1398",
                 "typeString": "contract Ownable"
               }
             },
@@ -509,13 +509,13 @@
           }
         ],
         "contractDependencies": [
-          648,
-          670,
-          1416,
-          1788,
-          1831,
-          1863,
-          2278
+          630,
+          652,
+          1398,
+          1770,
+          2260,
+          1813,
+          1845
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -523,13 +523,13 @@
         "id": 91,
         "linearizedBaseContracts": [
           91,
-          1416,
-          2278,
-          1788,
-          1831,
-          1863,
-          670,
-          648
+          1398,
+          2260,
+          1770,
+          1813,
+          1845,
+          652,
+          630
         ],
         "name": "IkuToken",
         "nodeType": "ContractDefinition",
@@ -893,7 +893,7 @@
                       "name": "totalSupply_",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1707,
+                      "referencedDeclaration": 1689,
                       "src": "555:12:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -941,7 +941,7 @@
                         "name": "balances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1705,
+                        "referencedDeclaration": 1687,
                         "src": "594:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -957,7 +957,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2293,
+                          "referencedDeclaration": 2275,
                           "src": "603:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1044,7 +1044,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2293,
+                          "referencedDeclaration": 2275,
                           "src": "660:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1098,7 +1098,7 @@
                       "name": "Transfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1844,
                       "src": "646:8:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -1225,10 +1225,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2296,
-                        2297
+                        2278,
+                        2279
                       ],
-                      "referencedDeclaration": 2297,
+                      "referencedDeclaration": 2279,
                       "src": "962:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1318,7 +1318,7 @@
                       "name": "owner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1334,
+                      "referencedDeclaration": 1316,
                       "src": "1049:5:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1364,7 +1364,7 @@
                       "name": "totalSupply_",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1707,
+                      "referencedDeclaration": 1689,
                       "src": "1073:12:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1412,7 +1412,7 @@
                         "name": "balances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1705,
+                        "referencedDeclaration": 1687,
                         "src": "1112:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -1537,7 +1537,7 @@
                       "name": "Transfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1844,
                       "src": "1160:8:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -1615,7 +1615,7 @@
             "scope": 91,
             "src": "902:302:0",
             "stateMutability": "payable",
-            "superFunction": 669,
+            "superFunction": 651,
             "visibility": "public"
           }
         ],
@@ -1652,7 +1652,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 92,
-        "sourceUnit": 2279,
+        "sourceUnit": 2261,
         "src": "26:71:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1663,7 +1663,7 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 92,
-        "sourceUnit": 1417,
+        "sourceUnit": 1399,
         "src": "98:63:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1674,7 +1674,7 @@
         "id": 4,
         "nodeType": "ImportDirective",
         "scope": 92,
-        "sourceUnit": 671,
+        "sourceUnit": 653,
         "src": "162:41:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1688,10 +1688,10 @@
               "id": 5,
               "name": "Upgradeable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 670,
+              "referencedDeclaration": 652,
               "src": "226:11:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Upgradeable_$670",
+                "typeIdentifier": "t_contract$_Upgradeable_$652",
                 "typeString": "contract Upgradeable"
               }
             },
@@ -1706,10 +1706,10 @@
               "id": 7,
               "name": "StandardToken",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2278,
+              "referencedDeclaration": 2260,
               "src": "239:13:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_StandardToken_$2278",
+                "typeIdentifier": "t_contract$_StandardToken_$2260",
                 "typeString": "contract StandardToken"
               }
             },
@@ -1724,10 +1724,10 @@
               "id": 9,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1416,
+              "referencedDeclaration": 1398,
               "src": "254:7:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$1416",
+                "typeIdentifier": "t_contract$_Ownable_$1398",
                 "typeString": "contract Ownable"
               }
             },
@@ -1737,13 +1737,13 @@
           }
         ],
         "contractDependencies": [
-          648,
-          670,
-          1416,
-          1788,
-          1831,
-          1863,
-          2278
+          630,
+          652,
+          1398,
+          1770,
+          2260,
+          1813,
+          1845
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -1751,13 +1751,13 @@
         "id": 91,
         "linearizedBaseContracts": [
           91,
-          1416,
-          2278,
-          1788,
-          1831,
-          1863,
-          670,
-          648
+          1398,
+          2260,
+          1770,
+          1813,
+          1845,
+          652,
+          630
         ],
         "name": "IkuToken",
         "nodeType": "ContractDefinition",
@@ -2121,7 +2121,7 @@
                       "name": "totalSupply_",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1707,
+                      "referencedDeclaration": 1689,
                       "src": "555:12:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -2169,7 +2169,7 @@
                         "name": "balances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1705,
+                        "referencedDeclaration": 1687,
                         "src": "594:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2185,7 +2185,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2293,
+                          "referencedDeclaration": 2275,
                           "src": "603:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2272,7 +2272,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2293,
+                          "referencedDeclaration": 2275,
                           "src": "660:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2326,7 +2326,7 @@
                       "name": "Transfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1844,
                       "src": "646:8:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -2453,10 +2453,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2296,
-                        2297
+                        2278,
+                        2279
                       ],
-                      "referencedDeclaration": 2297,
+                      "referencedDeclaration": 2279,
                       "src": "962:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -2546,7 +2546,7 @@
                       "name": "owner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1334,
+                      "referencedDeclaration": 1316,
                       "src": "1049:5:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -2592,7 +2592,7 @@
                       "name": "totalSupply_",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1707,
+                      "referencedDeclaration": 1689,
                       "src": "1073:12:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -2640,7 +2640,7 @@
                         "name": "balances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1705,
+                        "referencedDeclaration": 1687,
                         "src": "1112:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2765,7 +2765,7 @@
                       "name": "Transfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1844,
                       "src": "1160:8:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -2843,7 +2843,7 @@
             "scope": 91,
             "src": "902:302:0",
             "stateMutability": "payable",
-            "superFunction": 669,
+            "superFunction": 651,
             "visibility": "public"
           }
         ],
@@ -2861,10 +2861,10 @@
     "4447": {
       "events": {},
       "links": {},
-      "address": "0x8e4c131b37383e431b9cd0635d3cf9f3f628edae",
-      "transactionHash": "0x77894ab9c570acc38dbba7cad396a4982809310b2c83ab2f795a6d84ac9d456d"
+      "address": "0x0bfe658740556a3277fa529a6bbc265d5f65b516",
+      "transactionHash": "0x472308c5dc96e127062be2d7dbf750e10425b7538e36946e6b6383ffa7ebb1d2"
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-28T09:31:46.367Z"
+  "updatedAt": "2018-08-28T10:49:08.423Z"
 }

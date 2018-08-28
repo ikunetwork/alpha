@@ -26,14 +26,14 @@
     "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/UpgradeabilityStorage.sol",
     "exportedSymbols": {
       "UpgradeabilityStorage": [
-        648
+        630
       ]
     },
-    "id": 649,
+    "id": 631,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 634,
+        "id": 616,
         "literals": [
           "solidity",
           "^",
@@ -46,10 +46,10 @@
       {
         "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/IRegistry.sol",
         "file": "./IRegistry.sol",
-        "id": 635,
+        "id": 617,
         "nodeType": "ImportDirective",
-        "scope": 649,
-        "sourceUnit": 458,
+        "scope": 631,
+        "sourceUnit": 440,
         "src": "26:25:10",
         "symbolAliases": [],
         "unitAlias": ""
@@ -60,35 +60,35 @@
         "contractKind": "contract",
         "documentation": "@title UpgradeabilityStorage\n@dev This contract holds all the necessary state variables to support the upgrade functionality",
         "fullyImplemented": true,
-        "id": 648,
+        "id": 630,
         "linearizedBaseContracts": [
-          648
+          630
         ],
         "name": "UpgradeabilityStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 637,
+            "id": 619,
             "name": "registry",
             "nodeType": "VariableDeclaration",
-            "scope": 648,
+            "scope": 630,
             "src": "250:27:10",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IRegistry_$457",
+              "typeIdentifier": "t_contract$_IRegistry_$439",
               "typeString": "contract IRegistry"
             },
             "typeName": {
               "contractScope": null,
-              "id": 636,
+              "id": 618,
               "name": "IRegistry",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 457,
+              "referencedDeclaration": 439,
               "src": "250:9:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IRegistry_$457",
+                "typeIdentifier": "t_contract$_IRegistry_$439",
                 "typeString": "contract IRegistry"
               }
             },
@@ -97,10 +97,10 @@
           },
           {
             "constant": false,
-            "id": 639,
+            "id": 621,
             "name": "_implementation",
             "nodeType": "VariableDeclaration",
-            "scope": 648,
+            "scope": 630,
             "src": "325:32:10",
             "stateVariable": true,
             "storageLocation": "default",
@@ -109,7 +109,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 638,
+              "id": 620,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "325:7:10",
@@ -123,33 +123,33 @@
           },
           {
             "body": {
-              "id": 646,
+              "id": 628,
               "nodeType": "Block",
               "src": "536:33:10",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 644,
+                    "id": 626,
                     "name": "_implementation",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 639,
+                    "referencedDeclaration": 621,
                     "src": "549:15:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 643,
-                  "id": 645,
+                  "functionReturnParameters": 625,
+                  "id": 627,
                   "nodeType": "Return",
                   "src": "542:22:10"
                 }
               ]
             },
             "documentation": "@dev Tells the address of the current implementation\n@return address of the current implementation",
-            "id": 647,
+            "id": 629,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -157,22 +157,22 @@
             "name": "implementation",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 640,
+              "id": 622,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "503:2:10"
             },
             "payable": false,
             "returnParameters": {
-              "id": 643,
+              "id": 625,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 642,
+                  "id": 624,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 647,
+                  "scope": 629,
                   "src": "527:7:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -181,7 +181,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 641,
+                    "id": 623,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "527:7:10",
@@ -196,14 +196,14 @@
               ],
               "src": "526:9:10"
             },
-            "scope": 648,
+            "scope": 630,
             "src": "480:89:10",
             "stateMutability": "view",
-            "superFunction": 464,
+            "superFunction": 446,
             "visibility": "public"
           }
         ],
-        "scope": 649,
+        "scope": 631,
         "src": "192:379:10"
       }
     ],
@@ -213,14 +213,14 @@
     "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/UpgradeabilityStorage.sol",
     "exportedSymbols": {
       "UpgradeabilityStorage": [
-        648
+        630
       ]
     },
-    "id": 649,
+    "id": 631,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 634,
+        "id": 616,
         "literals": [
           "solidity",
           "^",
@@ -233,10 +233,10 @@
       {
         "absolutePath": "/Users/vcrizpy/Desktop/dapps/gitcoin/Upgradable/alpha/contracts/upgradability/IRegistry.sol",
         "file": "./IRegistry.sol",
-        "id": 635,
+        "id": 617,
         "nodeType": "ImportDirective",
-        "scope": 649,
-        "sourceUnit": 458,
+        "scope": 631,
+        "sourceUnit": 440,
         "src": "26:25:10",
         "symbolAliases": [],
         "unitAlias": ""
@@ -247,35 +247,35 @@
         "contractKind": "contract",
         "documentation": "@title UpgradeabilityStorage\n@dev This contract holds all the necessary state variables to support the upgrade functionality",
         "fullyImplemented": true,
-        "id": 648,
+        "id": 630,
         "linearizedBaseContracts": [
-          648
+          630
         ],
         "name": "UpgradeabilityStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 637,
+            "id": 619,
             "name": "registry",
             "nodeType": "VariableDeclaration",
-            "scope": 648,
+            "scope": 630,
             "src": "250:27:10",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IRegistry_$457",
+              "typeIdentifier": "t_contract$_IRegistry_$439",
               "typeString": "contract IRegistry"
             },
             "typeName": {
               "contractScope": null,
-              "id": 636,
+              "id": 618,
               "name": "IRegistry",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 457,
+              "referencedDeclaration": 439,
               "src": "250:9:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IRegistry_$457",
+                "typeIdentifier": "t_contract$_IRegistry_$439",
                 "typeString": "contract IRegistry"
               }
             },
@@ -284,10 +284,10 @@
           },
           {
             "constant": false,
-            "id": 639,
+            "id": 621,
             "name": "_implementation",
             "nodeType": "VariableDeclaration",
-            "scope": 648,
+            "scope": 630,
             "src": "325:32:10",
             "stateVariable": true,
             "storageLocation": "default",
@@ -296,7 +296,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 638,
+              "id": 620,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "325:7:10",
@@ -310,33 +310,33 @@
           },
           {
             "body": {
-              "id": 646,
+              "id": 628,
               "nodeType": "Block",
               "src": "536:33:10",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 644,
+                    "id": 626,
                     "name": "_implementation",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 639,
+                    "referencedDeclaration": 621,
                     "src": "549:15:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 643,
-                  "id": 645,
+                  "functionReturnParameters": 625,
+                  "id": 627,
                   "nodeType": "Return",
                   "src": "542:22:10"
                 }
               ]
             },
             "documentation": "@dev Tells the address of the current implementation\n@return address of the current implementation",
-            "id": 647,
+            "id": 629,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -344,22 +344,22 @@
             "name": "implementation",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 640,
+              "id": 622,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "503:2:10"
             },
             "payable": false,
             "returnParameters": {
-              "id": 643,
+              "id": 625,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 642,
+                  "id": 624,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 647,
+                  "scope": 629,
                   "src": "527:7:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -368,7 +368,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 641,
+                    "id": 623,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "527:7:10",
@@ -383,14 +383,14 @@
               ],
               "src": "526:9:10"
             },
-            "scope": 648,
+            "scope": 630,
             "src": "480:89:10",
             "stateMutability": "view",
-            "superFunction": 464,
+            "superFunction": 446,
             "visibility": "public"
           }
         ],
-        "scope": 649,
+        "scope": 631,
         "src": "192:379:10"
       }
     ],
@@ -402,5 +402,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-28T08:57:59.650Z"
+  "updatedAt": "2018-08-28T10:49:07.371Z"
 }

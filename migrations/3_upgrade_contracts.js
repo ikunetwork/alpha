@@ -13,7 +13,7 @@ function getLogs(filter) {
   });
 }
 
-module.exports = (deployer) => {
+module.exports = (deployer, network, accounts) => {
 	var registry;
 	var ikuToken_v2, researchSpecificToken_v2;
 	var ikuTokenProxy, researchSpecificTokenProxy;
@@ -64,5 +64,18 @@ module.exports = (deployer) => {
 	      'ResearchSpecificToken',
 	      '2.0'
 	     );
+	});
+
+	//step 4 : call respective contract initializers
+	deployer.then(()=>{
+		console.log('initializing IkuToken_v2 ...');
+		return IkuToken_v2.at(ikuTokenProxy).initialize(accounts[1], { from: accounts[1] });;
+	}).then(tx => {
+		console.log('initializing ResearchSpecificToken_v2 ...');
+		return ResearchSpecificToken_v2.at(
+			researchSpecificTokenProxy
+		).initializeRSToken(18, 'ResearchSpecificToken', 'RST1', { from: accounts[1]});
+	}).then(tx => {
+		console.log('Upgrades Completed.');
 	});
 }

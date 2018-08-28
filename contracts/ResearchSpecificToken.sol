@@ -33,7 +33,6 @@ contract ResearchSpecificToken is Upgradeable, MintableToken {
         string _tokenSymbol
     ) public {
         require(!isInitialized, "already initialized");
-        require(owner == address(0), "owner already set");
         isInitialized = true;
         owner = msg.sender;
         decimals = _decimalUnits;

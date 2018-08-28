@@ -460,13 +460,13 @@
         ],
         "contractDependencies": [
           91,
-          648,
-          670,
-          1416,
-          1788,
-          1831,
-          1863,
-          2278
+          630,
+          652,
+          1398,
+          1770,
+          2260,
+          1813,
+          1845
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -475,13 +475,13 @@
         "linearizedBaseContracts": [
           147,
           91,
-          1416,
-          2278,
-          1788,
-          1831,
-          1863,
-          670,
-          648
+          1398,
+          2260,
+          1770,
+          1813,
+          1845,
+          652,
+          630
         ],
         "name": "IkuToken_v2",
         "nodeType": "ContractDefinition",
@@ -731,10 +731,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2296,
-                        2297
+                        2278,
+                        2279
                       ],
-                      "referencedDeclaration": 2297,
+                      "referencedDeclaration": 2279,
                       "src": "548:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -824,7 +824,7 @@
                       "name": "owner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1334,
+                      "referencedDeclaration": 1316,
                       "src": "623:5:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -870,7 +870,7 @@
                       "name": "totalSupply_",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1707,
+                      "referencedDeclaration": 1689,
                       "src": "641:12:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -918,7 +918,7 @@
                         "name": "balances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1705,
+                        "referencedDeclaration": 1687,
                         "src": "680:8:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -1043,7 +1043,7 @@
                       "name": "Transfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1844,
                       "src": "728:8:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -1186,13 +1186,13 @@
         ],
         "contractDependencies": [
           91,
-          648,
-          670,
-          1416,
-          1788,
-          1831,
-          1863,
-          2278
+          630,
+          652,
+          1398,
+          1770,
+          2260,
+          1813,
+          1845
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -1201,13 +1201,13 @@
         "linearizedBaseContracts": [
           147,
           91,
-          1416,
-          2278,
-          1788,
-          1831,
-          1863,
-          670,
-          648
+          1398,
+          2260,
+          1770,
+          1813,
+          1845,
+          652,
+          630
         ],
         "name": "IkuToken_v2",
         "nodeType": "ContractDefinition",
@@ -1457,10 +1457,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2296,
-                        2297
+                        2278,
+                        2279
                       ],
-                      "referencedDeclaration": 2297,
+                      "referencedDeclaration": 2279,
                       "src": "548:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1550,7 +1550,7 @@
                       "name": "owner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1334,
+                      "referencedDeclaration": 1316,
                       "src": "623:5:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1596,7 +1596,7 @@
                       "name": "totalSupply_",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1707,
+                      "referencedDeclaration": 1689,
                       "src": "641:12:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1644,7 +1644,7 @@
                         "name": "balances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1705,
+                        "referencedDeclaration": 1687,
                         "src": "680:8:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -1769,7 +1769,7 @@
                       "name": "Transfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1844,
                       "src": "728:8:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -1863,12 +1863,86 @@
   },
   "networks": {
     "4447": {
-      "events": {},
+      "events": {
+        "0xf8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c64820": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "previousOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipRenounced",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0x4eee4559bd589b1cdfc419f0eed2ff9cbd47f439",
-      "transactionHash": "0xb248e2f5a87f01649c70171b63c38a3a3a45ca415b90cf655f9b14c9b5ad3526"
+      "address": "0xf052d236b8076879d86c9e4c116a068a0d420c55",
+      "transactionHash": "0x3edc8bedca4bc303634e9cb2ac0d4729f39b797230b22dd739c16f6631335fb5"
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-28T09:31:47.137Z"
+  "updatedAt": "2018-08-28T10:49:09.579Z"
 }
