@@ -6,16 +6,17 @@ const TABLE_NAME_VOTES = 'proposal_vote';
 const TABLE_NAME_USER = 'user';
 const TABLE_NAME_COMMENTS = 'proposal_comment';
 const Contract = require('truffle-contract');
+const EthUtil = require('ethereumjs-util');
+const SigUtil = require('eth-sig-util');
 const ResearchSpecificToken = require('../../build/contracts/ResearchSpecificToken.json');
 const RSTCrowdsale = require('../../build/contracts/RSTCrowdsale.json');
 const IPFS = require('ipfs-api');
-const CryptoJS = require('crypto-js');
 const Web3 = require('web3');
 
 class Proposal {
   static normalize(obj) {
     // Fields that we don't want to expose through the API
-    const private_fields = ['encryption_key', 'ipfs_hash'];
+    const private_fields = ['encryption_key'];
     const new_obj = { ...obj };
     private_fields.forEach(key => {
       delete new_obj[key];
@@ -146,11 +147,18 @@ class Proposal {
         }
 
         if (allowed) {
-          if (data.attachments.length) {
+          if (data.attachments && data.attachments.length) {
             data.attachments = JSON.stringify(data.attachments);
           } else {
             delete data.attachments;
           }
+
+          if (data.ipfs_hash && data.ipfs_hash.length) {
+            data.ipfs_hash = JSON.stringify(data.ipfs_hash);
+          } else {
+            delete data.ipfs_hash;
+          }
+
           if (!data.rare_disease) {
             delete data.rare_disease;
           }
@@ -364,13 +372,8 @@ class Proposal {
                     );
                   }
 
-                  const encrypted_file_content = file.toString('utf8');
-                  const bytes = CryptoJS.AES.decrypt(
-                    encrypted_file_content,
-                    record.encryption_key
-                  );
-                  const plaintext = bytes.toString(CryptoJS.enc.Utf8);
-                  resolve({ content: plaintext });
+                  const ipfs_file_content = file.toString('utf8');
+                  resolve({ content: ipfs_file_content });
                 });
               } else {
                 reject({
@@ -387,48 +390,69 @@ class Proposal {
 
   static accessToLicense(req) {
     return new Promise((resolve, reject) => {
-      DB.query(`SELECT * FROM "${TABLE_NAME}" WHERE id='${req.query.id}'`)
-        .then(res => {
-          const record = res.rows[0];
-          // Get the token address from db,
-          const { token_address } = record;
+      // 1 - First check the signature
+      const text = 'Requesting access to license';
+      const msg = EthUtil.bufferToHex(Buffer.from(text, 'utf8'));
+      const msgParams = { data: msg };
+      msgParams.sig = req.body.sign;
+      let recovered = null;
+      try {
+        recovered = SigUtil.recoverPersonalSignature(msgParams);
+      } catch (err) {
+        console.log(
+          'USER :: Exception while recovering personal signature',
+          err
+        );
+      }
 
-          // Get token instance
-          const provider = config.getProvider();
-          // const web3 = new Web3(provider);
-          const token = Contract(ResearchSpecificToken);
-          token.setProvider(provider);
+      if (recovered && recovered === req.body.address) {
+        DB.query(`SELECT * FROM "${TABLE_NAME}" WHERE id='${req.body.id}'`)
+          .then(res => {
+            const record = res.rows[0];
+            // Get the token address from db,
+            const { token_address } = record;
 
-          token
-            .at(token_address)
-            .then(tokenInstance =>
-              tokenInstance.balanceOf.call(req.user.address)
-            )
-            .then(result => {
-              const balance = result
-                .dividedBy(10 ** parseInt(record.decimals, 10))
-                .toFormat(0);
-              if (balance >= config.RST_ACCESS_LICENSE_THRESHOLD) {
-                // This is the license
-                const content = `This is a license for the data that allows the owner of the ETHEREUM address: ${
-                  req.user.address
-                }, which is currently the owner of at least ${
-                  config.RST_ACCESS_LICENSE_THRESHOLD
-                } ${record.token_name} (${
-                  record.token_symbol
-                }) to utilize the data from this research`;
+            // Get token instance
+            const provider = config.getProvider();
+            // const web3 = new Web3(provider);
+            const token = Contract(ResearchSpecificToken);
+            token.setProvider(provider);
 
-                resolve({ content });
-              } else {
-                reject({
-                  message: 'not enough tokens to access the license',
-                });
-              }
-            });
-        })
-        .catch(e => {
-          reject({ message: e.message });
-        });
+            token
+              .at(token_address)
+              .then(tokenInstance =>
+                tokenInstance.balanceOf.call(req.body.address)
+              )
+              .then(result => {
+                const balance = result
+                  .dividedBy(10 ** parseInt(record.decimals, 10))
+                  .toFormat(0);
+                if (balance >= config.RST_ACCESS_LICENSE_THRESHOLD) {
+                  // This is the license
+                  const content = `This is a license for the data that allows the owner of the ETHEREUM address: ${
+                    req.body.address
+                  }, which is currently the owner of at least ${
+                    config.RST_ACCESS_LICENSE_THRESHOLD
+                  } ${record.token_name} (${
+                    record.token_symbol
+                  }) to utilize the data from this research`;
+
+                  resolve({ content });
+                } else {
+                  reject({
+                    message: `You need ${config.RST_ACCESS_LICENSE_THRESHOLD} ${
+                      record.token_symbol
+                    } tokens to be able to access the license`,
+                  });
+                }
+              });
+          })
+          .catch(e => {
+            reject({ message: e.message });
+          });
+      } else {
+        reject({ message: 'invalid signature' });
+      }
     });
   }
 }
