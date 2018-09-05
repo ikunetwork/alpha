@@ -506,7 +506,7 @@ class Proposal extends Component {
 
   renderFundedPercentage() {
     const percentage = Math.ceil(
-      (this.state.amount_raised * 100) / this.state.funds_required
+      this.state.amount_raised * 100 / this.state.funds_required
     );
 
     return (
