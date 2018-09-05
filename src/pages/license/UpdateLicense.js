@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import IpfsApi from 'ipfs-api';
 import { connect } from 'react-redux';
 import { updateLicenseAction } from '../../redux/modules/license';
 import Loader from '../../components/Loader';
@@ -72,7 +71,7 @@ class UpdateLicense extends Component {
     // };
 
     const buffer = Buffer.from(JSON.stringify(metadata));
-    this.ipfs = IpfsApi('ipfs.infura.io', '5001', { // eslint-disable-line
+    this.ipfs = window.IpfsApi('ipfs.infura.io', '5001', { // eslint-disable-line
       protocol: 'https',
     });
     this.ipfs
