@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import IpfsApi from 'ipfs-api';
 import { connect } from 'react-redux';
-import { getTokensAction } from '../../redux/modules/faucet';
+import { updateLicenseAction } from '../../redux/modules/license';
 import Loader from '../../components/Loader';
 import Title from '../../components/Title';
+import IPFSUploader from '../../components/IPFSUploader';
+import './License.css';
 
 import {
   showNoWeb3BrowserModalAction,
@@ -15,6 +18,20 @@ import {
 } from '../../redux/modules/alerts';
 
 class UpdateLicense extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      ip_description: '',
+      license_type: '',
+      license_url: '',
+      copyright: '',
+      territory: '',
+      public_benefit: '',
+      commercialization: '',
+    };
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!this.props.success && nextProps.success) {
       this.props.setAlert('Hold tight... The license is being updated now');
@@ -25,17 +42,54 @@ class UpdateLicense extends Component {
     this.props.clearAlert();
   }
 
-  getIKU() {
-    if (this.props.web3) {
-      if (!this.props.address) {
-        this.props.showUnlockMetamaskModal(true);
-      } else {
-        this.props.getTokens(this.props.address);
-      }
-    } else {
-      this.props.showNoWeb3BrowserModal(true);
-    }
+  onUploadSuccess = ipfs_hash => {
+    console.log(`hash update ${ipfs_hash}`);
+    this.setState({ license_url: `https://ipfs.io/ipfs/${ipfs_hash}` });
+  };
+
+  setValue(event) {
+    const { target } = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
+    this.setState({
+      [name]: value,
+    });
   }
+
+  updateLicense = () => {
+    const metadata = { ...this.state };
+    // const metadata = {
+    //   name: 'EULA for IKU',
+    //   license:
+    //     'https://ipfs.io/ipfs/QmYzKc3AWeFvXNANPPrZcXW7caP5Kttgpc9d7xrAhnAPw6',
+    //   ip_description: 'this represents the IP copyright of the IKU token',
+    //   license_type: 'transferrable',
+    //   copyright:
+    //     'The IKU Portal content is protected by the copyright laws of the United States, international copyright treaties and conventions, and other laws. All rights are reserved',
+    //   territory: 'worldwide',
+    //   public_benefit: true,
+    //   commercialization: 'Allowed after owning 51% of all the token supply',
+    // };
+
+    const buffer = Buffer.from(JSON.stringify(metadata));
+    this.ipfs = IpfsApi('ipfs.infura.io', '5001', { // eslint-disable-line
+      protocol: 'https',
+    });
+    this.ipfs
+      .add(buffer)
+      .then(response => {
+        const ipfsId = response[0].hash;
+        console.log(`tokenUri: https://ipfs.io/ipfs/${ipfsId}`);
+        this.props
+          .updateLicense(`https://ipfs.io/ipfs/${ipfsId}`)
+          .catch(err => {
+            console.error(err);
+          });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   renderError() {
     return (
@@ -51,106 +105,169 @@ class UpdateLicense extends Component {
         <button
           type="button"
           className="btn btn-iku btn-faucet btn-big"
-          onClick={_ => this.getIKU()}
+          onClick={this.updateLicense}
         >
-          {this.props.loading ? (
-            <Loader size="small" />
-          ) : (
-            'Send me some tokens!'
-          )}
+          {this.props.loading ? <Loader size="small" /> : 'Update License'}
         </button>
       </div>
     );
   }
 
+  renderLicenseField() {
+    if (this.state.license_url) {
+      return (
+        <p>
+          License:{' '}
+          <a
+            href={this.state.license_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {this.state.license_url}
+          </a>
+        </p>
+      );
+    } else {
+      return (
+        <div>
+          <p>Choose the license txt file:</p>
+          <IPFSUploader onUploadSuccess={this.onUploadSuccess} />
+        </div>
+      );
+    }
+  }
+
   renderContent() {
     return (
-      <div className="container col-md-6">
+      <div className="license-page container col-md-8">
         <Title align="center">License Manager</Title>
 
         <div className="form-wrapper">
-          <div className="row ">
+          <div className="row">
             <p className="text-center mr-auto ml-auto">
               Here you can manage the license attached to our Token.
               <br />
               <br />
             </p>
           </div>
-          <div className="container col-md-10 col-sm-12">
-            <div className="row">
-              <div className="col-md-12 col-sm-6">
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    value={this.state.first_name}
-                    placeholder="First Name"
-                    onChange={e => this.setValue(e, 'first_name')}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 col-sm-6">
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    value={this.state.last_name}
-                    placeholder="Last Name"
-                    onChange={e => this.setValue(e, 'last_name')}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 col-sm-6">
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    value={this.state.email}
-                    placeholder="Email"
-                    onChange={e => this.setValue(e, 'email')}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 col-sm-6">
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="username"
-                    value={this.state.username}
-                    placeholder="Username"
-                    onChange={e => this.setValue(e, 'username')}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 col-sm-6">
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="organization"
-                    value={this.state.organization}
-                    placeholder="Company, Organization or Institution"
-                    onChange={e => this.setValue(e, 'organization')}
-                  />
-                </div>
-              </div>
-            </div>
-            {!this.props.loading ? this.renderButton() : <Loader />}
+          <div className="row ">
+            <div className="col-md-12 col-sm-6" />
+            {this.renderLicenseField()}
           </div>
+          <div className="row row-separator" />
+          <div className="row">
+            <div className="field-row col-md-12 col-sm-6">
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  value={this.state.name}
+                  placeholder="Name"
+                  onChange={e => this.setValue(e, 'name')}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row row-separator" />
+          <div className="row">
+            <div className="field-row col-md-12 col-sm-6">
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  value={this.state.ip_description}
+                  placeholder="IP Description"
+                  onChange={e => this.setValue(e, 'ip_description')}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row row-separator" />
+          <div className="row">
+            <div className="field-row col-md-12 col-sm-6">
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  value={this.state.license_type}
+                  placeholder="License Type"
+                  onChange={e => this.setValue(e, 'license_type')}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row row-separator" />
+          <div className="row">
+            <div className="field-row col-md-12 col-sm-6">
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  value={this.state.copyright}
+                  placeholder="Copyright"
+                  onChange={e => this.setValue(e, 'copyright')}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row row-separator" />
+          <div className="row">
+            <div className="field-row col-md-12 col-sm-6">
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  value={this.state.territory}
+                  placeholder="Territory"
+                  onChange={e => this.setValue(e, 'territory')}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row row-separator" />
+          <div className="row">
+            <div className="field-row col-md-12 col-sm-6">
+              <div className="form-check">
+                <label htmlFor="public_benefit" className="form-check-label">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="public_benefit"
+                    id="public_benefit"
+                    checked={this.state.public_benefit ? 'checked' : ''}
+                    onChange={e => this.setValue(e)}
+                    value="true"
+                  />
+                  Public Benefit
+                  <span className="form-check-sign" />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="row row-separator" />
+          <div className="row">
+            <div className="field-row col-md-12 col-sm-6">
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  value={this.state.commercialization}
+                  placeholder="Commercialization"
+                  onChange={e => this.setValue(e, 'commercialization')}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row row-separator" />
+          {this.props.error ? this.renderError() : null}
         </div>
-        {this.props.error ? this.renderError() : null}
+        {!this.props.loading ? this.renderButton() : <Loader />}
       </div>
     );
   }
@@ -172,6 +289,7 @@ export default connect(
     success: state.license.success,
   }),
   dispatch => ({
+    updateLicense: data => dispatch(updateLicenseAction(data)),
     showNoWeb3BrowserModal: show =>
       dispatch(showNoWeb3BrowserModalAction(show)),
     showUnlockMetamaskModal: show =>

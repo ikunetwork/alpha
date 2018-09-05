@@ -89,7 +89,8 @@ class Signup extends Component {
   renderError() {
     const defaultError = (
       <p>
-        Ooops! Something went wrong...<br />
+        Ooops! Something went wrong...
+        <br />
         Please try again...
         <br />
       </p>

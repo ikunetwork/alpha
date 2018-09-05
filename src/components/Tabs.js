@@ -8,7 +8,9 @@ const CustomTabs = props => (
         <Tab key={`tab-${i.toString()}`}>el.props.title</Tab>
       ))}
     </TabList>
-    {this.props.children.map((el, i) => <TabPanel>{el.props.title}</TabPanel>)}
+    {this.props.children.map((el, i) => (
+      <TabPanel>{el.props.title}</TabPanel>
+    ))}
   </Tabs>
 );
 

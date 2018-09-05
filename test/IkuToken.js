@@ -30,6 +30,14 @@ contract('IkuToken', accounts => {
     assert(totalSupply.equals(100000 * 10 ** 18));
   });
 
+  it('can have a tokenURI', async () => {
+    const URI =
+      'https://ipfs.io/ipfs/QmQBEwQYc3hGprxvCcW2owr4X1uwQqCpusTJkQuoTDhL5r';
+    await token.setTokenURI(URI, { from: creator });
+    const tokenURI = await token.tokenURI();
+    assert.equal(tokenURI, URI);
+  });
+
   it('assigns the initial total supply to the creator', async () => {
     const totalSupply = await token.totalSupply();
     const creatorBalance = await token.balanceOf(creator);

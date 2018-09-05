@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import ReactJson from 'react-json-view';
 import { connect } from 'react-redux';
-import { getTokensAction } from '../../redux/modules/faucet';
+import { getLicenseAction } from '../../redux/modules/license';
 import Loader from '../../components/Loader';
 import Title from '../../components/Title';
+import IkuTokenHelper from '../../utils/IkuTokenHelper';
 
 import {
   showNoWeb3BrowserModalAction,
@@ -15,80 +17,61 @@ import {
 } from '../../redux/modules/alerts';
 
 class ViewLicense extends Component {
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.success && nextProps.success) {
-      this.props.setAlert(
-        'Hold tight... Your tokens are on the way! \n(It may take a couple of minutes to reflect your new balance)'
-      );
-      setTimeout(_ => {
-        window.location.reload();
-      }, 4000);
-    }
+  constructor(props) {
+    super(props);
+    this.state = { license: '' };
   }
+
+  componentDidMount = () => {
+    // if (this.props.address) {
+    setTimeout(_ => {
+      this.getLicense();
+    }, 1000);
+    // }
+  };
 
   componentWillUnmount() {
     this.props.clearAlert();
   }
 
-  getIKU() {
+  getLicense() {
     if (this.props.web3) {
       if (!this.props.address) {
         this.props.showUnlockMetamaskModal(true);
       } else {
-        this.props.getTokens(this.props.address);
+        IkuTokenHelper.getLicense(web3.currentProvider).then(license => {
+          this.setState({ license });
+        });
       }
     } else {
       this.props.showNoWeb3BrowserModal(true);
     }
   }
 
-  renderError() {
-    return (
-      <div className="form-error mr-auto ml-auto text-center">
-        <p>{this.props.error}</p>
-      </div>
-    );
-  }
-
-  renderButton() {
-    return (
-      <div className="ml-auto mr-auto text-center title">
-        <button
-          type="button"
-          className="btn btn-iku btn-faucet btn-big"
-          onClick={_ => this.getIKU()}
-        >
-          {this.props.loading ? (
-            <Loader size="small" />
-          ) : (
-            'Send me some tokens!'
-          )}
-        </button>
-      </div>
-    );
-  }
-
   renderContent() {
     return (
-      <div className="container col-md-6">
-        <Title align="center">Token License</Title>
-
-        <div className="row form-wrapper">
-          <p className="text-center mr-auto ml-auto">
-            In order to access all the features of the IKU platform (ALPHA) you
-            will need IKU tokens.
-          </p>
-          <br />
-          <p className="text-center mr-auto ml-auto">
-            By clicking the button below, we will send you 100 IKU tokens to
-            your current ethereum address.
-          </p>
-          <br />
-          <br />
-          <br />
-          {this.renderButton()}
+      <div className="container col-md-10">
+        <Title align="center">IKU Token Metadata</Title>
+        <h5 className="text-center mr-auto ml-auto subtitle">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={this.state.license.license}
+          >
+            License: {this.state.license.license}
+          </a>
+        </h5>
+        <br />
+        <br />
+        <div className="form-wrapper">
+          <div className="row">
+            {!this.state.license ? (
+              <Loader size="small" />
+            ) : (
+              <ReactJson src={this.state.license} />
+            )}
+          </div>
         </div>
-        {this.props.error ? this.renderError() : null}
       </div>
     );
   }
@@ -106,11 +89,11 @@ class ViewLicense extends Component {
 
 export default connect(
   state => ({
-    loading: state.faucet.loading,
-    success: state.faucet.success,
+    loading: state.license.loading,
+    success: state.license.success,
   }),
   dispatch => ({
-    getTokens: address => dispatch(getTokensAction(address)),
+    getLicense: _ => dispatch(getLicenseAction()),
     showNoWeb3BrowserModal: show =>
       dispatch(showNoWeb3BrowserModalAction(show)),
     showUnlockMetamaskModal: show =>
