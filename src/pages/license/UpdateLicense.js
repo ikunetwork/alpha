@@ -57,19 +57,6 @@ class UpdateLicense extends Component {
 
   updateLicense = () => {
     const metadata = { ...this.state };
-    // const metadata = {
-    //   name: 'EULA for IKU',
-    //   license:
-    //     'https://ipfs.io/ipfs/QmYzKc3AWeFvXNANPPrZcXW7caP5Kttgpc9d7xrAhnAPw6',
-    //   ip_description: 'this represents the IP copyright of the IKU token',
-    //   license_type: 'transferrable',
-    //   copyright:
-    //     'The IKU Portal content is protected by the copyright laws of the United States, international copyright treaties and conventions, and other laws. All rights are reserved',
-    //   territory: 'worldwide',
-    //   public_benefit: true,
-    //   commercialization: 'Allowed after owning 51% of all the token supply',
-    // };
-
     const buffer = Buffer.from(JSON.stringify(metadata));
     this.ipfs = window.IpfsApi('ipfs.infura.io', '5001', { // eslint-disable-line
       protocol: 'https',
