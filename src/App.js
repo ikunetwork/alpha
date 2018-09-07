@@ -16,6 +16,8 @@ import Proposal from './pages/proposal/Proposal';
 import Account from './pages/account/Account';
 import Faucet from './pages/faucet/Faucet';
 import Signup from './pages/signup/Signup';
+import UpdateLicense from './pages/license/UpdateLicense';
+import ViewLicense from './pages/license/ViewLicense';
 import VerifyEmail from './pages/verify-email/VerifyEmail';
 import SubmitResearchTarget from './pages/research-target/SubmitResearchTarget';
 import SubmitProposal from './pages/proposal/SubmitProposal';
@@ -152,6 +154,26 @@ class App extends Component {
                 path="/faucet"
                 render={() => (
                   <Faucet
+                    user={this.props.user}
+                    address={this.props.address}
+                    web3={this.props.web3}
+                  />
+                )}
+              />
+              <Route
+                path="/license/update"
+                render={() => (
+                  <UpdateLicense
+                    user={this.props.user}
+                    address={this.props.address}
+                    web3={this.props.web3}
+                  />
+                )}
+              />
+              <Route
+                path="/license/view"
+                render={() => (
+                  <ViewLicense
                     user={this.props.user}
                     address={this.props.address}
                     web3={this.props.web3}
