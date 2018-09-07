@@ -127,11 +127,11 @@ class SubmitProposal extends Component {
           console.log('Error trying to parse attachments', e);
           attachments = [];
         }
-      } else if (typeof attachments !== 'object') {
+      } else if (typeof attachments !== 'object' || attachments === null) {
         attachments = [];
       }
       info.attachments = attachments;
-      this.setState({ ...info });
+      this.setState(info);
     }
   }
 
@@ -214,7 +214,8 @@ class SubmitProposal extends Component {
   renderError = () => (
     <div className="form-error">
       <p>
-        There was an error while trying to submit your proposal.<br />
+        There was an error while trying to submit your proposal.
+        <br />
         Please try again...
         <br />
       </p>
@@ -585,9 +586,8 @@ class SubmitProposal extends Component {
                 onChange={e => this.setValue(e)}
                 value="true"
               />
-              <span className="form-check-sign" />
-              I certify that the information I have given on the proposal is
-              complete and correct
+              <span className="form-check-sign" />I certify that the information
+              I have given on the proposal is complete and correct
             </label>
           </div>
           {!this.props.loading ? this.renderButton() : <Loader />}

@@ -1153,6 +1153,18 @@ a.attachment {
   outline: none !important;
 }
 
+ul.datasets {
+  margin-bottom: 40px;
+}
+
+ul.datasets li a {
+  font-size: 19px;
+}
+.request-license-wrapper {
+  justify-content: center;
+  display: flex;
+}
+
 /*                       */
 /*    MOBILE STYLES      */
 /*                       */

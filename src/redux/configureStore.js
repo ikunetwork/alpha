@@ -4,6 +4,7 @@ import { install as installReduxLoop, combineReducers } from 'redux-loop';
 import alerts from './modules/alerts';
 import faq from './modules/faq';
 import faucet from './modules/faucet';
+import license from './modules/license';
 import network from './modules/network';
 import proposals from './modules/proposals';
 import researchTargets from './modules/researchTargets';
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   alerts,
   faq,
   faucet,
+  license,
   network,
   proposals,
   researchTargets,

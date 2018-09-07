@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const ResearchTarget = require('./api/ResearchTarget');
+const License = require('./api/License');
 const Faucet = require('./api/Faucet');
 const Proposal = require('./api/Proposal');
 const Faq = require('./api/Faq');
@@ -372,43 +373,20 @@ router.post(
   }
 );
 
-router.get(
-  '/proposal/data',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    if (req.query.id) {
-      Proposal.accessToData(req)
-        .then(response => {
-          res.json(response);
-        })
-        .catch(error => {
-          console.log('ROUTE :: GET :: /proposal/data :: 500', error);
-          res.status(500).send(error);
-        });
-    } else {
-      res.send({ error: 'missing parameters' });
-    }
+router.route('/proposal/license').post((req, res) => {
+  if (req.body.id && req.body.address && req.body.sign) {
+    Proposal.accessToLicense(req)
+      .then(response => {
+        res.json(response);
+      })
+      .catch(error => {
+        console.log('ROUTE :: GET :: /proposal/license :: 500', error);
+        res.status(500).send(error);
+      });
+  } else {
+    res.send({ error: 'missing parameters' });
   }
-);
-
-router.get(
-  '/proposal/license',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    if (req.query.id) {
-      Proposal.accessToLicense(req)
-        .then(response => {
-          res.json(response);
-        })
-        .catch(error => {
-          console.log('ROUTE :: GET :: /proposal/license :: 500', error);
-          res.status(500).send(error);
-        });
-    } else {
-      res.send({ error: 'missing parameters' });
-    }
-  }
-);
+});
 
 router
   .route('/faq')
@@ -446,6 +424,35 @@ router.post('/faucet/send-tokens', (req, res) => {
       res.status(500).send(error);
     });
 });
+
+router
+  .route('/license')
+  // update the license (PUT http://localhost:8080/api/license)
+  .put((req, res) => {
+    if (req.body.data) {
+      License.put(req.body.data)
+        .then(response => {
+          res.json(response);
+        })
+        .catch(error => {
+          console.log('ROUTE :: PUT :: /license :: 500', error);
+          res.status(500).send(error);
+        });
+    } else {
+      res.send({ error: 'missing parameters' });
+    }
+  })
+
+  // get the license (GET http://localhost:8080/api/license)
+  .get((req, res) => {
+    License.get(req)
+      .then(response => {
+        res.json(response);
+      })
+      .catch(error => {
+        res.send(error);
+      });
+  });
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api

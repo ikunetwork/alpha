@@ -45,6 +45,7 @@
     "Headers": false,
     "Buffer": true,
     "crypto": true,
+    "IpfsApi": true,
 
     // Flow global types.
     "ReactComponent": false,

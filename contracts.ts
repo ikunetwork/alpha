@@ -597,257 +597,6 @@ export abstract class Web3Contract {
     }
 }
 
-            export class BasicToken extends StaticWeb3Contract {    
-                constructor() {
-                    super({"contractName":"BasicToken","networks":{},"abi":[{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]})    
-                }
-        
-            private _TransferWatcher = {
-                watch: async (cb: (args: {from: string;to: string;value: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.Transfer('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get TransferEvent() {
-                return this._TransferWatcher;
-            }
-        
-
-            
-
-            public async totalSupply(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.totalSupply.call({ from: params.options.from })
-            }
-        
-            private _totalSupplyWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.totalSupply('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get totalSupplyEvent() {
-                return this._totalSupplyWatcher;
-            }
-        
-
-            
-
-            public async transfer(params: {_to: string;
-_value: string;
-options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.transfer(params._to, params._value, { from: params.options.from })
-            }
-        
-            private _transferWatcher = {
-                watch: async (cb: (args: {_to: string;_value: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.transfer('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get transferEvent() {
-                return this._transferWatcher;
-            }
-        
-
-            
-
-            public async balanceOf(params: {_owner: string;
-options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.balanceOf.call(params._owner, { from: params.options.from })
-            }
-        
-            private _balanceOfWatcher = {
-                watch: async (cb: (args: {_owner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.balanceOf('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get balanceOfEvent() {
-                return this._balanceOfWatcher;
-            }
-        }
-            export class ERC20 extends StaticWeb3Contract {    
-                constructor() {
-                    super({"contractName":"ERC20","networks":{},"abi":[{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"who","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
-                }
-        
-
-            
-
-            public async totalSupply(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.totalSupply.call({ from: params.options.from })
-            }
-        
-            private _totalSupplyWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.totalSupply('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get totalSupplyEvent() {
-                return this._totalSupplyWatcher;
-            }
-        
-
-            
-
-            public async balanceOf(params: {who: string;
-options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.balanceOf.call(params.who, { from: params.options.from })
-            }
-        
-            private _balanceOfWatcher = {
-                watch: async (cb: (args: {who: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.balanceOf('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get balanceOfEvent() {
-                return this._balanceOfWatcher;
-            }
-        
-
-            
-
-            public async transfer(params: {to: string;
-value: string;
-options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.transfer(params.to, params.value, { from: params.options.from })
-            }
-        
-            private _transferWatcher = {
-                watch: async (cb: (args: {to: string;value: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.transfer('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get transferEvent() {
-                return this._transferWatcher;
-            }
-        
-            private _ApprovalWatcher = {
-                watch: async (cb: (args: {owner: string;spender: string;value: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.Approval('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get ApprovalEvent() {
-                return this._ApprovalWatcher;
-            }
-        
-            private _TransferWatcher = {
-                watch: async (cb: (args: {from: string;to: string;value: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.Transfer('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get TransferEvent() {
-                return this._TransferWatcher;
-            }
-        
-
-            
-
-            public async allowance(params: {owner: string;
-spender: string;
-options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.allowance.call(params.owner, params.spender, { from: params.options.from })
-            }
-        
-            private _allowanceWatcher = {
-                watch: async (cb: (args: {owner: string;spender: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.allowance('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get allowanceEvent() {
-                return this._allowanceWatcher;
-            }
-        
-
-            
-
-            public async transferFrom(params: {from: string;
-to: string;
-value: string;
-options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.transferFrom(params.from, params.to, params.value, { from: params.options.from })
-            }
-        
-            private _transferFromWatcher = {
-                watch: async (cb: (args: {from: string;to: string;value: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.transferFrom('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get transferFromEvent() {
-                return this._transferFromWatcher;
-            }
-        
-
-            
-
-            public async approve(params: {spender: string;
-value: string;
-options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.approve(params.spender, params.value, { from: params.options.from })
-            }
-        
-            private _approveWatcher = {
-                watch: async (cb: (args: {spender: string;value: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.approve('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get approveEvent() {
-                return this._approveWatcher;
-            }
-        }
             export class CappedCrowdsale extends StaticWeb3Contract {    
                 constructor() {
                     super({"contractName":"CappedCrowdsale","networks":{},"abi":[{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"cap","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_cap","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"},{"constant":true,"inputs":[],"name":"capReached","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"}]})    
@@ -1014,9 +763,385 @@ options: { from: string }}): Promise<void | null> {
                 return this._capReachedWatcher;
             }
         }
-            export class ERC20Basic extends StaticWeb3Contract {    
+            export class ConditionalEscrow extends StaticWeb3Contract {    
                 constructor() {
-                    super({"contractName":"ERC20Basic","networks":{},"abi":[{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"who","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
+                    super({"contractName":"ConditionalEscrow","networks":{},"abi":[{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_payee","type":"address"}],"name":"depositsOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_payee","type":"address"}],"name":"deposit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"payee","type":"address"},{"indexed":false,"name":"weiAmount","type":"uint256"}],"name":"Deposited","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"payee","type":"address"},{"indexed":false,"name":"weiAmount","type":"uint256"}],"name":"Withdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":true,"inputs":[{"name":"_payee","type":"address"}],"name":"withdrawalAllowed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_payee","type":"address"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
+                }
+        
+
+            
+
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.renounceOwnership({ from: params.options.from })
+            }
+        
+            private _renounceOwnershipWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
+            }
+        
+
+            
+
+            public async owner(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.owner.call({ from: params.options.from })
+            }
+        
+            private _ownerWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.owner('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get ownerEvent() {
+                return this._ownerWatcher;
+            }
+        
+
+            
+
+            public async depositsOf(params: {_payee: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.depositsOf.call(params._payee, { from: params.options.from })
+            }
+        
+            private _depositsOfWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.depositsOf('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get depositsOfEvent() {
+                return this._depositsOfWatcher;
+            }
+        
+
+            
+
+            public async transferOwnership(params: {_newOwner: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
+            }
+        
+            private _transferOwnershipWatcher = {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get transferOwnershipEvent() {
+                return this._transferOwnershipWatcher;
+            }
+        
+
+            
+
+            public async deposit(params: {_payee: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.deposit(params._payee, { from: params.options.from })
+            }
+        
+            private _depositWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.deposit('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get depositEvent() {
+                return this._depositWatcher;
+            }
+        
+            private _DepositedWatcher = {
+                watch: async (cb: (args: {payee: string;weiAmount: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Deposited('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get DepositedEvent() {
+                return this._DepositedWatcher;
+            }
+        
+            private _WithdrawnWatcher = {
+                watch: async (cb: (args: {payee: string;weiAmount: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Withdrawn('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get WithdrawnEvent() {
+                return this._WithdrawnWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
+            }
+        
+            private _OwnershipTransferredWatcher = {
+                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipTransferredEvent() {
+                return this._OwnershipTransferredWatcher;
+            }
+        
+
+            
+
+            public async withdrawalAllowed(params: {_payee: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.withdrawalAllowed.call(params._payee, { from: params.options.from })
+            }
+        
+            private _withdrawalAllowedWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.withdrawalAllowed('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get withdrawalAllowedEvent() {
+                return this._withdrawalAllowedWatcher;
+            }
+        
+
+            
+
+            public async withdraw(params: {_payee: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.withdraw(params._payee, { from: params.options.from })
+            }
+        
+            private _withdrawWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.withdraw('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get withdrawEvent() {
+                return this._withdrawWatcher;
+            }
+        }
+            export class ERC20 extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"ERC20","networks":{},"abi":[{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_who","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
+                }
+        
+
+            
+
+            public async totalSupply(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.totalSupply.call({ from: params.options.from })
+            }
+        
+            private _totalSupplyWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.totalSupply('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get totalSupplyEvent() {
+                return this._totalSupplyWatcher;
+            }
+        
+
+            
+
+            public async balanceOf(params: {_who: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.balanceOf.call(params._who, { from: params.options.from })
+            }
+        
+            private _balanceOfWatcher = {
+                watch: async (cb: (args: {_who: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.balanceOf('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get balanceOfEvent() {
+                return this._balanceOfWatcher;
+            }
+        
+
+            
+
+            public async transfer(params: {_to: string;
+_value: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.transfer(params._to, params._value, { from: params.options.from })
+            }
+        
+            private _transferWatcher = {
+                watch: async (cb: (args: {_to: string;_value: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.transfer('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get transferEvent() {
+                return this._transferWatcher;
+            }
+        
+            private _ApprovalWatcher = {
+                watch: async (cb: (args: {owner: string;spender: string;value: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Approval('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get ApprovalEvent() {
+                return this._ApprovalWatcher;
+            }
+        
+            private _TransferWatcher = {
+                watch: async (cb: (args: {from: string;to: string;value: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Transfer('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get TransferEvent() {
+                return this._TransferWatcher;
+            }
+        
+
+            
+
+            public async allowance(params: {_owner: string;
+_spender: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.allowance.call(params._owner, params._spender, { from: params.options.from })
+            }
+        
+            private _allowanceWatcher = {
+                watch: async (cb: (args: {_owner: string;_spender: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.allowance('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get allowanceEvent() {
+                return this._allowanceWatcher;
+            }
+        
+
+            
+
+            public async transferFrom(params: {_from: string;
+_to: string;
+_value: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.transferFrom(params._from, params._to, params._value, { from: params.options.from })
+            }
+        
+            private _transferFromWatcher = {
+                watch: async (cb: (args: {_from: string;_to: string;_value: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.transferFrom('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get transferFromEvent() {
+                return this._transferFromWatcher;
+            }
+        
+
+            
+
+            public async approve(params: {_spender: string;
+_value: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.approve(params._spender, params._value, { from: params.options.from })
+            }
+        
+            private _approveWatcher = {
+                watch: async (cb: (args: {_spender: string;_value: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.approve('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get approveEvent() {
+                return this._approveWatcher;
+            }
+        }
+            export class BasicToken extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"BasicToken","networks":{},"abi":[{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]})    
                 }
         
             private _TransferWatcher = {
@@ -1056,14 +1181,98 @@ options: { from: string }}): Promise<void | null> {
 
             
 
-            public async balanceOf(params: {who: string;
+            public async transfer(params: {_to: string;
+_value: string;
 options: { from: string }}): Promise<string | null> {
                 const instance = await this._getInstance();
-                return await instance.balanceOf.call(params.who, { from: params.options.from })
+                return await instance.transfer(params._to, params._value, { from: params.options.from })
+            }
+        
+            private _transferWatcher = {
+                watch: async (cb: (args: {_to: string;_value: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.transfer('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get transferEvent() {
+                return this._transferWatcher;
+            }
+        
+
+            
+
+            public async balanceOf(params: {_owner: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.balanceOf.call(params._owner, { from: params.options.from })
             }
         
             private _balanceOfWatcher = {
-                watch: async (cb: (args: {who: string}) => void) => {
+                watch: async (cb: (args: {_owner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.balanceOf('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get balanceOfEvent() {
+                return this._balanceOfWatcher;
+            }
+        }
+            export class ERC20Basic extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"ERC20Basic","networks":{},"abi":[{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_who","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
+                }
+        
+            private _TransferWatcher = {
+                watch: async (cb: (args: {from: string;to: string;value: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Transfer('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get TransferEvent() {
+                return this._TransferWatcher;
+            }
+        
+
+            
+
+            public async totalSupply(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.totalSupply.call({ from: params.options.from })
+            }
+        
+            private _totalSupplyWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.totalSupply('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get totalSupplyEvent() {
+                return this._totalSupplyWatcher;
+            }
+        
+
+            
+
+            public async balanceOf(params: {_who: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.balanceOf.call(params._who, { from: params.options.from })
+            }
+        
+            private _balanceOfWatcher = {
+                watch: async (cb: (args: {_who: string}) => void) => {
                     const instance = await this._getInstance();
                     instance.balanceOf('latest').watch((error: Error, result: any) => {
                         cb(result.args);
@@ -1078,15 +1287,15 @@ options: { from: string }}): Promise<string | null> {
 
             
 
-            public async transfer(params: {to: string;
-value: string;
+            public async transfer(params: {_to: string;
+_value: string;
 options: { from: string }}): Promise<string | null> {
                 const instance = await this._getInstance();
-                return await instance.transfer(params.to, params.value, { from: params.options.from })
+                return await instance.transfer(params._to, params._value, { from: params.options.from })
             }
         
             private _transferWatcher = {
-                watch: async (cb: (args: {to: string;value: string}) => void) => {
+                watch: async (cb: (args: {_to: string;_value: string}) => void) => {
                     const instance = await this._getInstance();
                     instance.transfer('latest').watch((error: Error, result: any) => {
                         cb(result.args);
@@ -1096,6 +1305,338 @@ options: { from: string }}): Promise<string | null> {
 
             public get transferEvent() {
                 return this._transferWatcher;
+            }
+        }
+            export class FinalizableCrowdsale extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"FinalizableCrowdsale","networks":{},"abi":[{"constant":true,"inputs":[],"name":"hasClosed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"closingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"isFinalized","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"openingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[],"name":"Finalized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":false,"inputs":[],"name":"finalize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
+                }
+        
+
+            
+
+            public async hasClosed(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.hasClosed.call({ from: params.options.from })
+            }
+        
+            private _hasClosedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.hasClosed('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get hasClosedEvent() {
+                return this._hasClosedWatcher;
+            }
+        
+
+            
+
+            public async rate(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.rate.call({ from: params.options.from })
+            }
+        
+            private _rateWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.rate('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get rateEvent() {
+                return this._rateWatcher;
+            }
+        
+
+            
+
+            public async weiRaised(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.weiRaised.call({ from: params.options.from })
+            }
+        
+            private _weiRaisedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.weiRaised('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get weiRaisedEvent() {
+                return this._weiRaisedWatcher;
+            }
+        
+
+            
+
+            public async closingTime(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.closingTime.call({ from: params.options.from })
+            }
+        
+            private _closingTimeWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.closingTime('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get closingTimeEvent() {
+                return this._closingTimeWatcher;
+            }
+        
+
+            
+
+            public async wallet(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.wallet.call({ from: params.options.from })
+            }
+        
+            private _walletWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.wallet('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get walletEvent() {
+                return this._walletWatcher;
+            }
+        
+
+            
+
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.renounceOwnership({ from: params.options.from })
+            }
+        
+            private _renounceOwnershipWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
+            }
+        
+
+            
+
+            public async isFinalized(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.isFinalized.call({ from: params.options.from })
+            }
+        
+            private _isFinalizedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.isFinalized('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get isFinalizedEvent() {
+                return this._isFinalizedWatcher;
+            }
+        
+
+            
+
+            public async owner(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.owner.call({ from: params.options.from })
+            }
+        
+            private _ownerWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.owner('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get ownerEvent() {
+                return this._ownerWatcher;
+            }
+        
+
+            
+
+            public async openingTime(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.openingTime.call({ from: params.options.from })
+            }
+        
+            private _openingTimeWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.openingTime('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get openingTimeEvent() {
+                return this._openingTimeWatcher;
+            }
+        
+
+            
+
+            public async buyTokens(params: {_beneficiary: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.buyTokens(params._beneficiary, { from: params.options.from })
+            }
+        
+            private _buyTokensWatcher = {
+                watch: async (cb: (args: {_beneficiary: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.buyTokens('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get buyTokensEvent() {
+                return this._buyTokensWatcher;
+            }
+        
+
+            
+
+            public async transferOwnership(params: {_newOwner: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
+            }
+        
+            private _transferOwnershipWatcher = {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get transferOwnershipEvent() {
+                return this._transferOwnershipWatcher;
+            }
+        
+
+            
+
+            public async token(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.token.call({ from: params.options.from })
+            }
+        
+            private _tokenWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.token('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get tokenEvent() {
+                return this._tokenWatcher;
+            }
+        
+            private _FinalizedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Finalized('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get FinalizedEvent() {
+                return this._FinalizedWatcher;
+            }
+        
+            private _TokenPurchaseWatcher = {
+                watch: async (cb: (args: {purchaser: string;beneficiary: string;value: string;amount: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.TokenPurchase('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get TokenPurchaseEvent() {
+                return this._TokenPurchaseWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
+            }
+        
+            private _OwnershipTransferredWatcher = {
+                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipTransferredEvent() {
+                return this._OwnershipTransferredWatcher;
+            }
+        
+
+            
+
+            public async finalize(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.finalize({ from: params.options.from })
+            }
+        
+            private _finalizeWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.finalize('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get finalizeEvent() {
+                return this._finalizeWatcher;
             }
         }
             export class Crowdsale extends StaticWeb3Contract {    
@@ -1222,31 +1763,383 @@ options: { from: string }}): Promise<void | null> {
                 return this._buyTokensWatcher;
             }
         }
-            export class FinalizableCrowdsale extends StaticWeb3Contract {    
+            export class Escrow extends StaticWeb3Contract {    
                 constructor() {
-                    super({"contractName":"FinalizableCrowdsale","networks":{},"abi":[{"constant":true,"inputs":[],"name":"hasClosed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"closingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"isFinalized","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"openingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[],"name":"Finalized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"},{"constant":false,"inputs":[],"name":"finalize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
+                    super({"contractName":"Escrow","networks":{},"abi":[{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"payee","type":"address"},{"indexed":false,"name":"weiAmount","type":"uint256"}],"name":"Deposited","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"payee","type":"address"},{"indexed":false,"name":"weiAmount","type":"uint256"}],"name":"Withdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":true,"inputs":[{"name":"_payee","type":"address"}],"name":"depositsOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_payee","type":"address"}],"name":"deposit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_payee","type":"address"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
                 }
         
 
             
 
-            public async hasClosed(params: {options: { from: string }}): Promise<string | null> {
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
                 const instance = await this._getInstance();
-                return await instance.hasClosed.call({ from: params.options.from })
+                return await instance.renounceOwnership({ from: params.options.from })
             }
         
-            private _hasClosedWatcher = {
+            private _renounceOwnershipWatcher = {
                 watch: async (cb: (args: {}) => void) => {
                     const instance = await this._getInstance();
-                    instance.hasClosed('latest').watch((error: Error, result: any) => {
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
                         cb(result.args);
                     });
                 }
             }
 
-            public get hasClosedEvent() {
-                return this._hasClosedWatcher;
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
             }
+        
+
+            
+
+            public async owner(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.owner.call({ from: params.options.from })
+            }
+        
+            private _ownerWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.owner('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get ownerEvent() {
+                return this._ownerWatcher;
+            }
+        
+
+            
+
+            public async transferOwnership(params: {_newOwner: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
+            }
+        
+            private _transferOwnershipWatcher = {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get transferOwnershipEvent() {
+                return this._transferOwnershipWatcher;
+            }
+        
+            private _DepositedWatcher = {
+                watch: async (cb: (args: {payee: string;weiAmount: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Deposited('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get DepositedEvent() {
+                return this._DepositedWatcher;
+            }
+        
+            private _WithdrawnWatcher = {
+                watch: async (cb: (args: {payee: string;weiAmount: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Withdrawn('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get WithdrawnEvent() {
+                return this._WithdrawnWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
+            }
+        
+            private _OwnershipTransferredWatcher = {
+                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipTransferredEvent() {
+                return this._OwnershipTransferredWatcher;
+            }
+        
+
+            
+
+            public async depositsOf(params: {_payee: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.depositsOf.call(params._payee, { from: params.options.from })
+            }
+        
+            private _depositsOfWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.depositsOf('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get depositsOfEvent() {
+                return this._depositsOfWatcher;
+            }
+        
+
+            
+
+            public async deposit(params: {_payee: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.deposit(params._payee, { from: params.options.from })
+            }
+        
+            private _depositWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.deposit('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get depositEvent() {
+                return this._depositWatcher;
+            }
+        
+
+            
+
+            public async withdraw(params: {_payee: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.withdraw(params._payee, { from: params.options.from })
+            }
+        
+            private _withdrawWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.withdraw('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get withdrawEvent() {
+                return this._withdrawWatcher;
+            }
+        }
+            export class Migrations extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"Migrations","networks":{"3":{"events":{},"links":{},"address":"0xadbf1e77c98f8c9bce2350a9a35cf9e504da3919","transactionHash":"0xea66f3dacb44a2ef34d3d23eb25b68f1960114106243ad9dce74ac60cffe23a2"}},"abi":[{"constant":true,"inputs":[],"name":"last_completed_migration","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"constant":false,"inputs":[{"name":"completed","type":"uint256"}],"name":"setCompleted","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"new_address","type":"address"}],"name":"upgrade","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
+                }
+        
+
+            
+
+            public async last_completed_migration(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.last_completed_migration.call({ from: params.options.from })
+            }
+        
+            private _last_completed_migrationWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.last_completed_migration('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get last_completed_migrationEvent() {
+                return this._last_completed_migrationWatcher;
+            }
+        
+
+            
+
+            public async owner(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.owner.call({ from: params.options.from })
+            }
+        
+            private _ownerWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.owner('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get ownerEvent() {
+                return this._ownerWatcher;
+            }
+        
+
+            
+
+            public async setCompleted(params: {completed: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.setCompleted(params.completed, { from: params.options.from })
+            }
+        
+            private _setCompletedWatcher = {
+                watch: async (cb: (args: {completed: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.setCompleted('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get setCompletedEvent() {
+                return this._setCompletedWatcher;
+            }
+        
+
+            
+
+            public async upgrade(params: {new_address: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.upgrade(params.new_address, { from: params.options.from })
+            }
+        
+            private _upgradeWatcher = {
+                watch: async (cb: (args: {new_address: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.upgrade('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get upgradeEvent() {
+                return this._upgradeWatcher;
+            }
+        }
+            export class Ownable extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"Ownable","networks":{},"abi":[{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
+                }
+        
+
+            
+
+            public async owner(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.owner.call({ from: params.options.from })
+            }
+        
+            private _ownerWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.owner('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get ownerEvent() {
+                return this._ownerWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
+            }
+        
+            private _OwnershipTransferredWatcher = {
+                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipTransferredEvent() {
+                return this._OwnershipTransferredWatcher;
+            }
+        
+
+            
+
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.renounceOwnership({ from: params.options.from })
+            }
+        
+            private _renounceOwnershipWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
+            }
+        
+
+            
+
+            public async transferOwnership(params: {_newOwner: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
+            }
+        
+            private _transferOwnershipWatcher = {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get transferOwnershipEvent() {
+                return this._transferOwnershipWatcher;
+            }
+        }
+            export class MintedCrowdsale extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"MintedCrowdsale","networks":{},"abi":[{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"}]})    
+                }
         
 
             
@@ -1293,27 +2186,6 @@ options: { from: string }}): Promise<void | null> {
 
             
 
-            public async closingTime(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.closingTime.call({ from: params.options.from })
-            }
-        
-            private _closingTimeWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.closingTime('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get closingTimeEvent() {
-                return this._closingTimeWatcher;
-            }
-        
-
-            
-
             public async wallet(params: {options: { from: string }}): Promise<string | null> {
                 const instance = await this._getInstance();
                 return await instance.wallet.call({ from: params.options.from })
@@ -1330,69 +2202,6 @@ options: { from: string }}): Promise<void | null> {
 
             public get walletEvent() {
                 return this._walletWatcher;
-            }
-        
-
-            
-
-            public async isFinalized(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.isFinalized.call({ from: params.options.from })
-            }
-        
-            private _isFinalizedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.isFinalized('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get isFinalizedEvent() {
-                return this._isFinalizedWatcher;
-            }
-        
-
-            
-
-            public async owner(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.owner.call({ from: params.options.from })
-            }
-        
-            private _ownerWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.owner('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get ownerEvent() {
-                return this._ownerWatcher;
-            }
-        
-
-            
-
-            public async openingTime(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.openingTime.call({ from: params.options.from })
-            }
-        
-            private _openingTimeWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.openingTime('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get openingTimeEvent() {
-                return this._openingTimeWatcher;
             }
         
 
@@ -1420,28 +2229,6 @@ options: { from: string }}): Promise<void | null> {
 
             
 
-            public async transferOwnership(params: {newOwner: string;
-options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.transferOwnership(params.newOwner, { from: params.options.from })
-            }
-        
-            private _transferOwnershipWatcher = {
-                watch: async (cb: (args: {newOwner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get transferOwnershipEvent() {
-                return this._transferOwnershipWatcher;
-            }
-        
-
-            
-
             public async token(params: {options: { from: string }}): Promise<string | null> {
                 const instance = await this._getInstance();
                 return await instance.token.call({ from: params.options.from })
@@ -1460,32 +2247,6 @@ options: { from: string }}): Promise<void | null> {
                 return this._tokenWatcher;
             }
         
-            private _FinalizedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.Finalized('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get FinalizedEvent() {
-                return this._FinalizedWatcher;
-            }
-        
-            private _OwnershipTransferredWatcher = {
-                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get OwnershipTransferredEvent() {
-                return this._OwnershipTransferredWatcher;
-            }
-        
             private _TokenPurchaseWatcher = {
                 watch: async (cb: (args: {purchaser: string;beneficiary: string;value: string;amount: string}) => void) => {
                     const instance = await this._getInstance();
@@ -1498,31 +2259,10 @@ options: { from: string }}): Promise<void | null> {
             public get TokenPurchaseEvent() {
                 return this._TokenPurchaseWatcher;
             }
-        
-
-            
-
-            public async finalize(params: {options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.finalize({ from: params.options.from })
-            }
-        
-            private _finalizeWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.finalize('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get finalizeEvent() {
-                return this._finalizeWatcher;
-            }
         }
             export class IkuToken extends StaticWeb3Contract {    
                 constructor() {
-                    super({"contractName":"IkuToken","networks":{"3":{"events":{},"links":{},"address":"0x5abb48d83d4fcda4d56238205bcd24ed03aba253","transactionHash":"0x6076df76fd20a1abfc7a0d2c86645980c4baf6cd2bcb8e846750081f2f5900a8"},"4447":{"events":{},"links":{},"address":"0x345ca3e014aaf5dca488057592ee47305d9b3e10","transactionHash":"0x4f392b04416aa72e8c5fd6578cc8a17fbba1273d4e03700bc5e65f418723fcfa"}},"abi":[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"INITIAL_SUPPLY","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]})    
+                    super({"contractName":"IkuToken","networks":{"3":{"events":{},"links":{},"address":"0x2604481b510ee899119718061f00cbc8ed2fb5af","transactionHash":"0xf3c9234be1eeb0c80c9a98411f152e3b8d90e7ef9787d7e5b5ec45fde842b2ca"}},"abi":[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"INITIAL_SUPPLY","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"tokenURI","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":false,"inputs":[{"name":"_tokenURI","type":"string"}],"name":"setTokenURI","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
                 }
         
 
@@ -1659,6 +2399,27 @@ options: { from: string }}): Promise<string | null> {
 
             
 
+            public async tokenURI(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.tokenURI.call({ from: params.options.from })
+            }
+        
+            private _tokenURIWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.tokenURI('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get tokenURIEvent() {
+                return this._tokenURIWatcher;
+            }
+        
+
+            
+
             public async decreaseApproval(params: {_spender: string;
 _subtractedValue: string;
 options: { from: string }}): Promise<string | null> {
@@ -1699,6 +2460,27 @@ options: { from: string }}): Promise<string | null> {
 
             public get balanceOfEvent() {
                 return this._balanceOfWatcher;
+            }
+        
+
+            
+
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.renounceOwnership({ from: params.options.from })
+            }
+        
+            private _renounceOwnershipWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
             }
         
 
@@ -1815,14 +2597,14 @@ options: { from: string }}): Promise<string | null> {
 
             
 
-            public async transferOwnership(params: {newOwner: string;
+            public async transferOwnership(params: {_newOwner: string;
 options: { from: string }}): Promise<void | null> {
                 const instance = await this._getInstance();
-                return await instance.transferOwnership(params.newOwner, { from: params.options.from })
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
             }
         
             private _transferOwnershipWatcher = {
-                watch: async (cb: (args: {newOwner: string}) => void) => {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
                     const instance = await this._getInstance();
                     instance.transferOwnership('latest').watch((error: Error, result: any) => {
                         cb(result.args);
@@ -1832,6 +2614,19 @@ options: { from: string }}): Promise<void | null> {
 
             public get transferOwnershipEvent() {
                 return this._transferOwnershipWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
             }
         
             private _OwnershipTransferredWatcher = {
@@ -1872,286 +2667,32 @@ options: { from: string }}): Promise<void | null> {
             public get TransferEvent() {
                 return this._TransferWatcher;
             }
-        }
-            export class Migrations extends StaticWeb3Contract {    
-                constructor() {
-                    super({"contractName":"Migrations","networks":{"3":{"events":{},"links":{},"address":"0x004f0f9e4bfe3aa169687ebd757c713a917a4e10","transactionHash":"0x30eec7b52c8adaa86be042359ff909d8ae91f69ad94f5c9a3b400f70ab990e38"},"4447":{"events":{},"links":{},"address":"0x8cdaf0cd259887258bc13a92c0a6da92698644c0","transactionHash":"0x5dc37b5eeca0ff95d289d3cc0112f3e5d725db7df9b322442e3f94435ac22598"}},"abi":[{"constant":true,"inputs":[],"name":"last_completed_migration","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"constant":false,"inputs":[{"name":"completed","type":"uint256"}],"name":"setCompleted","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"new_address","type":"address"}],"name":"upgrade","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
-                }
         
 
             
 
-            public async last_completed_migration(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.last_completed_migration.call({ from: params.options.from })
-            }
-        
-            private _last_completed_migrationWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.last_completed_migration('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get last_completed_migrationEvent() {
-                return this._last_completed_migrationWatcher;
-            }
-        
-
-            
-
-            public async owner(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.owner.call({ from: params.options.from })
-            }
-        
-            private _ownerWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.owner('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get ownerEvent() {
-                return this._ownerWatcher;
-            }
-        
-
-            
-
-            public async setCompleted(params: {completed: string;
+            public async setTokenURI(params: {_tokenURI: string;
 options: { from: string }}): Promise<void | null> {
                 const instance = await this._getInstance();
-                return await instance.setCompleted(params.completed, { from: params.options.from })
+                return await instance.setTokenURI(params._tokenURI, { from: params.options.from })
             }
         
-            private _setCompletedWatcher = {
-                watch: async (cb: (args: {completed: string}) => void) => {
+            private _setTokenURIWatcher = {
+                watch: async (cb: (args: {_tokenURI: string}) => void) => {
                     const instance = await this._getInstance();
-                    instance.setCompleted('latest').watch((error: Error, result: any) => {
+                    instance.setTokenURI('latest').watch((error: Error, result: any) => {
                         cb(result.args);
                     });
                 }
             }
 
-            public get setCompletedEvent() {
-                return this._setCompletedWatcher;
-            }
-        
-
-            
-
-            public async upgrade(params: {new_address: string;
-options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.upgrade(params.new_address, { from: params.options.from })
-            }
-        
-            private _upgradeWatcher = {
-                watch: async (cb: (args: {new_address: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.upgrade('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get upgradeEvent() {
-                return this._upgradeWatcher;
-            }
-        }
-            export class Ownable extends StaticWeb3Contract {    
-                constructor() {
-                    super({"contractName":"Ownable","networks":{},"abi":[{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
-                }
-        
-
-            
-
-            public async owner(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.owner.call({ from: params.options.from })
-            }
-        
-            private _ownerWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.owner('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get ownerEvent() {
-                return this._ownerWatcher;
-            }
-        
-            private _OwnershipTransferredWatcher = {
-                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get OwnershipTransferredEvent() {
-                return this._OwnershipTransferredWatcher;
-            }
-        
-
-            
-
-            public async transferOwnership(params: {newOwner: string;
-options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.transferOwnership(params.newOwner, { from: params.options.from })
-            }
-        
-            private _transferOwnershipWatcher = {
-                watch: async (cb: (args: {newOwner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get transferOwnershipEvent() {
-                return this._transferOwnershipWatcher;
-            }
-        }
-            export class MintedCrowdsale extends StaticWeb3Contract {    
-                constructor() {
-                    super({"contractName":"MintedCrowdsale","networks":{},"abi":[{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"}]})    
-                }
-        
-
-            
-
-            public async rate(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.rate.call({ from: params.options.from })
-            }
-        
-            private _rateWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.rate('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get rateEvent() {
-                return this._rateWatcher;
-            }
-        
-
-            
-
-            public async weiRaised(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.weiRaised.call({ from: params.options.from })
-            }
-        
-            private _weiRaisedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.weiRaised('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get weiRaisedEvent() {
-                return this._weiRaisedWatcher;
-            }
-        
-
-            
-
-            public async wallet(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.wallet.call({ from: params.options.from })
-            }
-        
-            private _walletWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.wallet('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get walletEvent() {
-                return this._walletWatcher;
-            }
-        
-
-            
-
-            public async buyTokens(params: {_beneficiary: string;
-options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.buyTokens(params._beneficiary, { from: params.options.from })
-            }
-        
-            private _buyTokensWatcher = {
-                watch: async (cb: (args: {_beneficiary: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.buyTokens('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get buyTokensEvent() {
-                return this._buyTokensWatcher;
-            }
-        
-
-            
-
-            public async token(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.token.call({ from: params.options.from })
-            }
-        
-            private _tokenWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.token('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get tokenEvent() {
-                return this._tokenWatcher;
-            }
-        
-            private _TokenPurchaseWatcher = {
-                watch: async (cb: (args: {purchaser: string;beneficiary: string;value: string;amount: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.TokenPurchase('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get TokenPurchaseEvent() {
-                return this._TokenPurchaseWatcher;
+            public get setTokenURIEvent() {
+                return this._setTokenURIWatcher;
             }
         }
             export class MintableToken extends StaticWeb3Contract {    
                 constructor() {
-                    super({"contractName":"MintableToken","networks":{},"abi":[{"constant":true,"inputs":[],"name":"mintingFinished","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[],"name":"MintFinished","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"finishMinting","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
+                    super({"contractName":"MintableToken","networks":{},"abi":[{"constant":true,"inputs":[],"name":"mintingFinished","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[],"name":"MintFinished","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"finishMinting","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
                 }
         
 
@@ -2291,6 +2832,27 @@ options: { from: string }}): Promise<string | null> {
 
             
 
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.renounceOwnership({ from: params.options.from })
+            }
+        
+            private _renounceOwnershipWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
+            }
+        
+
+            
+
             public async owner(params: {options: { from: string }}): Promise<string | null> {
                 const instance = await this._getInstance();
                 return await instance.owner.call({ from: params.options.from })
@@ -2381,14 +2943,14 @@ options: { from: string }}): Promise<string | null> {
 
             
 
-            public async transferOwnership(params: {newOwner: string;
+            public async transferOwnership(params: {_newOwner: string;
 options: { from: string }}): Promise<void | null> {
                 const instance = await this._getInstance();
-                return await instance.transferOwnership(params.newOwner, { from: params.options.from })
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
             }
         
             private _transferOwnershipWatcher = {
-                watch: async (cb: (args: {newOwner: string}) => void) => {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
                     const instance = await this._getInstance();
                     instance.transferOwnership('latest').watch((error: Error, result: any) => {
                         cb(result.args);
@@ -2424,6 +2986,19 @@ options: { from: string }}): Promise<void | null> {
 
             public get MintFinishedEvent() {
                 return this._MintFinishedWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
             }
         
             private _OwnershipTransferredWatcher = {
@@ -2509,683 +3084,9 @@ options: { from: string }}): Promise<string | null> {
                 return this._finishMintingWatcher;
             }
         }
-            export class RSTCrowdsale extends StaticWeb3Contract {    
-                constructor() {
-                    super({"contractName":"RSTCrowdsale","networks":{},"abi":[{"constant":true,"inputs":[],"name":"hasClosed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"cap","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"goal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"closingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"finalize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"capReached","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"goalReached","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"isFinalized","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"claimRefund","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"openingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"vault","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_openingTime","type":"uint256"},{"name":"_closingTime","type":"uint256"},{"name":"_rate","type":"uint256"},{"name":"_wallet","type":"address"},{"name":"_cap","type":"uint256"},{"name":"_token","type":"address"},{"name":"_goal","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[],"name":"Finalized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"}]})    
-                }
-        
-
-            
-
-            public async hasClosed(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.hasClosed.call({ from: params.options.from })
-            }
-        
-            private _hasClosedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.hasClosed('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get hasClosedEvent() {
-                return this._hasClosedWatcher;
-            }
-        
-
-            
-
-            public async rate(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.rate.call({ from: params.options.from })
-            }
-        
-            private _rateWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.rate('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get rateEvent() {
-                return this._rateWatcher;
-            }
-        
-
-            
-
-            public async cap(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.cap.call({ from: params.options.from })
-            }
-        
-            private _capWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.cap('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get capEvent() {
-                return this._capWatcher;
-            }
-        
-
-            
-
-            public async goal(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.goal.call({ from: params.options.from })
-            }
-        
-            private _goalWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.goal('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get goalEvent() {
-                return this._goalWatcher;
-            }
-        
-
-            
-
-            public async weiRaised(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.weiRaised.call({ from: params.options.from })
-            }
-        
-            private _weiRaisedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.weiRaised('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get weiRaisedEvent() {
-                return this._weiRaisedWatcher;
-            }
-        
-
-            
-
-            public async closingTime(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.closingTime.call({ from: params.options.from })
-            }
-        
-            private _closingTimeWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.closingTime('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get closingTimeEvent() {
-                return this._closingTimeWatcher;
-            }
-        
-
-            
-
-            public async finalize(params: {options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.finalize({ from: params.options.from })
-            }
-        
-            private _finalizeWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.finalize('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get finalizeEvent() {
-                return this._finalizeWatcher;
-            }
-        
-
-            
-
-            public async capReached(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.capReached.call({ from: params.options.from })
-            }
-        
-            private _capReachedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.capReached('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get capReachedEvent() {
-                return this._capReachedWatcher;
-            }
-        
-
-            
-
-            public async wallet(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.wallet.call({ from: params.options.from })
-            }
-        
-            private _walletWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.wallet('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get walletEvent() {
-                return this._walletWatcher;
-            }
-        
-
-            
-
-            public async goalReached(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.goalReached.call({ from: params.options.from })
-            }
-        
-            private _goalReachedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.goalReached('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get goalReachedEvent() {
-                return this._goalReachedWatcher;
-            }
-        
-
-            
-
-            public async isFinalized(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.isFinalized.call({ from: params.options.from })
-            }
-        
-            private _isFinalizedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.isFinalized('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get isFinalizedEvent() {
-                return this._isFinalizedWatcher;
-            }
-        
-
-            
-
-            public async owner(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.owner.call({ from: params.options.from })
-            }
-        
-            private _ownerWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.owner('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get ownerEvent() {
-                return this._ownerWatcher;
-            }
-        
-
-            
-
-            public async claimRefund(params: {options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.claimRefund({ from: params.options.from })
-            }
-        
-            private _claimRefundWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.claimRefund('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get claimRefundEvent() {
-                return this._claimRefundWatcher;
-            }
-        
-
-            
-
-            public async openingTime(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.openingTime.call({ from: params.options.from })
-            }
-        
-            private _openingTimeWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.openingTime('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get openingTimeEvent() {
-                return this._openingTimeWatcher;
-            }
-        
-
-            
-
-            public async buyTokens(params: {_beneficiary: string;
-options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.buyTokens(params._beneficiary, { from: params.options.from })
-            }
-        
-            private _buyTokensWatcher = {
-                watch: async (cb: (args: {_beneficiary: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.buyTokens('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get buyTokensEvent() {
-                return this._buyTokensWatcher;
-            }
-        
-
-            
-
-            public async transferOwnership(params: {newOwner: string;
-options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.transferOwnership(params.newOwner, { from: params.options.from })
-            }
-        
-            private _transferOwnershipWatcher = {
-                watch: async (cb: (args: {newOwner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get transferOwnershipEvent() {
-                return this._transferOwnershipWatcher;
-            }
-        
-
-            
-
-            public async vault(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.vault.call({ from: params.options.from })
-            }
-        
-            private _vaultWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.vault('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get vaultEvent() {
-                return this._vaultWatcher;
-            }
-        
-
-            
-
-            public async token(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.token.call({ from: params.options.from })
-            }
-        
-            private _tokenWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.token('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get tokenEvent() {
-                return this._tokenWatcher;
-            }
-        
-            private _FinalizedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.Finalized('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get FinalizedEvent() {
-                return this._FinalizedWatcher;
-            }
-        
-            private _OwnershipTransferredWatcher = {
-                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get OwnershipTransferredEvent() {
-                return this._OwnershipTransferredWatcher;
-            }
-        
-            private _TokenPurchaseWatcher = {
-                watch: async (cb: (args: {purchaser: string;beneficiary: string;value: string;amount: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.TokenPurchase('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get TokenPurchaseEvent() {
-                return this._TokenPurchaseWatcher;
-            }
-        }
-            export class RefundVault extends StaticWeb3Contract {    
-                constructor() {
-                    super({"contractName":"RefundVault","networks":{},"abi":[{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"state","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"deposited","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_wallet","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[],"name":"Closed","type":"event"},{"anonymous":false,"inputs":[],"name":"RefundsEnabled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"weiAmount","type":"uint256"}],"name":"Refunded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":false,"inputs":[{"name":"investor","type":"address"}],"name":"deposit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"close","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"enableRefunds","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"investor","type":"address"}],"name":"refund","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]})    
-                }
-        
-
-            
-
-            public async wallet(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.wallet.call({ from: params.options.from })
-            }
-        
-            private _walletWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.wallet('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get walletEvent() {
-                return this._walletWatcher;
-            }
-        
-
-            
-
-            public async owner(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.owner.call({ from: params.options.from })
-            }
-        
-            private _ownerWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.owner('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get ownerEvent() {
-                return this._ownerWatcher;
-            }
-        
-
-            
-
-            public async state(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.state.call({ from: params.options.from })
-            }
-        
-            private _stateWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.state('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get stateEvent() {
-                return this._stateWatcher;
-            }
-        
-
-            
-
-            public async deposited(params: {param0: string;
-options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.deposited.call(params.param0, { from: params.options.from })
-            }
-        
-            private _depositedWatcher = {
-                watch: async (cb: (args: {param0: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.deposited('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get depositedEvent() {
-                return this._depositedWatcher;
-            }
-        
-
-            
-
-            public async transferOwnership(params: {newOwner: string;
-options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.transferOwnership(params.newOwner, { from: params.options.from })
-            }
-        
-            private _transferOwnershipWatcher = {
-                watch: async (cb: (args: {newOwner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get transferOwnershipEvent() {
-                return this._transferOwnershipWatcher;
-            }
-        
-            private _ClosedWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.Closed('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get ClosedEvent() {
-                return this._ClosedWatcher;
-            }
-        
-            private _RefundsEnabledWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.RefundsEnabled('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get RefundsEnabledEvent() {
-                return this._RefundsEnabledWatcher;
-            }
-        
-            private _RefundedWatcher = {
-                watch: async (cb: (args: {beneficiary: string;weiAmount: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.Refunded('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get RefundedEvent() {
-                return this._RefundedWatcher;
-            }
-        
-            private _OwnershipTransferredWatcher = {
-                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get OwnershipTransferredEvent() {
-                return this._OwnershipTransferredWatcher;
-            }
-        
-
-            
-
-            public async deposit(params: {investor: string;
-options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.deposit(params.investor, { from: params.options.from })
-            }
-        
-            private _depositWatcher = {
-                watch: async (cb: (args: {investor: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.deposit('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get depositEvent() {
-                return this._depositWatcher;
-            }
-        
-
-            
-
-            public async close(params: {options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.close({ from: params.options.from })
-            }
-        
-            private _closeWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.close('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get closeEvent() {
-                return this._closeWatcher;
-            }
-        
-
-            
-
-            public async enableRefunds(params: {options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.enableRefunds({ from: params.options.from })
-            }
-        
-            private _enableRefundsWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.enableRefunds('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get enableRefundsEvent() {
-                return this._enableRefundsWatcher;
-            }
-        
-
-            
-
-            public async refund(params: {investor: string;
-options: { from: string }}): Promise<void | null> {
-                const instance = await this._getInstance();
-                return await instance.refund(params.investor, { from: params.options.from })
-            }
-        
-            private _refundWatcher = {
-                watch: async (cb: (args: {investor: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.refund('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get refundEvent() {
-                return this._refundWatcher;
-            }
-        }
             export class ResearchSpecificToken extends StaticWeb3Contract {    
                 constructor() {
-                    super({"contractName":"ResearchSpecificToken","networks":{},"abi":[{"constant":true,"inputs":[],"name":"mintingFinished","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"finishMinting","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_decimalUnits","type":"uint8"},{"name":"_tokenName","type":"string"},{"name":"_tokenSymbol","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[],"name":"MintFinished","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]})    
+                    super({"contractName":"ResearchSpecificToken","networks":{},"abi":[{"constant":true,"inputs":[],"name":"mintingFinished","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"finishMinting","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_decimalUnits","type":"uint8"},{"name":"_tokenName","type":"string"},{"name":"_tokenSymbol","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[],"name":"MintFinished","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]})    
                 }
         
 
@@ -3390,6 +3291,27 @@ options: { from: string }}): Promise<string | null> {
 
             
 
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.renounceOwnership({ from: params.options.from })
+            }
+        
+            private _renounceOwnershipWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
+            }
+        
+
+            
+
             public async finishMinting(params: {options: { from: string }}): Promise<string | null> {
                 const instance = await this._getInstance();
                 return await instance.finishMinting({ from: params.options.from })
@@ -3522,14 +3444,14 @@ options: { from: string }}): Promise<string | null> {
 
             
 
-            public async transferOwnership(params: {newOwner: string;
+            public async transferOwnership(params: {_newOwner: string;
 options: { from: string }}): Promise<void | null> {
                 const instance = await this._getInstance();
-                return await instance.transferOwnership(params.newOwner, { from: params.options.from })
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
             }
         
             private _transferOwnershipWatcher = {
-                watch: async (cb: (args: {newOwner: string}) => void) => {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
                     const instance = await this._getInstance();
                     instance.transferOwnership('latest').watch((error: Error, result: any) => {
                         cb(result.args);
@@ -3565,6 +3487,19 @@ options: { from: string }}): Promise<void | null> {
 
             public get MintFinishedEvent() {
                 return this._MintFinishedWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
             }
         
             private _OwnershipTransferredWatcher = {
@@ -3606,14 +3541,349 @@ options: { from: string }}): Promise<void | null> {
                 return this._TransferWatcher;
             }
         }
-            export class SafeMath extends StaticWeb3Contract {    
+            export class RefundEscrow extends StaticWeb3Contract {    
                 constructor() {
-                    super({"contractName":"SafeMath","networks":{},"abi":[]})    
+                    super({"contractName":"RefundEscrow","networks":{},"abi":[{"constant":true,"inputs":[],"name":"beneficiary","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_payee","type":"address"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"state","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_payee","type":"address"}],"name":"depositsOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_beneficiary","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[],"name":"Closed","type":"event"},{"anonymous":false,"inputs":[],"name":"RefundsEnabled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"payee","type":"address"},{"indexed":false,"name":"weiAmount","type":"uint256"}],"name":"Deposited","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"payee","type":"address"},{"indexed":false,"name":"weiAmount","type":"uint256"}],"name":"Withdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":false,"inputs":[{"name":"_refundee","type":"address"}],"name":"deposit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"close","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"enableRefunds","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"beneficiaryWithdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_payee","type":"address"}],"name":"withdrawalAllowed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"}]})    
                 }
+        
+
+            
+
+            public async beneficiary(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.beneficiary.call({ from: params.options.from })
+            }
+        
+            private _beneficiaryWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.beneficiary('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get beneficiaryEvent() {
+                return this._beneficiaryWatcher;
+            }
+        
+
+            
+
+            public async withdraw(params: {_payee: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.withdraw(params._payee, { from: params.options.from })
+            }
+        
+            private _withdrawWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.withdraw('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get withdrawEvent() {
+                return this._withdrawWatcher;
+            }
+        
+
+            
+
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.renounceOwnership({ from: params.options.from })
+            }
+        
+            private _renounceOwnershipWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
+            }
+        
+
+            
+
+            public async owner(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.owner.call({ from: params.options.from })
+            }
+        
+            private _ownerWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.owner('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get ownerEvent() {
+                return this._ownerWatcher;
+            }
+        
+
+            
+
+            public async state(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.state.call({ from: params.options.from })
+            }
+        
+            private _stateWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.state('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get stateEvent() {
+                return this._stateWatcher;
+            }
+        
+
+            
+
+            public async depositsOf(params: {_payee: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.depositsOf.call(params._payee, { from: params.options.from })
+            }
+        
+            private _depositsOfWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.depositsOf('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get depositsOfEvent() {
+                return this._depositsOfWatcher;
+            }
+        
+
+            
+
+            public async transferOwnership(params: {_newOwner: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
+            }
+        
+            private _transferOwnershipWatcher = {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get transferOwnershipEvent() {
+                return this._transferOwnershipWatcher;
+            }
+        
+            private _ClosedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Closed('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get ClosedEvent() {
+                return this._ClosedWatcher;
+            }
+        
+            private _RefundsEnabledWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.RefundsEnabled('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get RefundsEnabledEvent() {
+                return this._RefundsEnabledWatcher;
+            }
+        
+            private _DepositedWatcher = {
+                watch: async (cb: (args: {payee: string;weiAmount: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Deposited('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get DepositedEvent() {
+                return this._DepositedWatcher;
+            }
+        
+            private _WithdrawnWatcher = {
+                watch: async (cb: (args: {payee: string;weiAmount: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Withdrawn('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get WithdrawnEvent() {
+                return this._WithdrawnWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
+            }
+        
+            private _OwnershipTransferredWatcher = {
+                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipTransferredEvent() {
+                return this._OwnershipTransferredWatcher;
+            }
+        
+
+            
+
+            public async deposit(params: {_refundee: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.deposit(params._refundee, { from: params.options.from })
+            }
+        
+            private _depositWatcher = {
+                watch: async (cb: (args: {_refundee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.deposit('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get depositEvent() {
+                return this._depositWatcher;
+            }
+        
+
+            
+
+            public async close(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.close({ from: params.options.from })
+            }
+        
+            private _closeWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.close('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get closeEvent() {
+                return this._closeWatcher;
+            }
+        
+
+            
+
+            public async enableRefunds(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.enableRefunds({ from: params.options.from })
+            }
+        
+            private _enableRefundsWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.enableRefunds('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get enableRefundsEvent() {
+                return this._enableRefundsWatcher;
+            }
+        
+
+            
+
+            public async beneficiaryWithdraw(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.beneficiaryWithdraw({ from: params.options.from })
+            }
+        
+            private _beneficiaryWithdrawWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.beneficiaryWithdraw('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get beneficiaryWithdrawEvent() {
+                return this._beneficiaryWithdrawWatcher;
+            }
+        
+
+            
+
+            public async withdrawalAllowed(params: {_payee: string;
+options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.withdrawalAllowed.call(params._payee, { from: params.options.from })
+            }
+        
+            private _withdrawalAllowedWatcher = {
+                watch: async (cb: (args: {_payee: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.withdrawalAllowed('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get withdrawalAllowedEvent() {
+                return this._withdrawalAllowedWatcher;
+            }
         }
             export class RefundableCrowdsale extends StaticWeb3Contract {    
                 constructor() {
-                    super({"contractName":"RefundableCrowdsale","networks":{},"abi":[{"constant":true,"inputs":[],"name":"hasClosed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"goal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"closingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"finalize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"isFinalized","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"openingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"vault","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_goal","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[],"name":"Finalized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"},{"constant":false,"inputs":[],"name":"claimRefund","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"goalReached","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"}]})    
+                    super({"contractName":"RefundableCrowdsale","networks":{},"abi":[{"constant":true,"inputs":[],"name":"hasClosed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"goal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"closingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"finalize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"isFinalized","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"openingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_goal","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[],"name":"Finalized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":false,"inputs":[],"name":"claimRefund","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"goalReached","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"}]})    
                 }
         
 
@@ -3766,6 +4036,27 @@ options: { from: string }}): Promise<void | null> {
 
             
 
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.renounceOwnership({ from: params.options.from })
+            }
+        
+            private _renounceOwnershipWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
+            }
+        
+
+            
+
             public async isFinalized(params: {options: { from: string }}): Promise<string | null> {
                 const instance = await this._getInstance();
                 return await instance.isFinalized.call({ from: params.options.from })
@@ -3851,14 +4142,14 @@ options: { from: string }}): Promise<void | null> {
 
             
 
-            public async transferOwnership(params: {newOwner: string;
+            public async transferOwnership(params: {_newOwner: string;
 options: { from: string }}): Promise<void | null> {
                 const instance = await this._getInstance();
-                return await instance.transferOwnership(params.newOwner, { from: params.options.from })
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
             }
         
             private _transferOwnershipWatcher = {
-                watch: async (cb: (args: {newOwner: string}) => void) => {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
                     const instance = await this._getInstance();
                     instance.transferOwnership('latest').watch((error: Error, result: any) => {
                         cb(result.args);
@@ -3868,27 +4159,6 @@ options: { from: string }}): Promise<void | null> {
 
             public get transferOwnershipEvent() {
                 return this._transferOwnershipWatcher;
-            }
-        
-
-            
-
-            public async vault(params: {options: { from: string }}): Promise<string | null> {
-                const instance = await this._getInstance();
-                return await instance.vault.call({ from: params.options.from })
-            }
-        
-            private _vaultWatcher = {
-                watch: async (cb: (args: {}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.vault('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get vaultEvent() {
-                return this._vaultWatcher;
             }
         
 
@@ -3925,19 +4195,6 @@ options: { from: string }}): Promise<void | null> {
                 return this._FinalizedWatcher;
             }
         
-            private _OwnershipTransferredWatcher = {
-                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
-                    const instance = await this._getInstance();
-                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
-                        cb(result.args);
-                    });
-                }
-            }
-
-            public get OwnershipTransferredEvent() {
-                return this._OwnershipTransferredWatcher;
-            }
-        
             private _TokenPurchaseWatcher = {
                 watch: async (cb: (args: {purchaser: string;beneficiary: string;value: string;amount: string}) => void) => {
                     const instance = await this._getInstance();
@@ -3949,6 +4206,32 @@ options: { from: string }}): Promise<void | null> {
 
             public get TokenPurchaseEvent() {
                 return this._TokenPurchaseWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
+            }
+        
+            private _OwnershipTransferredWatcher = {
+                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipTransferredEvent() {
+                return this._OwnershipTransferredWatcher;
             }
         
 
@@ -3992,6 +4275,11 @@ options: { from: string }}): Promise<void | null> {
             public get goalReachedEvent() {
                 return this._goalReachedWatcher;
             }
+        }
+            export class SafeMath extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"SafeMath","networks":{},"abi":[]})    
+                }
         }
             export class TimedCrowdsale extends StaticWeb3Contract {    
                 constructor() {
@@ -4392,4 +4680,446 @@ options: { from: string }}): Promise<string | null> {
             public get decreaseApprovalEvent() {
                 return this._decreaseApprovalWatcher;
             }
+        }
+            export class RSTCrowdsale extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"RSTCrowdsale","networks":{},"abi":[{"constant":true,"inputs":[],"name":"hasClosed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"rate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"cap","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"goal","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"weiRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"closingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"finalize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"capReached","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"wallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"goalReached","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"isFinalized","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"claimRefund","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"openingTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_beneficiary","type":"address"}],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_openingTime","type":"uint256"},{"name":"_closingTime","type":"uint256"},{"name":"_rate","type":"uint256"},{"name":"_wallet","type":"address"},{"name":"_cap","type":"uint256"},{"name":"_token","type":"address"},{"name":"_goal","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[],"name":"Finalized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"purchaser","type":"address"},{"indexed":true,"name":"beneficiary","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"TokenPurchase","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"}]})    
+                }
+        
+
+            
+
+            public async hasClosed(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.hasClosed.call({ from: params.options.from })
+            }
+        
+            private _hasClosedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.hasClosed('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get hasClosedEvent() {
+                return this._hasClosedWatcher;
+            }
+        
+
+            
+
+            public async rate(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.rate.call({ from: params.options.from })
+            }
+        
+            private _rateWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.rate('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get rateEvent() {
+                return this._rateWatcher;
+            }
+        
+
+            
+
+            public async cap(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.cap.call({ from: params.options.from })
+            }
+        
+            private _capWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.cap('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get capEvent() {
+                return this._capWatcher;
+            }
+        
+
+            
+
+            public async goal(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.goal.call({ from: params.options.from })
+            }
+        
+            private _goalWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.goal('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get goalEvent() {
+                return this._goalWatcher;
+            }
+        
+
+            
+
+            public async weiRaised(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.weiRaised.call({ from: params.options.from })
+            }
+        
+            private _weiRaisedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.weiRaised('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get weiRaisedEvent() {
+                return this._weiRaisedWatcher;
+            }
+        
+
+            
+
+            public async closingTime(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.closingTime.call({ from: params.options.from })
+            }
+        
+            private _closingTimeWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.closingTime('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get closingTimeEvent() {
+                return this._closingTimeWatcher;
+            }
+        
+
+            
+
+            public async finalize(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.finalize({ from: params.options.from })
+            }
+        
+            private _finalizeWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.finalize('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get finalizeEvent() {
+                return this._finalizeWatcher;
+            }
+        
+
+            
+
+            public async capReached(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.capReached.call({ from: params.options.from })
+            }
+        
+            private _capReachedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.capReached('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get capReachedEvent() {
+                return this._capReachedWatcher;
+            }
+        
+
+            
+
+            public async wallet(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.wallet.call({ from: params.options.from })
+            }
+        
+            private _walletWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.wallet('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get walletEvent() {
+                return this._walletWatcher;
+            }
+        
+
+            
+
+            public async renounceOwnership(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.renounceOwnership({ from: params.options.from })
+            }
+        
+            private _renounceOwnershipWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.renounceOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get renounceOwnershipEvent() {
+                return this._renounceOwnershipWatcher;
+            }
+        
+
+            
+
+            public async goalReached(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.goalReached.call({ from: params.options.from })
+            }
+        
+            private _goalReachedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.goalReached('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get goalReachedEvent() {
+                return this._goalReachedWatcher;
+            }
+        
+
+            
+
+            public async isFinalized(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.isFinalized.call({ from: params.options.from })
+            }
+        
+            private _isFinalizedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.isFinalized('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get isFinalizedEvent() {
+                return this._isFinalizedWatcher;
+            }
+        
+
+            
+
+            public async owner(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.owner.call({ from: params.options.from })
+            }
+        
+            private _ownerWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.owner('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get ownerEvent() {
+                return this._ownerWatcher;
+            }
+        
+
+            
+
+            public async claimRefund(params: {options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.claimRefund({ from: params.options.from })
+            }
+        
+            private _claimRefundWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.claimRefund('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get claimRefundEvent() {
+                return this._claimRefundWatcher;
+            }
+        
+
+            
+
+            public async openingTime(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.openingTime.call({ from: params.options.from })
+            }
+        
+            private _openingTimeWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.openingTime('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get openingTimeEvent() {
+                return this._openingTimeWatcher;
+            }
+        
+
+            
+
+            public async buyTokens(params: {_beneficiary: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.buyTokens(params._beneficiary, { from: params.options.from })
+            }
+        
+            private _buyTokensWatcher = {
+                watch: async (cb: (args: {_beneficiary: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.buyTokens('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get buyTokensEvent() {
+                return this._buyTokensWatcher;
+            }
+        
+
+            
+
+            public async transferOwnership(params: {_newOwner: string;
+options: { from: string }}): Promise<void | null> {
+                const instance = await this._getInstance();
+                return await instance.transferOwnership(params._newOwner, { from: params.options.from })
+            }
+        
+            private _transferOwnershipWatcher = {
+                watch: async (cb: (args: {_newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.transferOwnership('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get transferOwnershipEvent() {
+                return this._transferOwnershipWatcher;
+            }
+        
+
+            
+
+            public async token(params: {options: { from: string }}): Promise<string | null> {
+                const instance = await this._getInstance();
+                return await instance.token.call({ from: params.options.from })
+            }
+        
+            private _tokenWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.token('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get tokenEvent() {
+                return this._tokenWatcher;
+            }
+        
+            private _FinalizedWatcher = {
+                watch: async (cb: (args: {}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.Finalized('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get FinalizedEvent() {
+                return this._FinalizedWatcher;
+            }
+        
+            private _TokenPurchaseWatcher = {
+                watch: async (cb: (args: {purchaser: string;beneficiary: string;value: string;amount: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.TokenPurchase('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get TokenPurchaseEvent() {
+                return this._TokenPurchaseWatcher;
+            }
+        
+            private _OwnershipRenouncedWatcher = {
+                watch: async (cb: (args: {previousOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipRenounced('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipRenouncedEvent() {
+                return this._OwnershipRenouncedWatcher;
+            }
+        
+            private _OwnershipTransferredWatcher = {
+                watch: async (cb: (args: {previousOwner: string;newOwner: string}) => void) => {
+                    const instance = await this._getInstance();
+                    instance.OwnershipTransferred('latest').watch((error: Error, result: any) => {
+                        cb(result.args);
+                    });
+                }
+            }
+
+            public get OwnershipTransferredEvent() {
+                return this._OwnershipTransferredWatcher;
+            }
+        }
+            export class SafeERC20 extends StaticWeb3Contract {    
+                constructor() {
+                    super({"contractName":"SafeERC20","networks":{},"abi":[]})    
+                }
         }

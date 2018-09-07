@@ -21,4 +21,30 @@ export default class IkuTokenHelper {
         });
     });
   }
+
+  static getLicense(provider) {
+    return new Promise((resolve, reject) => {
+      const token = Contract(IkuToken);
+      token.setProvider(provider);
+
+      // Declaring this for later so we can chain functions.
+      let tokenInstance;
+
+      token
+        .deployed()
+        .then(async instance => {
+          console.log('got instance', instance);
+          tokenInstance = instance;
+          const tokenURI = await tokenInstance.tokenURI();
+          console.log('got tokenURI', tokenURI);
+          const reqBody = await fetch(tokenURI);
+          const body = await reqBody.json();
+          console.log('fetch?', body);
+          resolve(body);
+        })
+        .catch(e => {
+          reject({ message: e.message });
+        });
+    });
+  }
 }
