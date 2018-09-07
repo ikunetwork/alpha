@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactJson from 'react-json-view';
+import ReactJson from 'react-json-tree';
 import { connect } from 'react-redux';
 import { getLicenseAction } from '../../redux/modules/license';
 import Loader from '../../components/Loader';
@@ -68,7 +68,11 @@ class ViewLicense extends Component {
             {!this.state.license ? (
               <Loader size="small" />
             ) : (
-              <ReactJson src={this.state.license} />
+              <ReactJson
+                data={this.state.license}
+                theme="monokai"
+                invertTheme
+              />
             )}
           </div>
         </div>

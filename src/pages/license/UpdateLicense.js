@@ -139,7 +139,7 @@ class UpdateLicense extends Component {
   renderContent() {
     return (
       <div className="license-page container col-md-8">
-        <Title align="center">License Manager</Title>
+        <Title align="center">IKU Token License Manager</Title>
 
         <div className="form-wrapper">
           <div className="row">
