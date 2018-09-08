@@ -10,6 +10,8 @@ const Contract = require('truffle-contract');
 const RSTCrowdsale = require('../build/contracts/RSTCrowdsale.json');
 const ResearchSpecificToken = require('../build/contracts/ResearchSpecificToken.json');
 
+const Registry = require('../build/contracts/Registry.json'); // added
+
 // TODO - Move this to it's own class
 const jobId = Date.now();
 const logPrefix = `"deploy-crowdsale-job ::: ${jobId} ::: `;
@@ -27,7 +29,16 @@ function deployToken(web3, provider, base_account, proposal) {
     token.defaults({
       from: base_account,
     });
+
+    //added
+    const registry = Contract(Registry);
+    registry.setProvider(provider);
+    registry.defaults({
+      from: base_account,
+    });
+
     // It was already deployed
+    // Note - token_address refers to the token proxy
     if (token_address) {
       return token
         .at(token_address)
@@ -46,27 +57,58 @@ function deployToken(web3, provider, base_account, proposal) {
         dataToken.gas = 6000000;
       }
 
-      // Deploy the token
-      token
-        .new(decimals, token_name, token_symbol, dataToken)
-        .then(tokenInstance => {
-          jobLog('TOKEN HAS BEEN DEPLOYED', tokenInstance.address);
-          DB.update(
-            TABLE_NAME,
-            { token_address: tokenInstance.address },
-            proposal.id
-          )
-            .then(res => {
-              jobLog('token address stored in db');
-              resolve(tokenInstance);
+      //deploy the token contract and create a proxy
+      registry
+        .deployed()
+        .then(registryInstance => {
+          jobLog('Fetching deployed registry at: ', registryInstance.address);
+          token
+            .new(decimals, token_name, token_symbol, dataToken)
+            .then(tokenInstance => {
+              jobLog('TOKEN HAS BEEN DEPLOYED', tokenInstance.address);
+              registry
+                .addVersion('ResearchSpecificToken', '1.0', researchSpecificToken.address)
+                .then(() => {
+                  jobLog('Version registered with Registry');
+                  registry.createProxy('IkuToken', '1.0')
+                  .then(tx => {
+                    let tokenProxy = tx.logs[0].args.proxy;
+                    jobLog('tokenProxy deployed at: ', tokenProxy);
+                    DB.update(
+                      TABLE_NAME,
+                      { token_address: tokenProxy },
+                      proposal.id
+                    )
+                    .then(res =>{
+                      jobLog('token proxy address stored in db');
+                      token.
+                        at(tokenProxy)
+                        .then(instance =>{
+                          jobLog('Proxy initialized');
+                          resolve(instance);
+                        })
+                        .catch(____err => {
+                          jobLog('Error resolving tokenInstance at proxy address', ____err);
+                        })
+                    })
+                    .catch(____err => {
+                      jobLog('Error updating token proxy address', ____err);
+                    })
+                  })
+                  .catch(____err => {
+                    jobLog('Error with proxy creation', ____err);
+                  })
+                })
+                .catch(____err => {
+                  jobLog('Error registering the contract version', ____err);
+                })
             })
             .catch(____err => {
-              jobLog('Error updating token address', ____err);
-            });
+              jobLog('Error deploying token', ____err);
+            })
         })
-        .catch(e => {
-          jobLog('Error deploying token', e);
-          reject(e);
+        .catch(____err => {
+          jobLog('Error fetching deployed registry', ____err);
         });
     }
   });
