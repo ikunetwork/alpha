@@ -33,7 +33,7 @@ class UpdateLicense extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.success && nextProps.success) {
-      this.props.setAlert('Hold tight... The license is being updated now');
+      window.location.href = window.location.href.replace('update', 'view');
     }
   }
 
@@ -162,7 +162,7 @@ class UpdateLicense extends Component {
                 <input
                   type="text"
                   className="form-control"
-                  name="name"
+                  name="ip_description"
                   value={this.state.ip_description}
                   placeholder="IP Description"
                   onChange={e => this.setValue(e, 'ip_description')}
@@ -177,7 +177,7 @@ class UpdateLicense extends Component {
                 <input
                   type="text"
                   className="form-control"
-                  name="name"
+                  name="license_type"
                   value={this.state.license_type}
                   placeholder="License Type"
                   onChange={e => this.setValue(e, 'license_type')}
@@ -192,7 +192,7 @@ class UpdateLicense extends Component {
                 <input
                   type="text"
                   className="form-control"
-                  name="name"
+                  name="copyright"
                   value={this.state.copyright}
                   placeholder="Copyright"
                   onChange={e => this.setValue(e, 'copyright')}
@@ -207,7 +207,7 @@ class UpdateLicense extends Component {
                 <input
                   type="text"
                   className="form-control"
-                  name="name"
+                  name="territory"
                   value={this.state.territory}
                   placeholder="Territory"
                   onChange={e => this.setValue(e, 'territory')}
@@ -242,7 +242,7 @@ class UpdateLicense extends Component {
                 <input
                   type="text"
                   className="form-control"
-                  name="name"
+                  name="commercialization"
                   value={this.state.commercialization}
                   placeholder="Commercialization"
                   onChange={e => this.setValue(e, 'commercialization')}
