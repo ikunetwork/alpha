@@ -23,7 +23,7 @@ contract IkuToken_v2 is IkuToken{
 		isInitialized = true;
 		owner = sender;
 		totalSupply_ = INITIAL_SUPPLY;
-        balances[sender] = INITIAL_SUPPLY;
-        emit Transfer(0x0, sender, INITIAL_SUPPLY);
+	        balances[sender] = INITIAL_SUPPLY;
+        	emit Transfer(0x0, sender, INITIAL_SUPPLY);
 	}
 }

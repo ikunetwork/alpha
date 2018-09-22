@@ -2,8 +2,8 @@ const Registry = artifacts.require("Registry");
 const IkuToken = artifacts.require("IkuToken");
 
 module.exports = (deployer) => {
-  var registry;
-  var ikuToken, ikuTokenProxy;
+  let registry;
+  let ikuToken, ikuTokenProxy;
 
   // only deploy registry contracts once
   deployer.deploy(Registry);

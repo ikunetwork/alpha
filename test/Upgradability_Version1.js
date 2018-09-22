@@ -260,3 +260,4 @@ contract('Upgradability for version-1 contracts', accounts => {
     });
   });
 });
+

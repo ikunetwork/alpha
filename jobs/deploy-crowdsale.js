@@ -10,7 +10,7 @@ const Contract = require('truffle-contract');
 const RSTCrowdsale = require('../build/contracts/RSTCrowdsale.json');
 const ResearchSpecificToken = require('../build/contracts/ResearchSpecificToken.json');
 
-const Registry = require('../build/contracts/Registry.json'); // added
+const Registry = require('../build/contracts/Registry.json');
 
 // TODO - Move this to it's own class
 const jobId = Date.now();
@@ -30,7 +30,6 @@ function deployToken(web3, provider, base_account, proposal) {
       from: base_account,
     });
 
-    //added
     const registry = Contract(Registry);
     registry.setProvider(provider);
     registry.defaults({

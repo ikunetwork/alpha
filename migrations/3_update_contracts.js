@@ -13,8 +13,8 @@ function getLogs(filter) {
 }
 
 module.exports = (deployer, network, accounts) => {
-	var registry;
-	var ikuToken_v2, ikuTokenProxy;
+	let registry;
+	let ikuToken_v2, ikuTokenProxy;
 
 	//deploy all version-2 contracts
 	deployer.deploy(IkuToken_v2);
