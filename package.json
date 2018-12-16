@@ -153,5 +153,8 @@
       "eth-sig-util",
       "awesome-typescript-loader"
     ]
+  },
+  "engines": {
+    "node": "8.x"
   }
 }
