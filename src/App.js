@@ -43,12 +43,15 @@ import { getFaqAction } from './redux/modules/faq';
 import './css/app.css';
 
 class App extends Component {
-  componentWillMount() {
+  async componentWillMount() {
     const initParams = {
       onChangeAddress: address => this.props.setUserAddress(address),
       onChangeNetwork: networkId => this.props.setNetworkId(networkId),
     };
     // [side-effect] for now initWeb3 instantiates a poll for changes
+    if (window.ethereum) {
+      await window.ethereum.enable();
+    }
     this.props.initWeb3(initParams);
     this.props.getResearchTargets();
     this.props.getProposals();
