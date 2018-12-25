@@ -92,7 +92,7 @@
     "resolve": "1.8.1",
     "sendgrid": "^5.2.3",
     "solidity-coverage": "^0.5.2",
-    "solium": "^1.1.7",
+    "solium": "^1.1.10",
     "source-map-loader": "^0.2.3",
     "strip-ansi": "4.0.0",
     "style-loader": "0.23.0",
