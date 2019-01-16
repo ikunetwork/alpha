@@ -87,7 +87,7 @@
     "react-tabs": "^2.2.1",
     "recursive-readdir": "2.2.2",
     "redux": "^4.0.0",
-    "redux-loop": "^4.2.4",
+    "redux-loop": "4.5.2",
     "request": "^2.85.0",
     "resolve": "1.8.1",
     "sendgrid": "^5.2.3",
