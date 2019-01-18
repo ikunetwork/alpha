@@ -7,7 +7,7 @@ export default class Currency {
       apiRequest(
         'https://min-api.cryptocompare.com/data/price',
         {
-          method: 'post',
+          method: 'get',
           external: true,
         },
         {
