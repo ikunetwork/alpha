@@ -58,7 +58,7 @@
     "ipfs-api": "^24.0.1",
     "jest": "22.4.3",
     "json-loader": "0.5.7",
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "8.4.0",
     "medium-editor": "^5.23.3",
     "mobile-detect": "^1.4.1",
     "moment": "^2.20.1",
