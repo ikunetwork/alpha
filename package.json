@@ -62,7 +62,7 @@
     "medium-editor": "^5.23.3",
     "mobile-detect": "^1.4.1",
     "moment": "^2.20.1",
-    "nodemon": "^1.17.3",
+    "nodemon": "^1.19.0",
     "object-assign": "4.1.1",
     "openzeppelin-solidity": "^1.9.0",
     "passport": "^0.4.0",
