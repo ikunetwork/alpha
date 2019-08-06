@@ -95,7 +95,7 @@
     "solium": "^1.1.7",
     "source-map-loader": "^0.2.3",
     "strip-ansi": "4.0.0",
-    "style-loader": "0.23.0",
+    "style-loader": "0.23.1",
     "sw-precache-webpack-plugin": "0.11.5",
     "truffle": "^4.1.14",
     "truffle-contract": "^3.0.5",
