@@ -12,7 +12,7 @@
     "aws-sdk": "^2.222.1",
     "bignumber.js": "^7.0.1",
     "body-parser": "~1.18.2",
-    "buffer": "^5.1.0",
+    "buffer": "5.2.1",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chai": "^4.0.2",
     "chai-as-promised": "^7.0.0",
