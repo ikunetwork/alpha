@@ -108,7 +108,7 @@
     "web3": "^0.20.6",
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",
-    "webpack-manifest-plugin": "2.0.3",
+    "webpack-manifest-plugin": "2.2.0",
     "whatwg-fetch": "2.0.4"
   },
   "scripts": {
