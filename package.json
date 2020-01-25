@@ -96,7 +96,7 @@
     "source-map-loader": "^0.2.3",
     "strip-ansi": "4.0.0",
     "style-loader": "0.23.0",
-    "sw-precache-webpack-plugin": "0.11.5",
+    "sw-precache-webpack-plugin": "1.0.0",
     "truffle": "^4.1.14",
     "truffle-contract": "^3.0.5",
     "truffle-contract-typescript": "^1.0.13",
