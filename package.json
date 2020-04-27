@@ -64,7 +64,7 @@
     "moment": "^2.20.1",
     "nodemon": "^1.17.3",
     "object-assign": "4.1.1",
-    "openzeppelin-solidity": "^1.9.0",
+    "openzeppelin-solidity": "^3.0.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "path-exists": "3.0.0",
