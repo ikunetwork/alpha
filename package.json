@@ -93,7 +93,7 @@
     "sendgrid": "^5.2.3",
     "solidity-coverage": "^0.5.2",
     "solium": "^1.1.7",
-    "source-map-loader": "^0.2.3",
+    "source-map-loader": "^1.0.0",
     "strip-ansi": "4.0.0",
     "style-loader": "0.23.0",
     "sw-precache-webpack-plugin": "0.11.5",
